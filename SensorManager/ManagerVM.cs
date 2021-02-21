@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,12 +24,20 @@ namespace SensorManager
             }
 
     }
+        
+        public RelayCommand SelectionChangedCommand { get; private set; }
 
         public ManagerVM(ICaService caService)
         {
             this.caService = caService;
             this.SenesorNames = caService.SensorNames;
             SlectedSensorData = caService.GetSenssorData(SenesorNames[0]);
-        } 
+            SelectionChangedCommand = new RelayCommand(SelectionChanged);
+        }
+
+        private void SelectionChanged()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

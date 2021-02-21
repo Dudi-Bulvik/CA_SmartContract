@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SensorManager"
              xmlns:uc ="clr-namespace:SensorManager.Views"     
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              DataContext="{Binding ManagerVM, Source={StaticResource Locator}}"            
              d:DesignHeight="450" d:DesignWidth="800">
@@ -16,15 +17,20 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock Text="SensorList"  Grid.Row="1"></TextBlock>
-        <ListBox Margin="20" Grid.Row="0" Name="SensorNamew" ItemsSource="{Binding Path=SenesorNames}">
-            <ListBox.ItemTemplate>
+        <ComboBox Margin="20" Grid.Row="0" Name="SensorNamew" ItemsSource="{Binding Path=SenesorNames}" >
+            <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ComboBox.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
         <uc:SensorRightsView Grid.Row ="2"></uc:SensorRightsView>
     </Grid>
 </UserControl>
