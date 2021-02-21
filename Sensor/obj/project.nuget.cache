@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "2RJlgjt0YIdjADtK8PMR3J9D9HD7MXROxJCfoy+SnZaheGiNFm8V4s2fY/QY2cvuOj4AD0P7W88pwNPZ6LCvEA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\IMOE001\\source\\repos\\CAManagmentSystem\\Sensor\\Sensor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\IMOE001\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\IMOE001\\.nuget\\packages\\mahapps.metro\\2.4.3\\mahapps.metro.2.4.3.nupkg.sha512",
+    "C:\\Users\\IMOE001\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\IMOE001\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}

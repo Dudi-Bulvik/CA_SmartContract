@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="SensorManager.Views.CaMangerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SensorManager"
+             xmlns:uc ="clr-namespace:SensorManager.Views"     
+             mc:Ignorable="d" 
+             DataContext="{Binding ManagerVM, Source={StaticResource Locator}}"            
+             d:DesignHeight="450" d:DesignWidth="800">
+ 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="SensorList"  Grid.Row="1"></TextBlock>
+        <ListBox Margin="20" Grid.Row="0" Name="SensorNamew" ItemsSource="{Binding Path=SenesorNames}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <uc:SensorRightsView Grid.Row ="2"></uc:SensorRightsView>
+    </Grid>
+</UserControl>
