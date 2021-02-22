@@ -10,6 +10,7 @@ namespace SensorManager
     public class ManagerVM : ViewModelBase
     {
         private readonly ICaService caService;
+        private string selectedSensorName;
         private List<string> sensorList;
         private SensorViewModel selectedSensoer;
         public List<string> SenesorNames {
@@ -31,13 +32,27 @@ namespace SensorManager
         {
             this.caService = caService;
             this.SenesorNames = caService.SensorNames;
-            SlectedSensorData = caService.GetSenssorData(SenesorNames[0]);
+            caService.GetSenssorData(SenesorNames[0]);
             SelectionChangedCommand = new RelayCommand(SelectionChanged);
+            caService.SensorDataArrived += SensorDataArrivedHandler;            
+            SelectedSensorName = this.SenesorNames[0];
         }
+        private void SensorDataArrivedHandler(object sender, SensorViewModel sensorDat)
+        {
+            SlectedSensorData = sensorDat;
+        }
+        public string SelectedSensorName { get { return selectedSensorName; }
+            set {
+                if(!value.Equals(selectedSensorName))
+                {
+                    selectedSensorName = value;
+                    caService.GetSenssorData(value);
 
+                    RaisePropertyChanged("SelectedSensorName");
+                }
+            } }
         private void SelectionChanged()
         {
-            throw new NotImplementedException();
         }
     }
 }

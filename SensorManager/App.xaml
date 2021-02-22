@@ -21,6 +21,10 @@
             </Style>
             <local:VMlocator x:Key="Locator"  />
             <local:DummyConverotr x:Key="dummyConverotr"  />
+            <local:AllowAndNotAllowConvertor x:Key="allowAndNotAllowConvertor"  />
+            <local:BoolToColorConertor x:Key="boolToColorConertor"  />
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

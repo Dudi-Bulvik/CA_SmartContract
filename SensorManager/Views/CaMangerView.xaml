@@ -17,7 +17,7 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock Text="SensorList"  Grid.Row="1"></TextBlock>
-        <ComboBox Margin="20" Grid.Row="0" Name="SensorNamew" ItemsSource="{Binding Path=SenesorNames}" >
+        <ComboBox Margin="20" Grid.Row="0" Name="SensorNamesComboBox" ItemsSource="{Binding Path=SenesorNames}" SelectedItem="{Binding Path=SelectedSensorName}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -25,11 +25,11 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            <i:Interaction.Triggers>
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=SensorNamesComboBox, Path=SelectedItem}"/>
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </i:Interaction.Triggers>-->
         </ComboBox>
         <uc:SensorRightsView Grid.Row ="2"></uc:SensorRightsView>
     </Grid>

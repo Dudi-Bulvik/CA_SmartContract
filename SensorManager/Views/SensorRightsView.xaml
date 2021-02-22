@@ -22,14 +22,21 @@
         <StackPanel  Orientation="Horizontal" Grid.Row="1" >
             <TextBlock Background="Black" Foreground="White"  Margin="5"> Senso Publick Key:</TextBlock>
             <TextBlock Margin="5" Text="{Binding Path=SensorPublicKey}"/>
-        </StackPanel>
+          </StackPanel>
         <ListBox Margin="20" Grid.Row="2" Name="AccessRight" ItemsSource="{Binding Path=AccsesRights}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding SensorName}" Margin="5"/>
-                        <TextBlock Text="{Binding AccessePermition}" Margin="5"/>
-                        
+                        <TextBlock Text="{Binding SensorName}" FontSize="15" Margin="5"/>
+                        <!--<TextBlock Text="{Binding AccessePermition}" Background="{Binding AccessePermition,Converter={StaticResource boolToColorConertor}}" Margin="5"/>-->
+                        <Button Command="{Binding ChangePermitionCommand}">
+                           
+                            <Button.Content>
+                                <TextBlock MinWidth="140" FontSize="15"   Text="{Binding AccessePermition, Converter={StaticResource allowAndNotAllowConvertor}}" Background="{Binding AccessePermition,Converter={StaticResource boolToColorConertor}}" Margin="5"/>
+                                <!--<textblock text="{binding accessepermition , converter={staticresource allowandnotallowconvertor}}" background="{binding  accessepermition , converter={ staticresource booltocolorconertor}}"/>-->
+                            </Button.Content>
+                        </Button>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
