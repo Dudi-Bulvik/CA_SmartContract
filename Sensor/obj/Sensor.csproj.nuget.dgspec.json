@@ -1,32 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\IMOE001\\source\\repos\\CAManagmentSystem\\Sensor\\Sensor.csproj": {}
+    "D:\\MyProject\\CaNew\\Sensor\\Sensor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\IMOE001\\source\\repos\\CAManagmentSystem\\Sensor\\Sensor.csproj": {
+    "D:\\MyProject\\CaNew\\Sensor\\Sensor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\IMOE001\\source\\repos\\CAManagmentSystem\\Sensor\\Sensor.csproj",
+        "projectUniqueName": "D:\\MyProject\\CaNew\\Sensor\\Sensor.csproj",
         "projectName": "Sensor",
-        "projectPath": "C:\\Users\\IMOE001\\source\\repos\\CAManagmentSystem\\Sensor\\Sensor.csproj",
-        "packagesPath": "C:\\Users\\IMOE001\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\IMOE001\\source\\repos\\CAManagmentSystem\\Sensor\\obj\\",
+        "projectPath": "D:\\MyProject\\CaNew\\Sensor\\Sensor.csproj",
+        "packagesPath": "C:\\Users\\dudib\\.nuget\\packages\\",
+        "outputPath": "D:\\MyProject\\CaNew\\Sensor\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\IMOE001\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dudib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0-windows7.0": {
+            "targetAlias": "net5.0-windows",
             "projectReferences": {}
           }
         },
@@ -37,8 +40,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
           "dependencies": {
             "MahApps.Metro": {
               "target": "Package",
@@ -63,7 +66,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

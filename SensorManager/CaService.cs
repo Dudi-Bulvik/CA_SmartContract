@@ -7,8 +7,8 @@ namespace SensorManager
    public interface ICaService
     {
         List<string> SensorNames { get; }
-        event EventHandler<SensorViewModel> SensorDataArrived;
-        public void ChangeAccessRight(string senstorName, bool accses);
+        event EventHandler<SensorModel> SensorDataArrived;
+        public void ChangeAccessRight(string fromSenstor ,string toSenstorName, bool accses);
         public void GetSenssorData(string sensorName);
        
     }

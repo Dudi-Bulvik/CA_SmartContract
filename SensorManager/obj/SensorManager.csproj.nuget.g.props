@@ -5,7 +5,7 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\IMOE001\.nuget\packages\</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\dudib\.nuget\packages\;C:\Program Files\dotnet\sdk\NuGetFallbackFolder</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.8.1</NuGetToolVersion>
   </PropertyGroup>
@@ -16,8 +16,8 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgMvvmLight Condition=" '$(PkgMvvmLight)' == '' ">C:\Users\IMOE001\.nuget\packages\mvvmlight\5.4.1.1</PkgMvvmLight>
-    <PkgMicrosoft_Xaml_Behaviors_Wpf Condition=" '$(PkgMicrosoft_Xaml_Behaviors_Wpf)' == '' ">C:\Users\IMOE001\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.19</PkgMicrosoft_Xaml_Behaviors_Wpf>
-    <PkgMahApps_Metro Condition=" '$(PkgMahApps_Metro)' == '' ">C:\Users\IMOE001\.nuget\packages\mahapps.metro\2.4.3</PkgMahApps_Metro>
+    <PkgMvvmLight Condition=" '$(PkgMvvmLight)' == '' ">C:\Users\dudib\.nuget\packages\mvvmlight\5.4.1.1</PkgMvvmLight>
+    <PkgMicrosoft_Xaml_Behaviors_Wpf Condition=" '$(PkgMicrosoft_Xaml_Behaviors_Wpf)' == '' ">C:\Users\dudib\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.19</PkgMicrosoft_Xaml_Behaviors_Wpf>
+    <PkgMahApps_Metro Condition=" '$(PkgMahApps_Metro)' == '' ">C:\Users\dudib\.nuget\packages\mahapps.metro\2.4.3</PkgMahApps_Metro>
   </PropertyGroup>
 </Project>

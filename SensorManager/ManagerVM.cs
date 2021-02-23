@@ -20,39 +20,40 @@ namespace SensorManager
         }
         public SensorViewModel SlectedSensorData {
             get {return selectedSensoer;}
-            set { selectedSensoer = value;
+            set { 
+                selectedSensoer = value;
                 RaisePropertyChanged("SlectedSensorData");                
             }
 
     }
-        
-        public RelayCommand SelectionChangedCommand { get; private set; }
+                
 
         public ManagerVM(ICaService caService)
         {
             this.caService = caService;
             this.SenesorNames = caService.SensorNames;
-            caService.GetSenssorData(SenesorNames[0]);
-            SelectionChangedCommand = new RelayCommand(SelectionChanged);
+            caService.GetSenssorData(SenesorNames[0]);            
             caService.SensorDataArrived += SensorDataArrivedHandler;            
             SelectedSensorName = this.SenesorNames[0];
         }
-        private void SensorDataArrivedHandler(object sender, SensorViewModel sensorDat)
+        private void SensorDataArrivedHandler(object sender, SensorModel sensorData)
         {
-            SlectedSensorData = sensorDat;
+            //if (selectedSensoer != null && SlectedSensorData.SensorName.Equals(sensorData.SensorName))
+            //{
+                
+            //    return;
+            //}
+            SlectedSensorData = new SensorViewModel(caService, sensorData);
+            SlectedSensorData.UpdateVM(sensorData);
+            RaisePropertyChanged("");
         }
         public string SelectedSensorName { get { return selectedSensorName; }
             set {
                 if(!value.Equals(selectedSensorName))
                 {
                     selectedSensorName = value;
-                    caService.GetSenssorData(value);
-
-                    RaisePropertyChanged("SelectedSensorName");
+                    caService.GetSenssorData(value);                    
                 }
-            } }
-        private void SelectionChanged()
-        {
-        }
+            } }       
     }
 }

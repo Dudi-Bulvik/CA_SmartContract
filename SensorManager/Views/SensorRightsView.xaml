@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
               xmlns:uc ="clr-namespace:SensorManager"  
               DataContext="{Binding ManagerVM.SlectedSensorData, Source={StaticResource Locator}}"   
-             d:DesignHeight="250" d:DesignWidth="800">
+            >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition  />
@@ -23,19 +23,32 @@
             <TextBlock Background="Black" Foreground="White"  Margin="5"> Senso Publick Key:</TextBlock>
             <TextBlock Margin="5" Text="{Binding Path=SensorPublicKey}"/>
           </StackPanel>
-        <ListBox Margin="20" Grid.Row="2" Name="AccessRight" ItemsSource="{Binding Path=AccsesRights}">
+        <ListBox Margin="20" Grid.Row="2" Name="AccessRight" ItemsSource="{Binding Path=DataContext.AccsesRights, UpdateSourceTrigger= PropertyChanged,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}}}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding SensorName}" FontSize="15" Margin="5"/>
                         <!--<TextBlock Text="{Binding AccessePermition}" Background="{Binding AccessePermition,Converter={StaticResource boolToColorConertor}}" Margin="5"/>-->
-                        <Button Command="{Binding ChangePermitionCommand}">
-                           
-                            <Button.Content>
+                        <ToggleButton Command="{Binding Path =DataContext.ChangePermitionCommand ,UpdateSourceTrigger= PropertyChanged, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}}}" CommandParameter="{Binding }">
+                            <ToggleButton.Style>
+                                <Style TargetType="ToggleButton">
+                                    <Setter Property="Content" Value="Accsee Allow"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                    <Setter Property="Background" Value="GreenYellow"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=AccessePermition , Converter={StaticResource dummyConverotr}}" Value="False">
+                                            <Setter Property="Content" Value="Accsee Not Allow"/>
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                                
+                            </ToggleButton.Style>
+                            <!--<ToggleButton.Content>
                                 <TextBlock MinWidth="140" FontSize="15"   Text="{Binding AccessePermition, Converter={StaticResource allowAndNotAllowConvertor}}" Background="{Binding AccessePermition,Converter={StaticResource boolToColorConertor}}" Margin="5"/>
-                                <!--<textblock text="{binding accessepermition , converter={staticresource allowandnotallowconvertor}}" background="{binding  accessepermition , converter={ staticresource booltocolorconertor}}"/>-->
-                            </Button.Content>
-                        </Button>
+                                --><!--<textblock text="{binding accessepermition , converter={staticresource allowandnotallowconvertor}}" background="{binding  accessepermition , converter={ staticresource booltocolorconertor}}"/>--><!--
+                            </ToggleButton.Content>-->
+                        </ToggleButton>
 
                     </StackPanel>
                 </DataTemplate>
