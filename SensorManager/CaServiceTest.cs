@@ -6,7 +6,7 @@ namespace SensorManager
 {
     public class CaServiceTest : ICaService
     {
-        public List<string> SensorNames =>  new List<string>{"1","2","3"};
+        public List<string> SensorNames => new List<string> { "1", "2", "3" };
         public Dictionary<string, SensorModel> senVM = new Dictionary<string, SensorModel>();
 
         public event EventHandler<SensorModel> SensorDataArrived;
@@ -17,10 +17,10 @@ namespace SensorManager
             if (senVM.ContainsKey(fromSenstor))
             {
                 var sensorViewModel = senVM[fromSenstor];
-                sensorViewModel.AccsesRights.Add(new AccessRight() { SensorName = rand.Next().ToString(), AccessePermition = accses});
+                sensorViewModel.AccsesRights.Add(new AccessRight() { SensorName = rand.Next().ToString(), AccessePermition = accses });
                 foreach (var acc in sensorViewModel.AccsesRights)
                 {
-                    if(acc.SensorName.Equals(toSenstorName))
+                    if (acc.SensorName.Equals(toSenstorName))
                     {
                         acc.AccessePermition = accses;
                         Task.Run(() => { RaizeEvent(fromSenstor); });
@@ -29,6 +29,14 @@ namespace SensorManager
                 }
             }
         }
+        public CaServiceTest()
+        {
+            foreach(var name in SensorNames)
+            {
+                RaizeEvent(name);
+            }
+        }
+
 
         public Dictionary<string, bool> GetSenssorAccessRight(string sensorName)
         {
@@ -36,6 +44,7 @@ namespace SensorManager
         }
         private void RaizeEvent(string sensorName)
         {
+            
             if (!senVM.ContainsKey(sensorName))
             {
                 var accessList = new List<AccessRight>();

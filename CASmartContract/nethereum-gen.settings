@@ -1,0 +1,7 @@
+{
+    "projectName": "CASmartContract",
+    "namespace": "CASmartContract.Contracts",
+    "lang": 0,
+    "autoCodeGen": true,
+    "projectPath": "../"
+}
