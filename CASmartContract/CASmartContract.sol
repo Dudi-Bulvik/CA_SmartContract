@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.7.4;
+pragma solidity ^0.5.11
 
   contract CASmartContract {
-       
         struct SensorData{
              address SennsorOwner;
             bool HasOwner;
@@ -10,9 +9,7 @@ pragma solidity ^0.7.4;
             address key;
             mapping(address=>bool) AccessList;
         }
-        mapping(address => SensorData) private sensorData;
-      
-        
+        mapping(address => SensorData) private sensorData
     function initSesor(address sensor,  string memory sensorName) public returns (bool success) {
         if(!sensorData[sensor].HasOwner)
         {

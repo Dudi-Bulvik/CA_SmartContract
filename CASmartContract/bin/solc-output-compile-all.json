@@ -1,0 +1,1706 @@
+{
+    "contracts": {
+        "c:/Myproject/CaNew/CASmartContract/CASmartContract.sol": {
+            "CASmartContract": {
+                "abi": [
+                    {
+                        "constant": true,
+                        "inputs": [
+                            {
+                                "internalType": "address",
+                                "name": "sensor",
+                                "type": "address"
+                            }
+                        ],
+                        "name": "IsAccessAllow",
+                        "outputs": [
+                            {
+                                "internalType": "bool",
+                                "name": "access",
+                                "type": "bool"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": false,
+                        "inputs": [
+                            {
+                                "internalType": "address",
+                                "name": "sensor",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "sensorName",
+                                "type": "string"
+                            }
+                        ],
+                        "name": "initSesor",
+                        "outputs": [
+                            {
+                                "internalType": "bool",
+                                "name": "success",
+                                "type": "bool"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "constant": false,
+                        "inputs": [
+                            {
+                                "internalType": "address",
+                                "name": "sensor",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "address",
+                                "name": "toSensor",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "bool",
+                                "name": "access",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "GrentAccess",
+                        "outputs": [
+                            {
+                                "internalType": "bool",
+                                "name": "success",
+                                "type": "bool"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    }
+                ],
+                "devdoc": {
+                    "methods": {}
+                },
+                "evm": {
+                    "bytecode": {
+                        "linkReferences": {},
+                        "object": "608060405234801561001057600080fd5b5061037e806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063af89f65114610046578063d0106bc114610080578063fc60fd7014610136575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b031661016e565b604080519115158252519081900360200190f35b61006c6004803603604081101561009657600080fd5b6001600160a01b0382351691908101906040810160208201356401000000008111156100c157600080fd5b8201836020820111156100d357600080fd5b803590602001918460018302840111640100000000831117156100f557600080fd5b91908080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201919091525092955061019b945050505050565b61006c6004803603606081101561014c57600080fd5b506001600160a01b038135811691602081013590911690604001351515610223565b336000908152602081815260408083206001600160a01b038516845260030190915290205460ff16919050565b6001600160a01b038216600090815260208190526040812054600160a01b900460ff16610219576001600160a01b03831660009081526020818152604090912080546001600160a01b031960ff60a01b19909116600160a01b171633178155835161020f92600192909201918501906102ae565b506001905061021d565b5060005b92915050565b6001600160a01b038316600090815260208190526040812054600160a01b900460ff16801561026b57506001600160a01b038481166000908152602081905260409020541633145b156102a4576001600160a01b0384811660009081526020818152604080832093871683526003909301905220805460ff19168315151790555b5060009392505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106102ef57805160ff191683800117855561031c565b8280016001018555821561031c579182015b8281111561031c578251825591602001919060010190610301565b5061032892915061032c565b5090565b61034691905b808211156103285760008155600101610332565b9056fea265627a7a7231582043654d92b2fe242bb4d4e516891caeade4246e51f6e8bb81690666c04d9622a264736f6c634300050b0032",
+                        "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x37E DUP1 PUSH2 0x20 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x41 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0xAF89F651 EQ PUSH2 0x46 JUMPI DUP1 PUSH4 0xD0106BC1 EQ PUSH2 0x80 JUMPI DUP1 PUSH4 0xFC60FD70 EQ PUSH2 0x136 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x6C PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x5C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND PUSH2 0x16E JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD SWAP2 ISZERO ISZERO DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH2 0x6C PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x40 DUP2 LT ISZERO PUSH2 0x96 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP3 CALLDATALOAD AND SWAP2 SWAP1 DUP2 ADD SWAP1 PUSH1 0x40 DUP2 ADD PUSH1 0x20 DUP3 ADD CALLDATALOAD PUSH5 0x100000000 DUP2 GT ISZERO PUSH2 0xC1 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP3 ADD DUP4 PUSH1 0x20 DUP3 ADD GT ISZERO PUSH2 0xD3 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP1 CALLDATALOAD SWAP1 PUSH1 0x20 ADD SWAP2 DUP5 PUSH1 0x1 DUP4 MUL DUP5 ADD GT PUSH5 0x100000000 DUP4 GT OR ISZERO PUSH2 0xF5 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST SWAP2 SWAP1 DUP1 DUP1 PUSH1 0x1F ADD PUSH1 0x20 DUP1 SWAP2 DIV MUL PUSH1 0x20 ADD PUSH1 0x40 MLOAD SWAP1 DUP2 ADD PUSH1 0x40 MSTORE DUP1 SWAP4 SWAP3 SWAP2 SWAP1 DUP2 DUP2 MSTORE PUSH1 0x20 ADD DUP4 DUP4 DUP1 DUP3 DUP5 CALLDATACOPY PUSH1 0x0 SWAP3 ADD SWAP2 SWAP1 SWAP2 MSTORE POP SWAP3 SWAP6 POP PUSH2 0x19B SWAP5 POP POP POP POP POP JUMP JUMPDEST PUSH2 0x6C PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x60 DUP2 LT ISZERO PUSH2 0x14C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 CALLDATALOAD DUP2 AND SWAP2 PUSH1 0x20 DUP2 ADD CALLDATALOAD SWAP1 SWAP2 AND SWAP1 PUSH1 0x40 ADD CALLDATALOAD ISZERO ISZERO PUSH2 0x223 JUMP JUMPDEST CALLER PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 DUP2 MSTORE PUSH1 0x40 DUP1 DUP4 KECCAK256 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP6 AND DUP5 MSTORE PUSH1 0x3 ADD SWAP1 SWAP2 MSTORE SWAP1 KECCAK256 SLOAD PUSH1 0xFF AND SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP3 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 SWAP1 MSTORE PUSH1 0x40 DUP2 KECCAK256 SLOAD PUSH1 0x1 PUSH1 0xA0 SHL SWAP1 DIV PUSH1 0xFF AND PUSH2 0x219 JUMPI PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP4 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 DUP2 MSTORE PUSH1 0x40 SWAP1 SWAP2 KECCAK256 DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT PUSH1 0xFF PUSH1 0xA0 SHL NOT SWAP1 SWAP2 AND PUSH1 0x1 PUSH1 0xA0 SHL OR AND CALLER OR DUP2 SSTORE DUP4 MLOAD PUSH2 0x20F SWAP3 PUSH1 0x1 SWAP3 SWAP1 SWAP3 ADD SWAP2 DUP6 ADD SWAP1 PUSH2 0x2AE JUMP JUMPDEST POP PUSH1 0x1 SWAP1 POP PUSH2 0x21D JUMP JUMPDEST POP PUSH1 0x0 JUMPDEST SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP4 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 SWAP1 MSTORE PUSH1 0x40 DUP2 KECCAK256 SLOAD PUSH1 0x1 PUSH1 0xA0 SHL SWAP1 DIV PUSH1 0xFF AND DUP1 ISZERO PUSH2 0x26B JUMPI POP PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP5 DUP2 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 SWAP1 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD AND CALLER EQ JUMPDEST ISZERO PUSH2 0x2A4 JUMPI PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP5 DUP2 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 DUP2 MSTORE PUSH1 0x40 DUP1 DUP4 KECCAK256 SWAP4 DUP8 AND DUP4 MSTORE PUSH1 0x3 SWAP1 SWAP4 ADD SWAP1 MSTORE KECCAK256 DUP1 SLOAD PUSH1 0xFF NOT AND DUP4 ISZERO ISZERO OR SWAP1 SSTORE JUMPDEST POP PUSH1 0x0 SWAP4 SWAP3 POP POP POP JUMP JUMPDEST DUP3 DUP1 SLOAD PUSH1 0x1 DUP2 PUSH1 0x1 AND ISZERO PUSH2 0x100 MUL SUB AND PUSH1 0x2 SWAP1 DIV SWAP1 PUSH1 0x0 MSTORE PUSH1 0x20 PUSH1 0x0 KECCAK256 SWAP1 PUSH1 0x1F ADD PUSH1 0x20 SWAP1 DIV DUP2 ADD SWAP3 DUP3 PUSH1 0x1F LT PUSH2 0x2EF JUMPI DUP1 MLOAD PUSH1 0xFF NOT AND DUP4 DUP1 ADD OR DUP6 SSTORE PUSH2 0x31C JUMP JUMPDEST DUP3 DUP1 ADD PUSH1 0x1 ADD DUP6 SSTORE DUP3 ISZERO PUSH2 0x31C JUMPI SWAP2 DUP3 ADD JUMPDEST DUP3 DUP2 GT ISZERO PUSH2 0x31C JUMPI DUP3 MLOAD DUP3 SSTORE SWAP2 PUSH1 0x20 ADD SWAP2 SWAP1 PUSH1 0x1 ADD SWAP1 PUSH2 0x301 JUMP JUMPDEST POP PUSH2 0x328 SWAP3 SWAP2 POP PUSH2 0x32C JUMP JUMPDEST POP SWAP1 JUMP JUMPDEST PUSH2 0x346 SWAP2 SWAP1 JUMPDEST DUP1 DUP3 GT ISZERO PUSH2 0x328 JUMPI PUSH1 0x0 DUP2 SSTORE PUSH1 0x1 ADD PUSH2 0x332 JUMP JUMPDEST SWAP1 JUMP INVALID LOG2 PUSH6 0x627A7A723158 KECCAK256 NUMBER PUSH6 0x4D92B2FE242B 0xb4 0xd4 0xe5 AND DUP10 SHR 0xae 0xad 0xe4 0x24 PUSH15 0x51F6E8BB81690666C04D9622A26473 PUSH16 0x6C634300050B00320000000000000000 ",
+                        "sourceMap": "67:1241:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;67:1241:0;;;;;;;"
+                    },
+                    "deployedBytecode": {
+                        "linkReferences": {},
+                        "object": "608060405234801561001057600080fd5b50600436106100415760003560e01c8063af89f65114610046578063d0106bc114610080578063fc60fd7014610136575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b031661016e565b604080519115158252519081900360200190f35b61006c6004803603604081101561009657600080fd5b6001600160a01b0382351691908101906040810160208201356401000000008111156100c157600080fd5b8201836020820111156100d357600080fd5b803590602001918460018302840111640100000000831117156100f557600080fd5b91908080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201919091525092955061019b945050505050565b61006c6004803603606081101561014c57600080fd5b506001600160a01b038135811691602081013590911690604001351515610223565b336000908152602081815260408083206001600160a01b038516845260030190915290205460ff16919050565b6001600160a01b038216600090815260208190526040812054600160a01b900460ff16610219576001600160a01b03831660009081526020818152604090912080546001600160a01b031960ff60a01b19909116600160a01b171633178155835161020f92600192909201918501906102ae565b506001905061021d565b5060005b92915050565b6001600160a01b038316600090815260208190526040812054600160a01b900460ff16801561026b57506001600160a01b038481166000908152602081905260409020541633145b156102a4576001600160a01b0384811660009081526020818152604080832093871683526003909301905220805460ff19168315151790555b5060009392505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106102ef57805160ff191683800117855561031c565b8280016001018555821561031c579182015b8281111561031c578251825591602001919060010190610301565b5061032892915061032c565b5090565b61034691905b808211156103285760008155600101610332565b9056fea265627a7a7231582043654d92b2fe242bb4d4e516891caeade4246e51f6e8bb81690666c04d9622a264736f6c634300050b0032",
+                        "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x41 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0xAF89F651 EQ PUSH2 0x46 JUMPI DUP1 PUSH4 0xD0106BC1 EQ PUSH2 0x80 JUMPI DUP1 PUSH4 0xFC60FD70 EQ PUSH2 0x136 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x6C PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x5C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND PUSH2 0x16E JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD SWAP2 ISZERO ISZERO DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH2 0x6C PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x40 DUP2 LT ISZERO PUSH2 0x96 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP3 CALLDATALOAD AND SWAP2 SWAP1 DUP2 ADD SWAP1 PUSH1 0x40 DUP2 ADD PUSH1 0x20 DUP3 ADD CALLDATALOAD PUSH5 0x100000000 DUP2 GT ISZERO PUSH2 0xC1 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP3 ADD DUP4 PUSH1 0x20 DUP3 ADD GT ISZERO PUSH2 0xD3 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP1 CALLDATALOAD SWAP1 PUSH1 0x20 ADD SWAP2 DUP5 PUSH1 0x1 DUP4 MUL DUP5 ADD GT PUSH5 0x100000000 DUP4 GT OR ISZERO PUSH2 0xF5 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST SWAP2 SWAP1 DUP1 DUP1 PUSH1 0x1F ADD PUSH1 0x20 DUP1 SWAP2 DIV MUL PUSH1 0x20 ADD PUSH1 0x40 MLOAD SWAP1 DUP2 ADD PUSH1 0x40 MSTORE DUP1 SWAP4 SWAP3 SWAP2 SWAP1 DUP2 DUP2 MSTORE PUSH1 0x20 ADD DUP4 DUP4 DUP1 DUP3 DUP5 CALLDATACOPY PUSH1 0x0 SWAP3 ADD SWAP2 SWAP1 SWAP2 MSTORE POP SWAP3 SWAP6 POP PUSH2 0x19B SWAP5 POP POP POP POP POP JUMP JUMPDEST PUSH2 0x6C PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x60 DUP2 LT ISZERO PUSH2 0x14C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 CALLDATALOAD DUP2 AND SWAP2 PUSH1 0x20 DUP2 ADD CALLDATALOAD SWAP1 SWAP2 AND SWAP1 PUSH1 0x40 ADD CALLDATALOAD ISZERO ISZERO PUSH2 0x223 JUMP JUMPDEST CALLER PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 DUP2 MSTORE PUSH1 0x40 DUP1 DUP4 KECCAK256 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP6 AND DUP5 MSTORE PUSH1 0x3 ADD SWAP1 SWAP2 MSTORE SWAP1 KECCAK256 SLOAD PUSH1 0xFF AND SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP3 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 SWAP1 MSTORE PUSH1 0x40 DUP2 KECCAK256 SLOAD PUSH1 0x1 PUSH1 0xA0 SHL SWAP1 DIV PUSH1 0xFF AND PUSH2 0x219 JUMPI PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP4 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 DUP2 MSTORE PUSH1 0x40 SWAP1 SWAP2 KECCAK256 DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT PUSH1 0xFF PUSH1 0xA0 SHL NOT SWAP1 SWAP2 AND PUSH1 0x1 PUSH1 0xA0 SHL OR AND CALLER OR DUP2 SSTORE DUP4 MLOAD PUSH2 0x20F SWAP3 PUSH1 0x1 SWAP3 SWAP1 SWAP3 ADD SWAP2 DUP6 ADD SWAP1 PUSH2 0x2AE JUMP JUMPDEST POP PUSH1 0x1 SWAP1 POP PUSH2 0x21D JUMP JUMPDEST POP PUSH1 0x0 JUMPDEST SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP4 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 SWAP1 MSTORE PUSH1 0x40 DUP2 KECCAK256 SLOAD PUSH1 0x1 PUSH1 0xA0 SHL SWAP1 DIV PUSH1 0xFF AND DUP1 ISZERO PUSH2 0x26B JUMPI POP PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP5 DUP2 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 SWAP1 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD AND CALLER EQ JUMPDEST ISZERO PUSH2 0x2A4 JUMPI PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP5 DUP2 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x20 DUP2 DUP2 MSTORE PUSH1 0x40 DUP1 DUP4 KECCAK256 SWAP4 DUP8 AND DUP4 MSTORE PUSH1 0x3 SWAP1 SWAP4 ADD SWAP1 MSTORE KECCAK256 DUP1 SLOAD PUSH1 0xFF NOT AND DUP4 ISZERO ISZERO OR SWAP1 SSTORE JUMPDEST POP PUSH1 0x0 SWAP4 SWAP3 POP POP POP JUMP JUMPDEST DUP3 DUP1 SLOAD PUSH1 0x1 DUP2 PUSH1 0x1 AND ISZERO PUSH2 0x100 MUL SUB AND PUSH1 0x2 SWAP1 DIV SWAP1 PUSH1 0x0 MSTORE PUSH1 0x20 PUSH1 0x0 KECCAK256 SWAP1 PUSH1 0x1F ADD PUSH1 0x20 SWAP1 DIV DUP2 ADD SWAP3 DUP3 PUSH1 0x1F LT PUSH2 0x2EF JUMPI DUP1 MLOAD PUSH1 0xFF NOT AND DUP4 DUP1 ADD OR DUP6 SSTORE PUSH2 0x31C JUMP JUMPDEST DUP3 DUP1 ADD PUSH1 0x1 ADD DUP6 SSTORE DUP3 ISZERO PUSH2 0x31C JUMPI SWAP2 DUP3 ADD JUMPDEST DUP3 DUP2 GT ISZERO PUSH2 0x31C JUMPI DUP3 MLOAD DUP3 SSTORE SWAP2 PUSH1 0x20 ADD SWAP2 SWAP1 PUSH1 0x1 ADD SWAP1 PUSH2 0x301 JUMP JUMPDEST POP PUSH2 0x328 SWAP3 SWAP2 POP PUSH2 0x32C JUMP JUMPDEST POP SWAP1 JUMP JUMPDEST PUSH2 0x346 SWAP2 SWAP1 JUMPDEST DUP1 DUP3 GT ISZERO PUSH2 0x328 JUMPI PUSH1 0x0 DUP2 SSTORE PUSH1 0x1 ADD PUSH2 0x332 JUMP JUMPDEST SWAP1 JUMP INVALID LOG2 PUSH6 0x627A7A723158 KECCAK256 NUMBER PUSH6 0x4D92B2FE242B 0xb4 0xd4 0xe5 AND DUP10 SHR 0xae 0xad 0xe4 0x24 PUSH15 0x51F6E8BB81690666C04D9622A26473 PUSH16 0x6C634300050B00320000000000000000 ",
+                        "sourceMap": "67:1241:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;67:1241:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1084:217;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1084:217:0;-1:-1:-1;;;;;1084:217:0;;:::i;:::-;;;;;;;;;;;;;;;;;;368:387;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;368:387:0;;;;;;;;;;;;;;;21:11:-1;5:28;;2:2;;;46:1;43;36:12;2:2;368:387:0;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;368:387:0;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;368:387:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;81:16;;74:27;;;;-1:-1;368:387:0;;-1:-1:-1;368:387:0;;-1:-1:-1;;;;;368:387:0:i;773:305::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;773:305:0;;;;;;;;;;;;;;;;;;;:::i;1084:217::-;1188:10;1144:11;1225:16;;;;;;;;;;;-1:-1:-1;;;;;1225:35:0;;;;:27;;:35;;;;;;;;1084:217;;;:::o;368:387::-;-1:-1:-1;;;;;475:18:0;;446:12;475:18;;;;;;;;;;:27;-1:-1:-1;;;475:27:0;;;;471:254;;-1:-1:-1;;;;;528:18:0;;:10;:18;;;;;;;;;;;:33;;-1:-1:-1;;;;;;;;;;528:33:0;;;-1:-1:-1;;;528:33:0;576:44;610:10;576:44;;;635:43;;;;557:4;635:29;;;;;:43;;;;:::i;:::-;-1:-1:-1;709:4:0;;-1:-1:-1;693:20:0;;471:254;-1:-1:-1;742:5:0;368:387;;;;;:::o;773:305::-;-1:-1:-1;;;;;884:18:0;;854:12;884:18;;;;;;;;;;:27;-1:-1:-1;;;884:27:0;;;;:76;;;;-1:-1:-1;;;;;;915:18:0;;;:10;:18;;;;;;;;;;:31;;950:10;915:45;884:76;881:167;;;-1:-1:-1;;;;;988:18:0;;;:10;:18;;;;;;;;;;;:39;;;;;:29;;;;:39;;;:47;;-1:-1:-1;;988:47:0;;;;;;;881:167;-1:-1:-1;1065:5:0;773:305;;;;;:::o;67:1241::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;67:1241:0;;;-1:-1:-1;67:1241:0;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o"
+                    },
+                    "gasEstimates": {
+                        "creation": {
+                            "codeDepositCost": "178800",
+                            "executionCost": "220",
+                            "totalCost": "179020"
+                        },
+                        "external": {
+                            "GrentAccess(address,address,bool)": "21405",
+                            "IsAccessAllow(address)": "614",
+                            "initSesor(address,string)": "infinite"
+                        }
+                    },
+                    "methodIdentifiers": {
+                        "GrentAccess(address,address,bool)": "fc60fd70",
+                        "IsAccessAllow(address)": "af89f651",
+                        "initSesor(address,string)": "d0106bc1"
+                    }
+                },
+                "metadata": "{\"compiler\":{\"version\":\"0.5.11+commit.c082d0b4\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"sensor\",\"type\":\"address\"}],\"name\":\"IsAccessAllow\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"access\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"sensor\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"sensorName\",\"type\":\"string\"}],\"name\":\"initSesor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"sensor\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"toSensor\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"access\",\"type\":\"bool\"}],\"name\":\"GrentAccess\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"c:/Myproject/CaNew/CASmartContract/CASmartContract.sol\":\"CASmartContract\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Myproject/CaNew/CASmartContract/CASmartContract.sol\":{\"keccak256\":\"0x9499674e42e706fc8d6c7efa10b49075c2ee15a80796bfcba3fa103c9bdb38f4\",\"urls\":[\"bzz-raw://3bc72016b5cf45a5913b1e63d37d8483c5c7006490f396b7a0fe224cc626c14b\",\"dweb:/ipfs/QmTz5aUc6ghsFrU7FFPRd9vfbUVegagkaRHp6tA9DqF5Vo\"]}},\"version\":1}",
+                "userdoc": {
+                    "methods": {}
+                }
+            }
+        }
+    },
+    "sources": {
+        "c:/Myproject/CaNew/CASmartContract/CASmartContract.sol": {
+            "ast": {
+                "absolutePath": "c:/Myproject/CaNew/CASmartContract/CASmartContract.sol",
+                "exportedSymbols": {
+                    "CASmartContract": [
+                        125
+                    ]
+                },
+                "id": 126,
+                "nodeType": "SourceUnit",
+                "nodes": [
+                    {
+                        "id": 1,
+                        "literals": [
+                            "solidity",
+                            "^",
+                            "0.5",
+                            ".11"
+                        ],
+                        "nodeType": "PragmaDirective",
+                        "src": "37:24:0"
+                    },
+                    {
+                        "baseContracts": [],
+                        "contractDependencies": [],
+                        "contractKind": "contract",
+                        "documentation": null,
+                        "fullyImplemented": true,
+                        "id": 125,
+                        "linearizedBaseContracts": [
+                            125
+                        ],
+                        "name": "CASmartContract",
+                        "nodeType": "ContractDefinition",
+                        "nodes": [
+                            {
+                                "canonicalName": "CASmartContract.SensorData",
+                                "id": 14,
+                                "members": [
+                                    {
+                                        "constant": false,
+                                        "id": 3,
+                                        "name": "SennsorOwner",
+                                        "nodeType": "VariableDeclaration",
+                                        "scope": 14,
+                                        "src": "136:20:0",
+                                        "stateVariable": false,
+                                        "storageLocation": "default",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        },
+                                        "typeName": {
+                                            "id": 2,
+                                            "name": "address",
+                                            "nodeType": "ElementaryTypeName",
+                                            "src": "136:7:0",
+                                            "stateMutability": "nonpayable",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "value": null,
+                                        "visibility": "internal"
+                                    },
+                                    {
+                                        "constant": false,
+                                        "id": 5,
+                                        "name": "HasOwner",
+                                        "nodeType": "VariableDeclaration",
+                                        "scope": 14,
+                                        "src": "171:13:0",
+                                        "stateVariable": false,
+                                        "storageLocation": "default",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        },
+                                        "typeName": {
+                                            "id": 4,
+                                            "name": "bool",
+                                            "nodeType": "ElementaryTypeName",
+                                            "src": "171:4:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_bool",
+                                                "typeString": "bool"
+                                            }
+                                        },
+                                        "value": null,
+                                        "visibility": "internal"
+                                    },
+                                    {
+                                        "constant": false,
+                                        "id": 7,
+                                        "name": "SensorName",
+                                        "nodeType": "VariableDeclaration",
+                                        "scope": 14,
+                                        "src": "199:17:0",
+                                        "stateVariable": false,
+                                        "storageLocation": "default",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_string_storage_ptr",
+                                            "typeString": "string"
+                                        },
+                                        "typeName": {
+                                            "id": 6,
+                                            "name": "string",
+                                            "nodeType": "ElementaryTypeName",
+                                            "src": "199:6:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_string_storage_ptr",
+                                                "typeString": "string"
+                                            }
+                                        },
+                                        "value": null,
+                                        "visibility": "internal"
+                                    },
+                                    {
+                                        "constant": false,
+                                        "id": 9,
+                                        "name": "key",
+                                        "nodeType": "VariableDeclaration",
+                                        "scope": 14,
+                                        "src": "231:11:0",
+                                        "stateVariable": false,
+                                        "storageLocation": "default",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        },
+                                        "typeName": {
+                                            "id": 8,
+                                            "name": "address",
+                                            "nodeType": "ElementaryTypeName",
+                                            "src": "231:7:0",
+                                            "stateMutability": "nonpayable",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "value": null,
+                                        "visibility": "internal"
+                                    },
+                                    {
+                                        "constant": false,
+                                        "id": 13,
+                                        "name": "AccessList",
+                                        "nodeType": "VariableDeclaration",
+                                        "scope": 14,
+                                        "src": "257:33:0",
+                                        "stateVariable": false,
+                                        "storageLocation": "default",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                                            "typeString": "mapping(address => bool)"
+                                        },
+                                        "typeName": {
+                                            "id": 12,
+                                            "keyType": {
+                                                "id": 10,
+                                                "name": "address",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "265:7:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            "nodeType": "Mapping",
+                                            "src": "257:22:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                                                "typeString": "mapping(address => bool)"
+                                            },
+                                            "valueType": {
+                                                "id": 11,
+                                                "name": "bool",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "274:4:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            }
+                                        },
+                                        "value": null,
+                                        "visibility": "internal"
+                                    }
+                                ],
+                                "name": "SensorData",
+                                "nodeType": "StructDefinition",
+                                "scope": 125,
+                                "src": "103:199:0",
+                                "visibility": "public"
+                            },
+                            {
+                                "constant": false,
+                                "id": 18,
+                                "name": "sensorData",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 125,
+                                "src": "312:49:0",
+                                "stateVariable": true,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                    "typeString": "mapping(address => struct CASmartContract.SensorData)"
+                                },
+                                "typeName": {
+                                    "id": 17,
+                                    "keyType": {
+                                        "id": 15,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "320:7:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "nodeType": "Mapping",
+                                    "src": "312:30:0",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                        "typeString": "mapping(address => struct CASmartContract.SensorData)"
+                                    },
+                                    "valueType": {
+                                        "contractScope": null,
+                                        "id": 16,
+                                        "name": "SensorData",
+                                        "nodeType": "UserDefinedTypeName",
+                                        "referencedDeclaration": 14,
+                                        "src": "331:10:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_struct$_SensorData_$14_storage_ptr",
+                                            "typeString": "struct CASmartContract.SensorData"
+                                        }
+                                    }
+                                },
+                                "value": null,
+                                "visibility": "private"
+                            },
+                            {
+                                "body": {
+                                    "id": 62,
+                                    "nodeType": "Block",
+                                    "src": "460:295:0",
+                                    "statements": [
+                                        {
+                                            "condition": {
+                                                "argumentTypes": null,
+                                                "id": 31,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "nodeType": "UnaryOperation",
+                                                "operator": "!",
+                                                "prefix": true,
+                                                "src": "474:28:0",
+                                                "subExpression": {
+                                                    "argumentTypes": null,
+                                                    "expression": {
+                                                        "argumentTypes": null,
+                                                        "baseExpression": {
+                                                            "argumentTypes": null,
+                                                            "id": 27,
+                                                            "name": "sensorData",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "referencedDeclaration": 18,
+                                                            "src": "475:10:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                            }
+                                                        },
+                                                        "id": 29,
+                                                        "indexExpression": {
+                                                            "argumentTypes": null,
+                                                            "id": 28,
+                                                            "name": "sensor",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "referencedDeclaration": 20,
+                                                            "src": "486:6:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_address",
+                                                                "typeString": "address"
+                                                            }
+                                                        },
+                                                        "isConstant": false,
+                                                        "isLValue": true,
+                                                        "isPure": false,
+                                                        "lValueRequested": false,
+                                                        "nodeType": "IndexAccess",
+                                                        "src": "475:18:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                            "typeString": "struct CASmartContract.SensorData storage ref"
+                                                        }
+                                                    },
+                                                    "id": 30,
+                                                    "isConstant": false,
+                                                    "isLValue": true,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "memberName": "HasOwner",
+                                                    "nodeType": "MemberAccess",
+                                                    "referencedDeclaration": 5,
+                                                    "src": "475:27:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_bool",
+                                                        "typeString": "bool"
+                                                    }
+                                                },
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "falseBody": null,
+                                            "id": 59,
+                                            "nodeType": "IfStatement",
+                                            "src": "471:254:0",
+                                            "trueBody": {
+                                                "id": 58,
+                                                "nodeType": "Block",
+                                                "src": "513:212:0",
+                                                "statements": [
+                                                    {
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "id": 37,
+                                                            "isConstant": false,
+                                                            "isLValue": false,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "leftHandSide": {
+                                                                "argumentTypes": null,
+                                                                "expression": {
+                                                                    "argumentTypes": null,
+                                                                    "baseExpression": {
+                                                                        "argumentTypes": null,
+                                                                        "id": 32,
+                                                                        "name": "sensorData",
+                                                                        "nodeType": "Identifier",
+                                                                        "overloadedDeclarations": [],
+                                                                        "referencedDeclaration": 18,
+                                                                        "src": "528:10:0",
+                                                                        "typeDescriptions": {
+                                                                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                            "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                                        }
+                                                                    },
+                                                                    "id": 34,
+                                                                    "indexExpression": {
+                                                                        "argumentTypes": null,
+                                                                        "id": 33,
+                                                                        "name": "sensor",
+                                                                        "nodeType": "Identifier",
+                                                                        "overloadedDeclarations": [],
+                                                                        "referencedDeclaration": 20,
+                                                                        "src": "539:6:0",
+                                                                        "typeDescriptions": {
+                                                                            "typeIdentifier": "t_address",
+                                                                            "typeString": "address"
+                                                                        }
+                                                                    },
+                                                                    "isConstant": false,
+                                                                    "isLValue": true,
+                                                                    "isPure": false,
+                                                                    "lValueRequested": false,
+                                                                    "nodeType": "IndexAccess",
+                                                                    "src": "528:18:0",
+                                                                    "typeDescriptions": {
+                                                                        "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                                        "typeString": "struct CASmartContract.SensorData storage ref"
+                                                                    }
+                                                                },
+                                                                "id": 35,
+                                                                "isConstant": false,
+                                                                "isLValue": true,
+                                                                "isPure": false,
+                                                                "lValueRequested": true,
+                                                                "memberName": "HasOwner",
+                                                                "nodeType": "MemberAccess",
+                                                                "referencedDeclaration": 5,
+                                                                "src": "528:27:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_bool",
+                                                                    "typeString": "bool"
+                                                                }
+                                                            },
+                                                            "nodeType": "Assignment",
+                                                            "operator": "=",
+                                                            "rightHandSide": {
+                                                                "argumentTypes": null,
+                                                                "hexValue": "74727565",
+                                                                "id": 36,
+                                                                "isConstant": false,
+                                                                "isLValue": false,
+                                                                "isPure": true,
+                                                                "kind": "bool",
+                                                                "lValueRequested": false,
+                                                                "nodeType": "Literal",
+                                                                "src": "557:4:0",
+                                                                "subdenomination": null,
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_bool",
+                                                                    "typeString": "bool"
+                                                                },
+                                                                "value": "true"
+                                                            },
+                                                            "src": "528:33:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_bool",
+                                                                "typeString": "bool"
+                                                            }
+                                                        },
+                                                        "id": 38,
+                                                        "nodeType": "ExpressionStatement",
+                                                        "src": "528:33:0"
+                                                    },
+                                                    {
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "id": 45,
+                                                            "isConstant": false,
+                                                            "isLValue": false,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "leftHandSide": {
+                                                                "argumentTypes": null,
+                                                                "expression": {
+                                                                    "argumentTypes": null,
+                                                                    "baseExpression": {
+                                                                        "argumentTypes": null,
+                                                                        "id": 39,
+                                                                        "name": "sensorData",
+                                                                        "nodeType": "Identifier",
+                                                                        "overloadedDeclarations": [],
+                                                                        "referencedDeclaration": 18,
+                                                                        "src": "576:10:0",
+                                                                        "typeDescriptions": {
+                                                                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                            "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                                        }
+                                                                    },
+                                                                    "id": 41,
+                                                                    "indexExpression": {
+                                                                        "argumentTypes": null,
+                                                                        "id": 40,
+                                                                        "name": "sensor",
+                                                                        "nodeType": "Identifier",
+                                                                        "overloadedDeclarations": [],
+                                                                        "referencedDeclaration": 20,
+                                                                        "src": "587:6:0",
+                                                                        "typeDescriptions": {
+                                                                            "typeIdentifier": "t_address",
+                                                                            "typeString": "address"
+                                                                        }
+                                                                    },
+                                                                    "isConstant": false,
+                                                                    "isLValue": true,
+                                                                    "isPure": false,
+                                                                    "lValueRequested": false,
+                                                                    "nodeType": "IndexAccess",
+                                                                    "src": "576:18:0",
+                                                                    "typeDescriptions": {
+                                                                        "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                                        "typeString": "struct CASmartContract.SensorData storage ref"
+                                                                    }
+                                                                },
+                                                                "id": 42,
+                                                                "isConstant": false,
+                                                                "isLValue": true,
+                                                                "isPure": false,
+                                                                "lValueRequested": true,
+                                                                "memberName": "SennsorOwner",
+                                                                "nodeType": "MemberAccess",
+                                                                "referencedDeclaration": 3,
+                                                                "src": "576:31:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_address",
+                                                                    "typeString": "address"
+                                                                }
+                                                            },
+                                                            "nodeType": "Assignment",
+                                                            "operator": "=",
+                                                            "rightHandSide": {
+                                                                "argumentTypes": null,
+                                                                "expression": {
+                                                                    "argumentTypes": null,
+                                                                    "id": 43,
+                                                                    "name": "msg",
+                                                                    "nodeType": "Identifier",
+                                                                    "overloadedDeclarations": [],
+                                                                    "referencedDeclaration": 140,
+                                                                    "src": "610:3:0",
+                                                                    "typeDescriptions": {
+                                                                        "typeIdentifier": "t_magic_message",
+                                                                        "typeString": "msg"
+                                                                    }
+                                                                },
+                                                                "id": 44,
+                                                                "isConstant": false,
+                                                                "isLValue": false,
+                                                                "isPure": false,
+                                                                "lValueRequested": false,
+                                                                "memberName": "sender",
+                                                                "nodeType": "MemberAccess",
+                                                                "referencedDeclaration": null,
+                                                                "src": "610:10:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_address_payable",
+                                                                    "typeString": "address payable"
+                                                                }
+                                                            },
+                                                            "src": "576:44:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_address",
+                                                                "typeString": "address"
+                                                            }
+                                                        },
+                                                        "id": 46,
+                                                        "nodeType": "ExpressionStatement",
+                                                        "src": "576:44:0"
+                                                    },
+                                                    {
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "id": 52,
+                                                            "isConstant": false,
+                                                            "isLValue": false,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "leftHandSide": {
+                                                                "argumentTypes": null,
+                                                                "expression": {
+                                                                    "argumentTypes": null,
+                                                                    "baseExpression": {
+                                                                        "argumentTypes": null,
+                                                                        "id": 47,
+                                                                        "name": "sensorData",
+                                                                        "nodeType": "Identifier",
+                                                                        "overloadedDeclarations": [],
+                                                                        "referencedDeclaration": 18,
+                                                                        "src": "635:10:0",
+                                                                        "typeDescriptions": {
+                                                                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                            "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                                        }
+                                                                    },
+                                                                    "id": 49,
+                                                                    "indexExpression": {
+                                                                        "argumentTypes": null,
+                                                                        "id": 48,
+                                                                        "name": "sensor",
+                                                                        "nodeType": "Identifier",
+                                                                        "overloadedDeclarations": [],
+                                                                        "referencedDeclaration": 20,
+                                                                        "src": "646:6:0",
+                                                                        "typeDescriptions": {
+                                                                            "typeIdentifier": "t_address",
+                                                                            "typeString": "address"
+                                                                        }
+                                                                    },
+                                                                    "isConstant": false,
+                                                                    "isLValue": true,
+                                                                    "isPure": false,
+                                                                    "lValueRequested": false,
+                                                                    "nodeType": "IndexAccess",
+                                                                    "src": "635:18:0",
+                                                                    "typeDescriptions": {
+                                                                        "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                                        "typeString": "struct CASmartContract.SensorData storage ref"
+                                                                    }
+                                                                },
+                                                                "id": 50,
+                                                                "isConstant": false,
+                                                                "isLValue": true,
+                                                                "isPure": false,
+                                                                "lValueRequested": true,
+                                                                "memberName": "SensorName",
+                                                                "nodeType": "MemberAccess",
+                                                                "referencedDeclaration": 7,
+                                                                "src": "635:29:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_string_storage",
+                                                                    "typeString": "string storage ref"
+                                                                }
+                                                            },
+                                                            "nodeType": "Assignment",
+                                                            "operator": "=",
+                                                            "rightHandSide": {
+                                                                "argumentTypes": null,
+                                                                "id": 51,
+                                                                "name": "sensorName",
+                                                                "nodeType": "Identifier",
+                                                                "overloadedDeclarations": [],
+                                                                "referencedDeclaration": 22,
+                                                                "src": "668:10:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_string_memory_ptr",
+                                                                    "typeString": "string memory"
+                                                                }
+                                                            },
+                                                            "src": "635:43:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_string_storage",
+                                                                "typeString": "string storage ref"
+                                                            }
+                                                        },
+                                                        "id": 53,
+                                                        "nodeType": "ExpressionStatement",
+                                                        "src": "635:43:0"
+                                                    },
+                                                    {
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "id": 56,
+                                                            "isConstant": false,
+                                                            "isLValue": false,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "leftHandSide": {
+                                                                "argumentTypes": null,
+                                                                "id": 54,
+                                                                "name": "success",
+                                                                "nodeType": "Identifier",
+                                                                "overloadedDeclarations": [],
+                                                                "referencedDeclaration": 25,
+                                                                "src": "700:7:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_bool",
+                                                                    "typeString": "bool"
+                                                                }
+                                                            },
+                                                            "nodeType": "Assignment",
+                                                            "operator": "=",
+                                                            "rightHandSide": {
+                                                                "argumentTypes": null,
+                                                                "hexValue": "74727565",
+                                                                "id": 55,
+                                                                "isConstant": false,
+                                                                "isLValue": false,
+                                                                "isPure": true,
+                                                                "kind": "bool",
+                                                                "lValueRequested": false,
+                                                                "nodeType": "Literal",
+                                                                "src": "709:4:0",
+                                                                "subdenomination": null,
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_bool",
+                                                                    "typeString": "bool"
+                                                                },
+                                                                "value": "true"
+                                                            },
+                                                            "src": "700:13:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_bool",
+                                                                "typeString": "bool"
+                                                            }
+                                                        },
+                                                        "functionReturnParameters": 26,
+                                                        "id": 57,
+                                                        "nodeType": "Return",
+                                                        "src": "693:20:0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "expression": {
+                                                "argumentTypes": null,
+                                                "hexValue": "66616c7365",
+                                                "id": 60,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "bool",
+                                                "lValueRequested": false,
+                                                "nodeType": "Literal",
+                                                "src": "742:5:0",
+                                                "subdenomination": null,
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                },
+                                                "value": "false"
+                                            },
+                                            "functionReturnParameters": 26,
+                                            "id": 61,
+                                            "nodeType": "Return",
+                                            "src": "735:12:0"
+                                        }
+                                    ]
+                                },
+                                "documentation": null,
+                                "id": 63,
+                                "implemented": true,
+                                "kind": "function",
+                                "modifiers": [],
+                                "name": "initSesor",
+                                "nodeType": "FunctionDefinition",
+                                "parameters": {
+                                    "id": 23,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 20,
+                                            "name": "sensor",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 63,
+                                            "src": "387:14:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            },
+                                            "typeName": {
+                                                "id": 19,
+                                                "name": "address",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "387:7:0",
+                                                "stateMutability": "nonpayable",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        },
+                                        {
+                                            "constant": false,
+                                            "id": 22,
+                                            "name": "sensorName",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 63,
+                                            "src": "404:24:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "memory",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_string_memory_ptr",
+                                                "typeString": "string"
+                                            },
+                                            "typeName": {
+                                                "id": 21,
+                                                "name": "string",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "404:6:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_string_storage_ptr",
+                                                    "typeString": "string"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "386:43:0"
+                                },
+                                "returnParameters": {
+                                    "id": 26,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 25,
+                                            "name": "success",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 63,
+                                            "src": "446:12:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_bool",
+                                                "typeString": "bool"
+                                            },
+                                            "typeName": {
+                                                "id": 24,
+                                                "name": "bool",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "446:4:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "445:14:0"
+                                },
+                                "scope": 125,
+                                "src": "368:387:0",
+                                "stateMutability": "nonpayable",
+                                "superFunction": null,
+                                "visibility": "public"
+                            },
+                            {
+                                "body": {
+                                    "id": 99,
+                                    "nodeType": "Block",
+                                    "src": "867:211:0",
+                                    "statements": [
+                                        {
+                                            "condition": {
+                                                "argumentTypes": null,
+                                                "commonType": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                },
+                                                "id": 85,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "leftExpression": {
+                                                    "argumentTypes": null,
+                                                    "expression": {
+                                                        "argumentTypes": null,
+                                                        "baseExpression": {
+                                                            "argumentTypes": null,
+                                                            "id": 74,
+                                                            "name": "sensorData",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "referencedDeclaration": 18,
+                                                            "src": "884:10:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                            }
+                                                        },
+                                                        "id": 76,
+                                                        "indexExpression": {
+                                                            "argumentTypes": null,
+                                                            "id": 75,
+                                                            "name": "sensor",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "referencedDeclaration": 65,
+                                                            "src": "895:6:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_address",
+                                                                "typeString": "address"
+                                                            }
+                                                        },
+                                                        "isConstant": false,
+                                                        "isLValue": true,
+                                                        "isPure": false,
+                                                        "lValueRequested": false,
+                                                        "nodeType": "IndexAccess",
+                                                        "src": "884:18:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                            "typeString": "struct CASmartContract.SensorData storage ref"
+                                                        }
+                                                    },
+                                                    "id": 77,
+                                                    "isConstant": false,
+                                                    "isLValue": true,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "memberName": "HasOwner",
+                                                    "nodeType": "MemberAccess",
+                                                    "referencedDeclaration": 5,
+                                                    "src": "884:27:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_bool",
+                                                        "typeString": "bool"
+                                                    }
+                                                },
+                                                "nodeType": "BinaryOperation",
+                                                "operator": "&&",
+                                                "rightExpression": {
+                                                    "argumentTypes": null,
+                                                    "commonType": {
+                                                        "typeIdentifier": "t_address",
+                                                        "typeString": "address"
+                                                    },
+                                                    "id": 84,
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "leftExpression": {
+                                                        "argumentTypes": null,
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "baseExpression": {
+                                                                "argumentTypes": null,
+                                                                "id": 78,
+                                                                "name": "sensorData",
+                                                                "nodeType": "Identifier",
+                                                                "overloadedDeclarations": [],
+                                                                "referencedDeclaration": 18,
+                                                                "src": "915:10:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                    "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                                }
+                                                            },
+                                                            "id": 80,
+                                                            "indexExpression": {
+                                                                "argumentTypes": null,
+                                                                "id": 79,
+                                                                "name": "sensor",
+                                                                "nodeType": "Identifier",
+                                                                "overloadedDeclarations": [],
+                                                                "referencedDeclaration": 65,
+                                                                "src": "926:6:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_address",
+                                                                    "typeString": "address"
+                                                                }
+                                                            },
+                                                            "isConstant": false,
+                                                            "isLValue": true,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "nodeType": "IndexAccess",
+                                                            "src": "915:18:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                                "typeString": "struct CASmartContract.SensorData storage ref"
+                                                            }
+                                                        },
+                                                        "id": 81,
+                                                        "isConstant": false,
+                                                        "isLValue": true,
+                                                        "isPure": false,
+                                                        "lValueRequested": false,
+                                                        "memberName": "SennsorOwner",
+                                                        "nodeType": "MemberAccess",
+                                                        "referencedDeclaration": 3,
+                                                        "src": "915:31:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_address",
+                                                            "typeString": "address"
+                                                        }
+                                                    },
+                                                    "nodeType": "BinaryOperation",
+                                                    "operator": "==",
+                                                    "rightExpression": {
+                                                        "argumentTypes": null,
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "id": 82,
+                                                            "name": "msg",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "referencedDeclaration": 140,
+                                                            "src": "950:3:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_magic_message",
+                                                                "typeString": "msg"
+                                                            }
+                                                        },
+                                                        "id": 83,
+                                                        "isConstant": false,
+                                                        "isLValue": false,
+                                                        "isPure": false,
+                                                        "lValueRequested": false,
+                                                        "memberName": "sender",
+                                                        "nodeType": "MemberAccess",
+                                                        "referencedDeclaration": null,
+                                                        "src": "950:10:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_address_payable",
+                                                            "typeString": "address payable"
+                                                        }
+                                                    },
+                                                    "src": "915:45:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_bool",
+                                                        "typeString": "bool"
+                                                    }
+                                                },
+                                                "src": "884:76:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "falseBody": null,
+                                            "id": 96,
+                                            "nodeType": "IfStatement",
+                                            "src": "881:167:0",
+                                            "trueBody": {
+                                                "id": 95,
+                                                "nodeType": "Block",
+                                                "src": "972:76:0",
+                                                "statements": [
+                                                    {
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "id": 93,
+                                                            "isConstant": false,
+                                                            "isLValue": false,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "leftHandSide": {
+                                                                "argumentTypes": null,
+                                                                "baseExpression": {
+                                                                    "argumentTypes": null,
+                                                                    "expression": {
+                                                                        "argumentTypes": null,
+                                                                        "baseExpression": {
+                                                                            "argumentTypes": null,
+                                                                            "id": 86,
+                                                                            "name": "sensorData",
+                                                                            "nodeType": "Identifier",
+                                                                            "overloadedDeclarations": [],
+                                                                            "referencedDeclaration": 18,
+                                                                            "src": "988:10:0",
+                                                                            "typeDescriptions": {
+                                                                                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                                "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                                            }
+                                                                        },
+                                                                        "id": 88,
+                                                                        "indexExpression": {
+                                                                            "argumentTypes": null,
+                                                                            "id": 87,
+                                                                            "name": "sensor",
+                                                                            "nodeType": "Identifier",
+                                                                            "overloadedDeclarations": [],
+                                                                            "referencedDeclaration": 65,
+                                                                            "src": "999:6:0",
+                                                                            "typeDescriptions": {
+                                                                                "typeIdentifier": "t_address",
+                                                                                "typeString": "address"
+                                                                            }
+                                                                        },
+                                                                        "isConstant": false,
+                                                                        "isLValue": true,
+                                                                        "isPure": false,
+                                                                        "lValueRequested": false,
+                                                                        "nodeType": "IndexAccess",
+                                                                        "src": "988:18:0",
+                                                                        "typeDescriptions": {
+                                                                            "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                                            "typeString": "struct CASmartContract.SensorData storage ref"
+                                                                        }
+                                                                    },
+                                                                    "id": 89,
+                                                                    "isConstant": false,
+                                                                    "isLValue": true,
+                                                                    "isPure": false,
+                                                                    "lValueRequested": false,
+                                                                    "memberName": "AccessList",
+                                                                    "nodeType": "MemberAccess",
+                                                                    "referencedDeclaration": 13,
+                                                                    "src": "988:29:0",
+                                                                    "typeDescriptions": {
+                                                                        "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                                                                        "typeString": "mapping(address => bool)"
+                                                                    }
+                                                                },
+                                                                "id": 91,
+                                                                "indexExpression": {
+                                                                    "argumentTypes": null,
+                                                                    "id": 90,
+                                                                    "name": "toSensor",
+                                                                    "nodeType": "Identifier",
+                                                                    "overloadedDeclarations": [],
+                                                                    "referencedDeclaration": 67,
+                                                                    "src": "1018:8:0",
+                                                                    "typeDescriptions": {
+                                                                        "typeIdentifier": "t_address",
+                                                                        "typeString": "address"
+                                                                    }
+                                                                },
+                                                                "isConstant": false,
+                                                                "isLValue": true,
+                                                                "isPure": false,
+                                                                "lValueRequested": true,
+                                                                "nodeType": "IndexAccess",
+                                                                "src": "988:39:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_bool",
+                                                                    "typeString": "bool"
+                                                                }
+                                                            },
+                                                            "nodeType": "Assignment",
+                                                            "operator": "=",
+                                                            "rightHandSide": {
+                                                                "argumentTypes": null,
+                                                                "id": 92,
+                                                                "name": "access",
+                                                                "nodeType": "Identifier",
+                                                                "overloadedDeclarations": [],
+                                                                "referencedDeclaration": 69,
+                                                                "src": "1029:6:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_bool",
+                                                                    "typeString": "bool"
+                                                                }
+                                                            },
+                                                            "src": "988:47:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_bool",
+                                                                "typeString": "bool"
+                                                            }
+                                                        },
+                                                        "id": 94,
+                                                        "nodeType": "ExpressionStatement",
+                                                        "src": "988:47:0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "expression": {
+                                                "argumentTypes": null,
+                                                "hexValue": "66616c7365",
+                                                "id": 97,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "bool",
+                                                "lValueRequested": false,
+                                                "nodeType": "Literal",
+                                                "src": "1065:5:0",
+                                                "subdenomination": null,
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                },
+                                                "value": "false"
+                                            },
+                                            "functionReturnParameters": 73,
+                                            "id": 98,
+                                            "nodeType": "Return",
+                                            "src": "1058:12:0"
+                                        }
+                                    ]
+                                },
+                                "documentation": null,
+                                "id": 100,
+                                "implemented": true,
+                                "kind": "function",
+                                "modifiers": [],
+                                "name": "GrentAccess",
+                                "nodeType": "FunctionDefinition",
+                                "parameters": {
+                                    "id": 70,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 65,
+                                            "name": "sensor",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 100,
+                                            "src": "794:14:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            },
+                                            "typeName": {
+                                                "id": 64,
+                                                "name": "address",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "794:7:0",
+                                                "stateMutability": "nonpayable",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        },
+                                        {
+                                            "constant": false,
+                                            "id": 67,
+                                            "name": "toSensor",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 100,
+                                            "src": "809:16:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            },
+                                            "typeName": {
+                                                "id": 66,
+                                                "name": "address",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "809:7:0",
+                                                "stateMutability": "nonpayable",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        },
+                                        {
+                                            "constant": false,
+                                            "id": 69,
+                                            "name": "access",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 100,
+                                            "src": "826:11:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_bool",
+                                                "typeString": "bool"
+                                            },
+                                            "typeName": {
+                                                "id": 68,
+                                                "name": "bool",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "826:4:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "793:45:0"
+                                },
+                                "returnParameters": {
+                                    "id": 73,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 72,
+                                            "name": "success",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 100,
+                                            "src": "854:12:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_bool",
+                                                "typeString": "bool"
+                                            },
+                                            "typeName": {
+                                                "id": 71,
+                                                "name": "bool",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "854:4:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "853:14:0"
+                                },
+                                "scope": 125,
+                                "src": "773:305:0",
+                                "stateMutability": "nonpayable",
+                                "superFunction": null,
+                                "visibility": "public"
+                            },
+                            {
+                                "body": {
+                                    "id": 123,
+                                    "nodeType": "Block",
+                                    "src": "1157:144:0",
+                                    "statements": [
+                                        {
+                                            "assignments": [
+                                                108
+                                            ],
+                                            "declarations": [
+                                                {
+                                                    "constant": false,
+                                                    "id": 108,
+                                                    "name": "send",
+                                                    "nodeType": "VariableDeclaration",
+                                                    "scope": 123,
+                                                    "src": "1173:12:0",
+                                                    "stateVariable": false,
+                                                    "storageLocation": "default",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_address",
+                                                        "typeString": "address"
+                                                    },
+                                                    "typeName": {
+                                                        "id": 107,
+                                                        "name": "address",
+                                                        "nodeType": "ElementaryTypeName",
+                                                        "src": "1173:7:0",
+                                                        "stateMutability": "nonpayable",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_address",
+                                                            "typeString": "address"
+                                                        }
+                                                    },
+                                                    "value": null,
+                                                    "visibility": "internal"
+                                                }
+                                            ],
+                                            "id": 111,
+                                            "initialValue": {
+                                                "argumentTypes": null,
+                                                "expression": {
+                                                    "argumentTypes": null,
+                                                    "id": 109,
+                                                    "name": "msg",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 140,
+                                                    "src": "1188:3:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_magic_message",
+                                                        "typeString": "msg"
+                                                    }
+                                                },
+                                                "id": 110,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "memberName": "sender",
+                                                "nodeType": "MemberAccess",
+                                                "referencedDeclaration": null,
+                                                "src": "1188:10:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address_payable",
+                                                    "typeString": "address payable"
+                                                }
+                                            },
+                                            "nodeType": "VariableDeclarationStatement",
+                                            "src": "1173:25:0"
+                                        },
+                                        {
+                                            "expression": {
+                                                "argumentTypes": null,
+                                                "id": 119,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "leftHandSide": {
+                                                    "argumentTypes": null,
+                                                    "id": 112,
+                                                    "name": "access",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 105,
+                                                    "src": "1215:6:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_bool",
+                                                        "typeString": "bool"
+                                                    }
+                                                },
+                                                "nodeType": "Assignment",
+                                                "operator": "=",
+                                                "rightHandSide": {
+                                                    "argumentTypes": null,
+                                                    "baseExpression": {
+                                                        "argumentTypes": null,
+                                                        "expression": {
+                                                            "argumentTypes": null,
+                                                            "baseExpression": {
+                                                                "argumentTypes": null,
+                                                                "id": 113,
+                                                                "name": "sensorData",
+                                                                "nodeType": "Identifier",
+                                                                "overloadedDeclarations": [],
+                                                                "referencedDeclaration": 18,
+                                                                "src": "1225:10:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_mapping$_t_address_$_t_struct$_SensorData_$14_storage_$",
+                                                                    "typeString": "mapping(address => struct CASmartContract.SensorData storage ref)"
+                                                                }
+                                                            },
+                                                            "id": 115,
+                                                            "indexExpression": {
+                                                                "argumentTypes": null,
+                                                                "id": 114,
+                                                                "name": "send",
+                                                                "nodeType": "Identifier",
+                                                                "overloadedDeclarations": [],
+                                                                "referencedDeclaration": 108,
+                                                                "src": "1236:4:0",
+                                                                "typeDescriptions": {
+                                                                    "typeIdentifier": "t_address",
+                                                                    "typeString": "address"
+                                                                }
+                                                            },
+                                                            "isConstant": false,
+                                                            "isLValue": true,
+                                                            "isPure": false,
+                                                            "lValueRequested": false,
+                                                            "nodeType": "IndexAccess",
+                                                            "src": "1225:16:0",
+                                                            "typeDescriptions": {
+                                                                "typeIdentifier": "t_struct$_SensorData_$14_storage",
+                                                                "typeString": "struct CASmartContract.SensorData storage ref"
+                                                            }
+                                                        },
+                                                        "id": 116,
+                                                        "isConstant": false,
+                                                        "isLValue": true,
+                                                        "isPure": false,
+                                                        "lValueRequested": false,
+                                                        "memberName": "AccessList",
+                                                        "nodeType": "MemberAccess",
+                                                        "referencedDeclaration": 13,
+                                                        "src": "1225:27:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                                                            "typeString": "mapping(address => bool)"
+                                                        }
+                                                    },
+                                                    "id": 118,
+                                                    "indexExpression": {
+                                                        "argumentTypes": null,
+                                                        "id": 117,
+                                                        "name": "sensor",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 102,
+                                                        "src": "1253:6:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_address",
+                                                            "typeString": "address"
+                                                        }
+                                                    },
+                                                    "isConstant": false,
+                                                    "isLValue": true,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "nodeType": "IndexAccess",
+                                                    "src": "1225:35:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_bool",
+                                                        "typeString": "bool"
+                                                    }
+                                                },
+                                                "src": "1215:45:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "id": 120,
+                                            "nodeType": "ExpressionStatement",
+                                            "src": "1215:45:0"
+                                        },
+                                        {
+                                            "expression": {
+                                                "argumentTypes": null,
+                                                "id": 121,
+                                                "name": "access",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 105,
+                                                "src": "1283:6:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "functionReturnParameters": 106,
+                                            "id": 122,
+                                            "nodeType": "Return",
+                                            "src": "1276:13:0"
+                                        }
+                                    ]
+                                },
+                                "documentation": null,
+                                "id": 124,
+                                "implemented": true,
+                                "kind": "function",
+                                "modifiers": [],
+                                "name": "IsAccessAllow",
+                                "nodeType": "FunctionDefinition",
+                                "parameters": {
+                                    "id": 103,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 102,
+                                            "name": "sensor",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 124,
+                                            "src": "1108:14:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            },
+                                            "typeName": {
+                                                "id": 101,
+                                                "name": "address",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "1108:7:0",
+                                                "stateMutability": "nonpayable",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "1107:16:0"
+                                },
+                                "returnParameters": {
+                                    "id": 106,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 105,
+                                            "name": "access",
+                                            "nodeType": "VariableDeclaration",
+                                            "scope": 124,
+                                            "src": "1144:11:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_bool",
+                                                "typeString": "bool"
+                                            },
+                                            "typeName": {
+                                                "id": 104,
+                                                "name": "bool",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "1144:4:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            "value": null,
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "1143:13:0"
+                                },
+                                "scope": 125,
+                                "src": "1084:217:0",
+                                "stateMutability": "view",
+                                "superFunction": null,
+                                "visibility": "public"
+                            }
+                        ],
+                        "scope": 126,
+                        "src": "67:1241:0"
+                    }
+                ],
+                "src": "37:1271:0"
+            },
+            "id": 0
+        }
+    }
+}

@@ -41,7 +41,7 @@ namespace CASmartContract.Contracts.CASmartContract.ContractDefinition
         public virtual bool Access { get; set; }
     }
 
-    public partial class IsAccessAllowFunction : IsAccessAllowFunctionBase { }
+        public partial class IsAccessAllowFunction : IsAccessAllowFunctionBase { }
 
     [Function("IsAccessAllow", "bool")]
     public class IsAccessAllowFunctionBase : FunctionMessage

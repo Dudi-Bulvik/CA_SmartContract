@@ -1,1 +1,1 @@
-Geth --rpc --rinkeby --syncmode=light --rpcapi="eth,admin,net,web3,personal,txpool"
+Geth --rpc --rinkeby --syncmode=full --rpcapi="eth,admin,net,web3,personal,txpool

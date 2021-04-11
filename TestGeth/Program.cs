@@ -12,10 +12,11 @@ namespace TestGeth
          static  void Main(string[] args)
         {
             var toAddress = "0x2339dc10423B924125234A394f9eeADa68EF3F0A";
-            //GetAccountBalance(toAddress).Wait();
+           //GetAccountBalance(toAddress).Wait();
             
-            //Transfer(toAddress);
-            GetAccountBalance(toAddress).Wait();
+           // Transfer(toAddress);
+           // GetAccountBalance(toAddress).Wait();
+            
             
             Demo().Wait();
             Console.ReadLine();
@@ -30,29 +31,65 @@ namespace TestGeth
                 
                 var privateKey = "0xacd8aed0732dfafc2f6483c0ff1611fa4162b1d70e24ff993fa0f39111d922d6";
                 var account = new Account(privateKey);
-                var web3 = new Web3(account);
+                var web3 = new Web3(account, "https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
                 var privateKeysensor = "0xf5ee10c67ecf5801ba9ed73ede16af5e91b33f526c13b8110a9cbaf5e6a385ad";
                 Console.WriteLine("Deploying...");
-                var deployment = new CASmartContractDeployment();
-                var receipt = await CASmartContractService.DeployContractAndWaitForReceiptAsync(web3, deployment);
+                var deployment = new CASmartContractDeployment() { };
+                var deploymentHandler = web3.Eth.GetContractDeploymentHandler<CASmartContractDeployment>();
+                var transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deployment);
+                //  var receipt = await CASmartContractService.DeployContractAndWaitForReceiptAsync(web3, deployment);
+                var transferHandler = web3.Eth.GetContractTransactionHandler<InitSesorFunctionBase>();
+                var initSesorFunctionBase = new InitSesorFunctionBase()
+                {
+                    SensorName = "Sensor1",
+                    Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A"
+                };
+                var transactionReceipt1 = await transferHandler.SendRequestAndWaitForReceiptAsync(transactionReceipt.ContractAddress, initSesorFunctionBase);
+                var transferHandler2 = web3.Eth.GetContractTransactionHandler<InitSesorFunctionBase>();
+                var initSesorFunctionBase2 = new InitSesorFunctionBase()
+                {
+                    SensorName = "Sensor2",
+                    Sensor = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4"
+                };
+                var transactionReceipt2 = await transferHandler.SendRequestAndWaitForReceiptAsync(transactionReceipt.ContractAddress, initSesorFunctionBase);
 
-                var service = new CASmartContractService(web3, receipt.ContractAddress);
-                //var service = new CASmartContractService(web3, "0xd9145CCE52D386f254917e481eB44e9943F39138");
-                 //Console.WriteLine($"Contract Deployment Tx Status: {receipt.Status.Value}");
-                Console.WriteLine($"Contract Address: {service.ContractHandler.ContractAddress}");
-                Console.WriteLine("");
+                var grentAccessFunctionferHandler = web3.Eth.GetContractTransactionHandler<GrentAccessFunction>();
+                var grentAccessFunction = new GrentAccessFunction()
+                {
+                    Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A",
+                    ToSensor = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+                    Access=true
+                };
+                var grentAccessFunctionA = await grentAccessFunctionferHandler.SendRequestAndWaitForReceiptAsync(transactionReceipt.ContractAddress, grentAccessFunction);
+
+                var account2 = new Account("0xf5ee10c67ecf5801ba9ed73ede16af5e91b33f526c13b8110a9cbaf5e6a385ad");
+                var web32 = new Web3(account, "https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
+
+                var isAccessAllowFunctionHandler = web32.Eth.GetContractQueryHandler<IsAccessAllowFunction>();
+                var isAccessAllowFunction = new IsAccessAllowFunction()
+                {
+                    Sensor = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",                   
+                };
+                var isAccessAllowFunctionAnswer = await isAccessAllowFunctionHandler.QueryAsync<IsAccessAllowOutputDTO>(transactionReceipt.ContractAddress, isAccessAllowFunction);
+
+
+                //var service = new CASmartContractService(web3, transactionReceipt.ContractAddress);
+                ////var service = new CASmartContractService(web3, "0xd9145CCE52D386f254917e481eB44e9943F39138");
+                // //Console.WriteLine($"Contract Deployment Tx Status: {receipt.Status.Value}");
+                //Console.WriteLine($"Contract Address: {service.ContractHandler.ContractAddress}");
+                //Console.WriteLine("");
 
                 Console.WriteLine("Sending a transaction to the function set()...");
                 //var receiptForSetFunctionCall = await service.InitSesorRequestAsync(new SetFunction() { X = 42, Gas = 400000 });
-                var receiptForSetFunctionCall = await service.InitSesorRequestAsync(new InitSesorFunction() { SensorName = "43", Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A" });
-                var access = await service.GrentAccessRequestAndWaitForReceiptAsync(new GrentAccessFunction() { Sensor= "0x2339dc10423B924125234A394f9eeADa68EF3F0A", ToSensor= "0xF0e8Ea9983765793a21D9eFa1c014Ce8b8b97e7f",Access=true });
-                var access1 = await service.GrentAccessRequestAndWaitForReceiptAsync(new GrentAccessFunction() { Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A", ToSensor = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", Access = true });
-                var accountSensor = new Account(privateKeysensor);
-                var accountSensorWeb= new Web3(account);
-                var serviceSensor = new CASmartContractService(accountSensorWeb, "0xd9145CCE52D386f254917e481eB44e9943F39138");
-                var hasAccess= await serviceSensor.IsAccessAllowQueryAsync("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
+                //var receiptForSetFunctionCall = await service.InitSesorRequestAsync(new InitSesorFunction() { SensorName = "43", Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A" });
+                //var access = await service.GrentAccessRequestAndWaitForReceiptAsync(new GrentAccessFunction() { Sensor= "0x2339dc10423B924125234A394f9eeADa68EF3F0A", ToSensor= "0xF0e8Ea9983765793a21D9eFa1c014Ce8b8b97e7f",Access=true });
+                //var access1 = await service.GrentAccessRequestAndWaitForReceiptAsync(new GrentAccessFunction() { Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A", ToSensor = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", Access = true });
+                //var accountSensor = new Account(privateKeysensor);
+                //var accountSensorWeb= new Web3(account);
+                //var serviceSensor = new CASmartContractService(accountSensorWeb, "0xd9145CCE52D386f254917e481eB44e9943F39138");
+                //var hasAccess= await serviceSensor.IsAccessAllowQueryAsync("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
 
-                Console.WriteLine($"hasAccess: { hasAccess}" );
+                //Console.WriteLine($"hasAccess: { hasAccess}" );
 
                 
                 Console.WriteLine("");
@@ -72,7 +109,7 @@ namespace TestGeth
             {
                 var privateKey = "0xacd8aed0732dfafc2f6483c0ff1611fa4162b1d70e24ff993fa0f39111d922d6";
                 var account = new Account(privateKey);
-                var web3 = new Web3(account);
+                var web3 = new Web3(account, "https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
 
                 var transaction = await web3.Eth.GetEtherTransferService()
                     .TransferEtherAndWaitForReceiptAsync(toAddress, 1.11m);
@@ -86,8 +123,9 @@ namespace TestGeth
         {
             try
             {
-                var web3 = new Web3();
+                var web3 = new Web3("https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
                 var balance = await web3.Eth.GetBalance.SendRequestAsync(address);
+                 balance = await web3.Eth.GetBalance.SendRequestAsync("0x2339dc10423B924125234A394f9eeADa68EF3F0A");
                 Console.WriteLine($"Balance in Wei: {balance.Value}");
 
                 var etherAmount = Web3.Convert.FromWei(balance.Value);
