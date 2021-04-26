@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace SensorManager
 {
+  
     public class CaServiceTest : ICaService
     {
         public List<string> SensorNames => new List<string> { "1", "2", "3" };

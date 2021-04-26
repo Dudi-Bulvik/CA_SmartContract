@@ -72,46 +72,47 @@ namespace CASmartContract.Contracts.CASmartContract
              return ContractHandler.SendRequestAndWaitForReceiptAsync(grentAccessFunction, cancellationToken);
         }
 
+        public Task<string> InitSensorRequestAsync(InitSensorFunction initSensorFunction)
+        {
+             return ContractHandler.SendRequestAsync(initSensorFunction);
+        }
+
+        public Task<TransactionReceipt> InitSensorRequestAndWaitForReceiptAsync(InitSensorFunction initSensorFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(initSensorFunction, cancellationToken);
+        }
+
+        public Task<string> InitSensorRequestAsync(string sensor, string sensorName)
+        {
+            var initSensorFunction = new InitSensorFunction();
+                initSensorFunction.Sensor = sensor;
+                initSensorFunction.SensorName = sensorName;
+            
+             return ContractHandler.SendRequestAsync(initSensorFunction);
+        }
+
+        public Task<TransactionReceipt> InitSensorRequestAndWaitForReceiptAsync(string sensor, string sensorName, CancellationTokenSource cancellationToken = null)
+        {
+            var initSensorFunction = new InitSensorFunction();
+                initSensorFunction.Sensor = sensor;
+                initSensorFunction.SensorName = sensorName;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(initSensorFunction, cancellationToken);
+        }
+
         public Task<bool> IsAccessAllowQueryAsync(IsAccessAllowFunction isAccessAllowFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<IsAccessAllowFunction, bool>(isAccessAllowFunction, blockParameter);
         }
 
         
-        public Task<bool> IsAccessAllowQueryAsync(string sensor, BlockParameter blockParameter = null)
+        public Task<bool> IsAccessAllowQueryAsync(string from, string to, BlockParameter blockParameter = null)
         {
             var isAccessAllowFunction = new IsAccessAllowFunction();
-                isAccessAllowFunction.Sensor = sensor;
+                isAccessAllowFunction.From = from;
+                isAccessAllowFunction.To = to;
             
             return ContractHandler.QueryAsync<IsAccessAllowFunction, bool>(isAccessAllowFunction, blockParameter);
-        }
-
-        public Task<string> InitSesorRequestAsync(InitSesorFunction initSesorFunction)
-        {
-             return ContractHandler.SendRequestAsync(initSesorFunction);
-        }
-
-        public Task<TransactionReceipt> InitSesorRequestAndWaitForReceiptAsync(InitSesorFunction initSesorFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(initSesorFunction, cancellationToken);
-        }
-
-        public Task<string> InitSesorRequestAsync(string sensor, string sensorName)
-        {
-            var initSesorFunction = new InitSesorFunction();
-                initSesorFunction.Sensor = sensor;
-                initSesorFunction.SensorName = sensorName;
-            
-             return ContractHandler.SendRequestAsync(initSesorFunction);
-        }
-
-        public Task<TransactionReceipt> InitSesorRequestAndWaitForReceiptAsync(string sensor, string sensorName, CancellationTokenSource cancellationToken = null)
-        {
-            var initSesorFunction = new InitSesorFunction();
-                initSesorFunction.Sensor = sensor;
-                initSesorFunction.SensorName = sensorName;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(initSesorFunction, cancellationToken);
         }
     }
 }

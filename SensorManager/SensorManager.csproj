@@ -6,10 +6,12 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	  
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
+    <PackageReference Include="log4net" Version="2.0.12" />
     <PackageReference Include="MahApps.Metro" Version="2.4.3" />
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
@@ -17,6 +19,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CASmartContract\CASmartContract.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

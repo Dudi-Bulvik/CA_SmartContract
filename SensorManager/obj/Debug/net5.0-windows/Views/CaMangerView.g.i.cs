@@ -63,7 +63,7 @@ namespace SensorManager.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SensorManager;component/views/camangerview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SensorManager;V1.0.0.0;component/views/camangerview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\CaMangerView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

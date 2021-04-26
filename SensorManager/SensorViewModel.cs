@@ -14,8 +14,9 @@ namespace SensorManager
     {
         public string SensorName { get; set; }
         public string SensorPublicKey { get; set; }
-        public List<AccessRight> AccsesRights { get; set; }
-         public SensorModel Clone()
+        public List<AccessRight> AccsesRights { get; set; } = new List<AccessRight>();
+        public string SensorPrivateKey { get; set; }
+        public SensorModel Clone()
         {
             var clone = new SensorModel();
             clone.SensorName =(string) SensorName.Clone();

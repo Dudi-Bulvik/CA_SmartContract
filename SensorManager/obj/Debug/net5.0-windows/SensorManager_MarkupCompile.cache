@@ -5,16 +5,16 @@ winexe
 C#
 .cs
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\
-SensorManager
+SensorManager_onnzzqob_wpftmp
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Myproject\CaNew\SensorManager\App.xaml
 31997314446
 
-11813878672
+16185508800
 217948457548
 MainWindow.xaml;Views\CaMangerView.xaml;Views\SensorRightsView.xaml;
 
-False
+True
 
