@@ -129,3 +129,5 @@ C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\BouncyCastle.Crypto.dll
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\CASmartContract.Contracts.dll
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\CASmartContract.Contracts.pdb
+C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\log4net.config
+C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\log4net.dll

@@ -23,6 +23,9 @@ namespace SensorManager
                 SimpleIoc.Default.Register<ManagerVM>();
             }
             
+            var ca = new CAService(@"C:\Myproject\configSensorsFile.txt");
+
+
         }
 
         public ManagerVM ManagerVM

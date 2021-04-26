@@ -54,14 +54,14 @@ namespace SensorManager
                     svm.SensorName = line;
                     svm.SensorPublicKey = sr.ReadLine();
                     svm.SensorPrivateKey = sr.ReadLine();
-                    accountDic.Add(svm.SensorName,  new Account(sr.ReadLine()));
+                    accountDic.Add(svm.SensorName,  new Account(svm.SensorPrivateKey));
                     senVM.Add(svm.SensorName, svm);
 
                 }
             }
                
         }
-
+       
         private void RaizeEvent(string sensorName)
         {
 
@@ -147,10 +147,7 @@ namespace SensorManager
             RaizeEvent(sensorName);
         }
 
-        public void ChangeAccessRight(string sensorOwner, string fromSenstor, string toSenstorName, bool accses)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void ChangeAccessRight(string fromSenstor, string toSenstorName, bool accses)
         {
