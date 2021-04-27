@@ -10,6 +10,9 @@
     <Compile Update="Views\CaMangerView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\GrantAccseeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SensorRightsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,6 +22,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GrantAccseeControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SensorRightsView.xaml">

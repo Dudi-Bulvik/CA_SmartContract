@@ -13,18 +13,18 @@ namespace SensorManager
         public event EventHandler<SensorModel> SensorDataArrived;
 
         private Random rand = new Random(12);
-        public void ChangeAccessRight(string fromSenstor, string toSenstorName, bool accses)
+        public void ChangeAccessRight(string sensorOwner, string fromSensor, string toSensorName, bool accses)
         {
-            if (senVM.ContainsKey(fromSenstor))
+            if (senVM.ContainsKey(fromSensor))
             {
-                var sensorViewModel = senVM[fromSenstor];
+                var sensorViewModel = senVM[toSensorName];
                 sensorViewModel.AccsesRights.Add(new AccessRight() { SensorName = rand.Next().ToString(), AccessePermition = accses });
                 foreach (var acc in sensorViewModel.AccsesRights)
                 {
-                    if (acc.SensorName.Equals(toSenstorName))
+                    if (acc.SensorName.Equals(toSensorName))
                     {
                         acc.AccessePermition = accses;
-                        Task.Run(() => { RaizeEvent(fromSenstor); });
+                        Task.Run(() => { RaizeEvent(fromSensor); });
                         break;
                     }
                 }
@@ -76,6 +76,14 @@ namespace SensorManager
            
         }
 
-        
+        public void InitSensor(string sensorOwner, string sensorName, string sensorPublikKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InitOwner(string sensorOwner, string sensorPublikKey, string SensorPrivateKey)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

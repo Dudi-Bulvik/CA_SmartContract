@@ -131,3 +131,5 @@ C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\CASmartContract.Contra
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\CASmartContract.Contracts.pdb
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\log4net.config
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\log4net.dll
+C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\GrantAccseeControl.g.cs
+C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\GrantAccseeControl.baml

@@ -25,11 +25,6 @@
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            <!--<i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=SensorNamesComboBox, Path=SelectedItem}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>-->
         </ComboBox>
         <uc:SensorRightsView DataContext="{Binding Path=SlectedSensorData}" Grid.Row ="2"></uc:SensorRightsView>
     </Grid>

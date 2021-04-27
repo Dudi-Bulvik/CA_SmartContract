@@ -12,32 +12,34 @@ using System.Linq;
 
 namespace SensorManager
 {
-   public interface ICaService
+    public interface ICaService
     {
         List<string> SensorNames { get; }
         event EventHandler<SensorModel> SensorDataArrived;
-        public void ChangeAccessRight(string fromSenstor ,string toSenstorName, bool accses);
+        public void ChangeAccessRight(string sensorOwner, string fromSensor, string toSensorName, bool accses);
         public void GetSenssorData(string sensorName);
-       
+        public void InitSensor(string sensorOwner,string sensorName,string sensorPublikKey);
+        public void InitOwner(string sensorOwner, string sensorPublikKey, string SensorPrivateKey);
+
     }
     public class CAService : ICaService
     {
         private string contractAddress;
         private string sensorName;
         private string url = @"https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0";
-        
+
         private Dictionary<string, Account> accountDic = new Dictionary<string, Account>();
         public Dictionary<string, SensorModel> senVM = new Dictionary<string, SensorModel>();
         private object web3;
+        public List<string> SensorNames { get; } = new List<string>();
 
-        List<string> SensorNames { get;  } = new List<string>();
 
-        List<string> ICaService.SensorNames => throw new NotImplementedException();
+
 
         public event EventHandler<SensorModel> SensorDataArrived;
         public CAService(string path)
         {
-           
+
             if (!File.Exists(path))
             {
                 throw new Exception();
@@ -47,21 +49,21 @@ namespace SensorManager
             {
                 contractAddress = sr.ReadLine();
                 string line;
-                while (( line = sr.ReadLine()) != null)
+                while ((line = sr.ReadLine()) != null)
                 {
                     SensorNames.Add(line);
                     var svm = new SensorModel();
                     svm.SensorName = line;
                     svm.SensorPublicKey = sr.ReadLine();
                     svm.SensorPrivateKey = sr.ReadLine();
-                    accountDic.Add(svm.SensorName,  new Account(svm.SensorPrivateKey));
+                    accountDic.Add(svm.SensorName, new Account(svm.SensorPrivateKey));
                     senVM.Add(svm.SensorName, svm);
 
                 }
             }
-               
+
         }
-       
+
         private void RaizeEvent(string sensorName)
         {
 
@@ -70,9 +72,22 @@ namespace SensorManager
                 var clone = senVM[sensorName].Clone();
                 SensorDataArrived?.Invoke(this, clone);
             }
-            
+
         }
-        public async Task InitSensor(string sensorOwner,string sensorName,string sensorPK)
+        public async Task InitSensorOwner(string sensorOwner, string sensorPrivateKey, string sensorPK)
+        {
+            if (accountDic.ContainsKey(sensorOwner))
+            {
+                return;
+            }
+            accountDic[sensorOwner] = new Account(sensorPrivateKey);
+            InitSensor(sensorOwner, sensorOwner, sensorPK);
+            
+
+        }
+            
+       
+            public async Task InitSensor(string sensorOwner,string sensorName,string sensorPK)
         {
             if(!accountDic.ContainsKey(sensorOwner))
             {
@@ -97,7 +112,7 @@ namespace SensorManager
             }
 
         }
-        public async Task ChangeAccessRight(string sensorOwner,  string fromSensor, string toSensorName, bool accses)
+        public async Task ChangeAccessRightFromConract(string sensorOwner,  string fromSensor, string toSensorName, bool accses)
         {
             if (!accountDic.ContainsKey(sensorOwner) || !senVM.ContainsKey(fromSensor) || !senVM.ContainsKey(toSensorName))
             {
@@ -115,9 +130,10 @@ namespace SensorManager
                 Access = accses
             };
             var grentAccessReceipt = await grentAccessFunctionferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, grentAccessFunction);
+            GetSenssorData(sensorOwner);
         }
 
-        public async Task GetSenssorData(string sensorName)
+        public async Task GetSenssorDataFromConract(string sensorName)
         {
             if(!senVM.ContainsKey(sensorName))
             {
@@ -147,14 +163,22 @@ namespace SensorManager
             RaizeEvent(sensorName);
         }
 
-        
+        public void ChangeAccessRight(string sensorOwner, string fromSensor, string toSensorName, bool accses)
+        {
+            Task.Run(() => { ChangeAccessRightFromConract(sensorOwner, fromSensor, toSensorName, accses); });
+        }
 
-        public void ChangeAccessRight(string fromSenstor, string toSenstorName, bool accses)
+        public void GetSenssorData(string sensorName)
+        {
+            Task.Run(() => { GetSenssorDataFromConract(sensorName); });
+        }
+
+        void ICaService.InitSensor(string sensorOwner, string sensorName, string sensorPublikKey)
         {
             throw new NotImplementedException();
         }
 
-        void ICaService.GetSenssorData(string sensorName)
+        public void InitOwner(string sensorOwner, string sensorPublikKey, string SensorPrivateKey)
         {
             throw new NotImplementedException();
         }

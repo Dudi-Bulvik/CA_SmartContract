@@ -43,7 +43,7 @@ namespace SensorManager
         private void ChangSensor(object accessRightobject = null)
         {
             var accessRight = (AccessRight)(accessRightobject);
-            this.service.ChangeAccessRight(SensorName, accessRight.SensorName, !accessRight.AccessePermition);
+            this.service.ChangeAccessRight(SensorName, SensorName, accessRight.SensorName, !accessRight.AccessePermition);
         }
         public string SensorName { get { return sensorData.SensorName; } }
         public string SensorPublicKey { get { return sensorData.SensorPublicKey; } }
