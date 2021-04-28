@@ -8,17 +8,24 @@
                  Title="Manager"
                  Width="900"
                  Height="600"
-                      
+                  DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}"     
                  WindowStartupLocation="CenterScreen"                 
     mc:Ignorable="d">
-    <TabControl>
-        <TabItem Header="General">
-            <uc:GrantAccseeControl></uc:GrantAccseeControl>
-        </TabItem>
-        <TabItem Header="Security" />
-        <uc:CaMangerView></uc:CaMangerView>
-        <TabItem Header="Details" />
-    </TabControl>
+    <Grid>
+        <TabControl SelectedItem="{Binding SelectedItemNumber}">
+            <TabItem Header="GrantAccseeControl" >
+                <uc:GrantAccseeControl></uc:GrantAccseeControl>
+                <!--<Label Background ="Yellow">Dudi Bulvik 1</Label>-->
+            </TabItem>
+            <TabItem Header="SensorAccess" >
+            <!--<Label Background ="Red">Dudi Bulvik 2 </Label>-->
+                 <uc:CaMangerView></uc:CaMangerView>
+            </TabItem>
+            <TabItem Header="Details" />
+        </TabControl>
+
+    </Grid>
+    
     <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />

@@ -25,6 +25,7 @@ namespace SensorManager
             SimpleIoc.Default.Register<ICaService>(()=> new CAService(@"C:\Myproject\configSensorsFile.txt"));
             SimpleIoc.Default.Register<ManagerVM>();
             SimpleIoc.Default.Register<SesnorCreatorVM>();
+            SimpleIoc.Default.Register<MainWindowVM>();
             //var ca = new CAService(@"C:\Myproject\configSensorsFile.txt");
 
 
@@ -42,6 +43,13 @@ namespace SensorManager
             get
             {
                 return ServiceLocator.Current.GetInstance<SesnorCreatorVM>();
+            }
+        }
+        public MainWindowVM MainWindowVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MainWindowVM>();
             }
         }
     }

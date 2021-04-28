@@ -39,7 +39,6 @@ C:\Myproject\CaNew\Sensor\bin\Debug\net5.0-windows\ControlzEx.dll
 C:\Myproject\CaNew\Sensor\bin\Debug\net5.0-windows\MahApps.Metro.dll
 C:\Myproject\CaNew\Sensor\bin\Debug\net5.0-windows\Microsoft.Xaml.Behaviors.dll
 C:\Myproject\CaNew\Sensor\bin\Debug\net5.0-windows\de\MahApps.Metro.resources.dll
-C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\Sensor.csprojAssemblyReference.cache
 C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\App.g.cs
