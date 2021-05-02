@@ -14,14 +14,17 @@
     <Grid>
         <TabControl SelectedItem="{Binding SelectedItemNumber}">
             <TabItem Header="GrantAccseeControl" >
-                <uc:GrantAccseeControl></uc:GrantAccseeControl>
+                <uc:IintSensorControl></uc:IintSensorControl>
                 <!--<Label Background ="Yellow">Dudi Bulvik 1</Label>-->
             </TabItem>
             <TabItem Header="SensorAccess" >
             <!--<Label Background ="Red">Dudi Bulvik 2 </Label>-->
                  <uc:CaMangerView></uc:CaMangerView>
             </TabItem>
-            <TabItem Header="Details" />
+            <TabItem Header="Log Viewer">
+                                  
+                <uc:LogViewer></uc:LogViewer>
+                </TabItem>
         </TabControl>
 
     </Grid>

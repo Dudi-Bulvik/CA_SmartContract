@@ -134,3 +134,4 @@ C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\log4net.dll
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\GrantAccseeControl.g.cs
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\GrantAccseeControl.baml
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\LogViewer.g.cs
+C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\LogViewer.baml

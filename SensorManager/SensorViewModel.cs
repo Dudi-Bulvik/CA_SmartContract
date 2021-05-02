@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -33,9 +34,10 @@ namespace SensorManager
     {
         private readonly ICaService service;
         private  SensorModel sensorData;
-
-        public SensorViewModel(ICaService service, SensorModel sensorData)
+        private ILogger logger;
+        public SensorViewModel(ICaService service, SensorModel sensorData , ILogger logger)
         {
+            this.logger = logger;
             ChangePermitionCommand = new RelayCommand<object>(ChangSensor);
             this.service = service;
             this.sensorData = sensorData;
@@ -51,8 +53,8 @@ namespace SensorManager
         public void UpdateVM(SensorModel newSensorData)
         {
             this.sensorData = newSensorData;
-            
-            this.RaisePropertyChanged(string.Empty);
+            logger.AddLogEntey("SensorViewModel New Sesnor Data Sensor Name: " + newSensorData.SensorName);
+            RaisePropertyChanged(string.Empty);
         }
         
         public ICommand ChangePermitionCommand { get; set; }

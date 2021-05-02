@@ -13,6 +13,7 @@ namespace SensorManager
         private string selectedSensorName;
         private List<string> sensorList;
         private SensorViewModel selectedSensoer;
+        private ILogger logger;
         public List<string> SenesorNames {
             get { return sensorList; }
             set { sensorList = value;
@@ -28,9 +29,10 @@ namespace SensorManager
     }
                 
 
-        public ManagerVM(ICaService caService)
+        public ManagerVM(ICaService caService , ILogger logger)
         {
             this.caService = caService;
+            this.logger = logger;
             this.SenesorNames = caService.SensorNames;
             caService.GetSenssorData(SenesorNames[0]);            
             caService.SensorDataArrived += SensorDataArrivedHandler;            
@@ -43,7 +45,7 @@ namespace SensorManager
                 
             //    return;
             //}
-            SlectedSensorData = new SensorViewModel(caService, sensorData);
+            SlectedSensorData = new SensorViewModel(caService, sensorData, logger);
             SlectedSensorData.UpdateVM(sensorData);
             RaisePropertyChanged("");
         }

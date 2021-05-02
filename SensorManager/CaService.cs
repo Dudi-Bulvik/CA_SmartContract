@@ -25,13 +25,25 @@ namespace SensorManager
     public class CAService : ICaService
     {
         private string contractAddress;
-        private string sensorName;
+        private List<string> sensorNames;
         private string url = @"https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0";
 
         private Dictionary<string, Account> accountDic = new Dictionary<string, Account>();
         public Dictionary<string, SensorModel> senVM = new Dictionary<string, SensorModel>();
         private object web3;
-        public List<string> SensorNames { get; } = new List<string>();
+        public List<string> SensorNames {
+            get {
+                var temp = new List<string>();
+                foreach (var name in sensorNames)
+                {
+                    temp.Add(name);
+                }
+                return temp; }
+            set
+            {
+                sensorNames = value;
+            }
+        } 
 
 
 

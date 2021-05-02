@@ -55,3 +55,4 @@ C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\Sensor.dll
 C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\ref\Sensor.dll
 C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\Sensor.pdb
 C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\Sensor.genruntimeconfig.cache
+C:\Myproject\CaNew\Sensor\obj\Debug\net5.0-windows\Sensor.csprojAssemblyReference.cache

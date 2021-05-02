@@ -17,15 +17,19 @@ namespace SensorManager
         }
         public  void Load()
         {
-            //if (test)
-            //{
-            //    SimpleIoc.Default.Register<ICaService, CaServiceTest>();
-            //    SimpleIoc.Default.Register<ManagerVM>();
-            //}
-            SimpleIoc.Default.Register<ICaService>(()=> new CAService(@"C:\Myproject\configSensorsFile.txt"));
+            if (test)
+            {
+                SimpleIoc.Default.Register<ICaService, CaServiceTest>();
+                //SimpleIoc.Default.Register<ManagerVM>();
+            }
+            SimpleIoc.Default.Register<ILogger, LogViewerVm>();
+           // SimpleIoc.Default.Register< LogViewerVm>();
+            //SimpleIoc.Default.Register<ICaService>(()=> new CAService(@"C:\Myproject\configSensorsFile.txt"));
             SimpleIoc.Default.Register<ManagerVM>();
             SimpleIoc.Default.Register<SesnorCreatorVM>();
             SimpleIoc.Default.Register<MainWindowVM>();
+            
+            
             //var ca = new CAService(@"C:\Myproject\configSensorsFile.txt");
 
 
@@ -52,5 +56,13 @@ namespace SensorManager
                 return ServiceLocator.Current.GetInstance<MainWindowVM>();
             }
         }
+        public LogViewerVm LogViewerVm
+        {
+            get
+            {
+                return (LogViewerVm)ServiceLocator.Current.GetInstance<ILogger>();
+            }
+        }
+        
     }
 }

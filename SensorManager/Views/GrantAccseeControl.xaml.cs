@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SensorManager.Views
 {
     /// <summary>
-    /// Interaction logic for GrantAccseeControl.xaml
+    /// Interaction logic for IintSensorControl.xaml
     /// </summary>
-    public partial class GrantAccseeControl : UserControl
+    public partial class IintSensorControl : UserControl
     {
-        public GrantAccseeControl()
+        public IintSensorControl()
         {
             InitializeComponent();
         }
