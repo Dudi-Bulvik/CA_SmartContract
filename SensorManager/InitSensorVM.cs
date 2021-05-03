@@ -21,13 +21,14 @@ namespace SensorManager
         private string sensorOwner;
         private bool isOwner;
         private string errorMessage;
-
+        private AddressUtil addressUtil;
         public InitSensorVM(ICaService caService ,ILogger logger)
         {
             this.caService = caService;
             this.logger = logger;
             sensorNames = caService.SensorNames;
             InitSensorCommand = new RelayCommand(InitSensor, CanExecuteInitSensor);
+            addressUtil = new AddressUtil();
             errorMessage = "";
         }
         //public string GetPublicAddress()
@@ -37,6 +38,7 @@ namespace SensorManager
         //    Array.Copy(initaddr, 12, addr, 0, initaddr.Length - 12);
         //    return new AddressUtil().ConvertToChecksumAddress(addr.ToHex());
         //}
+        public bool ShowToolTip { get { return !string.IsNullOrEmpty(errorMessage); } }
         private bool CanExecuteInitSensor()
         {
              if(IsNotOwner && string.IsNullOrEmpty(SensorOwner) )
@@ -49,11 +51,27 @@ namespace SensorManager
                 ErrorMessage = "SensorName can't be empty";
                 return false;
             }
+            else
+            {
+                if(sensorNames.Contains(SensorName))
+                {
+                    ErrorMessage = "Sensor Name: "+ SensorName+" is allready existing";
+                    return false;
+                }
+            }
 
             if (string.IsNullOrEmpty(SensorPublikKey))
             {
                 ErrorMessage = "SensorPublikKey can't be empty";
                 return false;
+            }
+            else
+            {
+                if (!addressUtil.IsValidEthereumAddressHexFormat(SensorPublikKey))
+                {
+                    ErrorMessage = "Sensor Public address is not valid";
+                    return false;
+                }
             }
             if (IsOwner && string.IsNullOrEmpty(SensorPrivateKey))
             {
@@ -63,13 +81,14 @@ namespace SensorManager
             if(IsOwner)
             {
                 return CheckPrivatePublicKeyPair();
-            }
+            }          
+            
             
             
             ErrorMessage = "";
             return true;
         }
-
+        
         private bool CheckPrivatePublicKeyPair()
         {
             try
@@ -103,7 +122,7 @@ namespace SensorManager
             set
             {
                 Set(() => ErrorMessage, ref errorMessage, value);
-                //RaisePropertyChanged("IsNotOwner");
+                RaisePropertyChanged("ShowToolTip");
             }
         }
         private void InitSensor()

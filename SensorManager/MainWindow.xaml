@@ -13,7 +13,7 @@
     mc:Ignorable="d">
     <Grid>
         <TabControl SelectedItem="{Binding SelectedItemNumber}">
-            <TabItem Header="GrantAccseeControl" >
+            <TabItem Header="Init Sensor" >
                 <uc:IintSensorControl></uc:IintSensorControl>
                 <!--<Label Background ="Yellow">Dudi Bulvik 1</Label>-->
             </TabItem>

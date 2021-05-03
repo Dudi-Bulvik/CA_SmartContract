@@ -91,7 +91,6 @@ C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\GalaSoft.MvvmLight.dll
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\System.Windows.Interactivity.dll
 C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\de\MahApps.Metro.resources.dll
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\SensorManager.csprojAssemblyReference.cache
-C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\CaMangerView.g.cs
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\SensorRightsView.g.cs
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\App.g.cs
@@ -99,7 +98,6 @@ C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\GeneratedInternalTypeH
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\SensorManager_MarkupCompile.cache
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\SensorManager_MarkupCompile.lref
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\App.baml
-C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\CaMangerView.baml
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\SensorRightsView.baml
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\SensorManager.g.resources
@@ -158,3 +156,5 @@ D:\MyProject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\GrantAccseeContr
 D:\MyProject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\LogViewer.baml
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\IintSensorControl.g.cs
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\IintSensorControl.baml
+C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\MainWindow.g.cs
+C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\MainWindow.baml

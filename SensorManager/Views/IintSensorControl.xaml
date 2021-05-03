@@ -29,7 +29,7 @@
 
         <StackPanel Orientation="Horizontal">
             <Label  MinWidth="110" Content="Sensor Name" Margin="8"/>
-            <TextBox MinWidth="350" Text="{Binding Path=SensorName}" Margin="10"/>
+            <TextBox MinWidth="350" Text="{Binding Path=SensorName , UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label   MinWidth="110" Content="Sensor Owner" Margin="8" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -39,17 +39,17 @@
             </ComboBox>
             </StackPanel>
         <StackPanel  Orientation="Horizontal" >
-            <Label   Content="Sensor Public Key" Margin="8"  MinWidth="110"/>
-            <TextBox   Text="{Binding Path=SensorPublikKey}" Margin="10" MinWidth="350" />
+            <Label   Content="Sensor Public Address" Margin="8"  MinWidth="110"/>
+            <TextBox   Text="{Binding Path=SensorPublikKey , UpdateSourceTrigger=PropertyChanged}" Margin="10" MinWidth="350" />
     </StackPanel>
         <StackPanel  Orientation="Horizontal" >
             <Label   MinWidth="110" Content="Sensor Private Key" Margin="8" Visibility="{Binding Path=IsOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <TextBox  MinWidth="350" Text="{Binding Path=SensorPrivateKey}" Margin="10" Visibility="{Binding Path=IsOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox  MinWidth="350" Text="{Binding Path=SensorPrivateKey , UpdateSourceTrigger=PropertyChanged}" Margin="10" Visibility="{Binding Path=IsOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </StackPanel>
         <!--</Grid>-->
-        <Button  FontSize="22"   Command="{Binding InitSensorCommand}" Width="400" Height="100" Content="Init Sensor" ToolTipService.ShowOnDisabled="True">
+        <Button  FontSize="22"   Command="{Binding InitSensorCommand}" Width="400" Height="100" Content="Init Sensor" ToolTipService.IsEnabled="{Binding Path=ShowToolTip}"  ToolTipService.ShowOnDisabled="True">
             <Button.ToolTip    >
-                <ToolTip Background="Red" Content="{Binding Path=ErrorMessage}" />
+                <ToolTip Background="Red" Content="{Binding Path=ErrorMessage}"  />
             </Button.ToolTip>
           </Button>
     </StackPanel>
