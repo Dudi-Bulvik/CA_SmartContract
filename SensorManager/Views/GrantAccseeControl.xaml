@@ -8,7 +8,11 @@
              DataContext="{Binding SesnorCreatorVM, Source={StaticResource Locator}}"   
              
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
     <StackPanel>
+        <CheckBox Content="Is Owner Sensor" IsChecked="{Binding IsOwner}" Margin="8"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
@@ -22,15 +26,23 @@
                 <ColumnDefinition  Width="400"/>
             </Grid.ColumnDefinitions>
 
-            <Label  Grid.Row="0" Grid.Column="0" Content="Sensor Name" Margin="10"/>
+            
+
+            <Label  Grid.Row="0" Grid.Column="0" Content="Sensor Name" Margin="8"/>
             <TextBox  Grid.Row="0" Grid.Column="1" Text="{Binding Path=SensorName}" Margin="10"/>
 
-            <Label  Grid.Row="1" Grid.Column="0" Content="Sensor Owner" Margin="10" />
-            <TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10"/>
-            <Label  Grid.Row="2" Grid.Column="0" Content="Sensor Publik Key" Margin="10" />
-            <TextBox  Grid.Row="2" Grid.Column="1" Text="{Binding Path=SensorPublikKey}" Margin="10"/>
-            <Label  Grid.Row="3" Grid.Column="0" Content="Sensor Private Key" Margin="10"/>
-            <TextBox  Grid.Row="3" Grid.Column="1" Text="{Binding Path=SensorPrivateKey}" Margin="10"/>
+            <Label  Grid.Row="1" Grid.Column="0" Content="Sensor Owner" Margin="8" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <!--<TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
+            <ComboBox ItemsSource="{Binding SensorNames}" SelectedItem="{Binding SensorOwner}"  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}">
+                
+            </ComboBox>
+
+            <Label  Grid.Row="2" Grid.Column="0" Content="Sensor Public Key" Margin="8" />
+            <TextBox  Grid.Row="2" Grid.Column="1" Text="{Binding Path=SensorPublikKey}" Margin="10" />
+            
+            <Label  Grid.Row="3" Grid.Column="0" Content="Sensor Private Key" Margin="8" Visibility="{Binding Path=IsOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox  Grid.Row="3" Grid.Column="1" Text="{Binding Path=SensorPrivateKey}" Margin="10" Visibility="{Binding Path=IsOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            
         </Grid>
         <Button  FontSize="22" Command="{Binding InitSensorCommand}" Width="400" Height="100" Content="Init Sensor"/>
     </StackPanel>
