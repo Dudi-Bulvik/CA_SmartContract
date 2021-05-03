@@ -170,23 +170,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dudib\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\IMOE001\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MyProject\\CaNew\\Sensor\\Sensor.csproj",
+      "projectUniqueName": "C:\\Myproject\\CaNew\\Sensor\\Sensor.csproj",
       "projectName": "Sensor",
-      "projectPath": "D:\\MyProject\\CaNew\\Sensor\\Sensor.csproj",
-      "packagesPath": "C:\\Users\\dudib\\.nuget\\packages\\",
-      "outputPath": "D:\\MyProject\\CaNew\\Sensor\\obj\\",
+      "projectPath": "C:\\Myproject\\CaNew\\Sensor\\Sensor.csproj",
+      "packagesPath": "C:\\Users\\IMOE001\\.nuget\\packages\\",
+      "outputPath": "C:\\Myproject\\CaNew\\Sensor\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\dudib\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\IMOE001\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -235,7 +231,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

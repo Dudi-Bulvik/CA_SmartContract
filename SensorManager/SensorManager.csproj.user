@@ -10,7 +10,7 @@
     <Compile Update="Views\CaMangerView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\GrantAccseeControl.xaml.cs">
+    <Compile Update="Views\IintSensorControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\LogViewer.xaml.cs">
@@ -27,7 +27,7 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\GrantAccseeControl.xaml">
+    <Page Update="Views\IintSensorControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LogViewer.xaml">

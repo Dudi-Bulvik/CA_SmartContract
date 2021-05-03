@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\MyProject\CaNew\SensorManager\obj\Debug\net5.0-windows\
+C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\
 SensorManager
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-D:\MyProject\CaNew\SensorManager\App.xaml
-51562607032
+C:\Myproject\CaNew\SensorManager\App.xaml
+51578366407
 
-172092666476
-2181350900233
-MainWindow.xaml;Views\CaMangerView.xaml;Views\GrantAccseeControl.xaml;Views\LogViewer.xaml;Views\SensorRightsView.xaml;
+17-1641561453
+218-1285512804
+MainWindow.xaml;Views\CaMangerView.xaml;Views\IintSensorControl.xaml;Views\LogViewer.xaml;Views\SensorRightsView.xaml;
 
 False
 
