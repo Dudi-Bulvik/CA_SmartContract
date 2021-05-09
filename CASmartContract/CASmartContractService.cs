@@ -42,6 +42,39 @@ namespace CASmartContract.Contracts.CASmartContract
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
+        public Task<string> GetSensorCountRequestAsync(GetSensorCountFunction getSensorCountFunction)
+        {
+             return ContractHandler.SendRequestAsync(getSensorCountFunction);
+        }
+
+        public Task<string> GetSensorCountRequestAsync()
+        {
+             return ContractHandler.SendRequestAsync<GetSensorCountFunction>();
+        }
+
+        public Task<TransactionReceipt> GetSensorCountRequestAndWaitForReceiptAsync(GetSensorCountFunction getSensorCountFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(getSensorCountFunction, cancellationToken);
+        }
+
+        public Task<TransactionReceipt> GetSensorCountRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync<GetSensorCountFunction>(null, cancellationToken);
+        }
+
+        public Task<GetSensornameOutputDTO> GetSensornameQueryAsync(GetSensornameFunction getSensornameFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<GetSensornameFunction, GetSensornameOutputDTO>(getSensornameFunction, blockParameter);
+        }
+
+        public Task<GetSensornameOutputDTO> GetSensornameQueryAsync(BigInteger sensorNumber, BlockParameter blockParameter = null)
+        {
+            var getSensornameFunction = new GetSensornameFunction();
+                getSensornameFunction.SensorNumber = sensorNumber;
+            
+            return ContractHandler.QueryDeserializingToObjectAsync<GetSensornameFunction, GetSensornameOutputDTO>(getSensornameFunction, blockParameter);
+        }
+
         public Task<string> GrentAccessRequestAsync(GrentAccessFunction grentAccessFunction)
         {
              return ContractHandler.SendRequestAsync(grentAccessFunction);

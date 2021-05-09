@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.8.3;
+pragma solidity ^0.8.1;
 //pragma solidity >0.5.8 <0.6.0;
 
 contract CASmartContract {
@@ -8,18 +8,24 @@ contract CASmartContract {
              address SennsorOwner;
             bool HasOwner;
             string SensorName;
-            address key;
+            address Key;
             mapping(address=>bool) AccessList;
         }
+        uint count;
         mapping(address => SensorData) private sensorData;
-        event initSensor(address sensorOwner ,address sensor, string name );
-    function InitSensor(address sensor,  string memory sensorName) public returns (bool success) {
+        address[] private sensorDataArray;
+
+     event initSensor(address sensorOwner ,address sensor, string name );
+    function InitSensor(address  sensor,  string memory sensorName) public returns (bool success) {
         if(!sensorData[sensor].HasOwner)
-        {
+        {        
             sensorData[sensor].HasOwner =true;
             sensorData[sensor].SennsorOwner = msg.sender;
             sensorData[sensor].SensorName  = sensorName;
-            emit initSensor( msg.sender,sensor,sensorData[sensor].SensorName);            
+            sensorData[sensor].Key =sensor;
+            
+            sensorDataArray.push(sensor);
+            emit initSensor( msg.sender,sensor,sensorData[sensor].SensorName);                         
             return success =true;
         }
        emit initSensor(sensorData[sensor].SennsorOwner,sensor,"HasOwner");
@@ -52,4 +58,16 @@ contract CASmartContract {
               access =  sensorData[from].AccessList[to];
              return access;
         }
+    event Count(uint count );
+    function GetSensorCount () public  returns(uint numberOfSensors) {   
+            emit Count(sensorDataArray.length);     
+            numberOfSensors =sensorDataArray.length;                 
+             return numberOfSensors;
+        }
+        function GetSensorname (uint sensorNumber) public view returns( string memory name,address  key) 
+        {                         
+
+            return (sensorData[sensorDataArray[sensorNumber-1]].SensorName,sensorData[sensorDataArray[sensorNumber-1]].Key);
+        }
+
     }

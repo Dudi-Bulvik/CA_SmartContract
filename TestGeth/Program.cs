@@ -11,8 +11,15 @@ namespace TestGeth
 {
     class Program
     {
-         static  void Main(string[] args)
+        private static string  contractAddress = "0x7134000ce227965bfb542302d23e7e8bffc81bad";
+        static string privateKey = "0xacd8aed0732dfafc2f6483c0ff1611fa4162b1d70e24ff993fa0f39111d922d6";
+        static Account account;
+        static Web3 web3;
+
+        static void Main(string[] args)
         {
+             account = new Account(privateKey);
+             web3 = new Web3(account, "https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
             var toAddress = "0x2339dc10423B924125234A394f9eeADa68EF3F0A";
            //GetAccountBalance(toAddress).Wait();
             
@@ -25,69 +32,115 @@ namespace TestGeth
 
 
         }
-        static async Task Demo()
+
+        static async Task DeployContract()
+        {
+          
+            string path = @"C:\Myproject\MyTest.txt";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            FileStream fs = File.Create(path);
+            StreamWriter writer = new StreamWriter(fs);
+
+
+            //Deploy contruct
+            //var privateKeysensor = "0xf5ee10c67ecf5801ba9ed73ede16af5e91b33f526c13b8110a9cbaf5e6a385ad";
+            Console.WriteLine("Deploying...");
+            var deployment = new CASmartContractDeployment() { };
+
+            var deploymentHandler = web3.Eth.GetContractDeploymentHandler<CASmartContractDeployment>();
+            var transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deployment);
+            contractAddress = transactionReceipt.ContractAddress;
+            writer.WriteLine("ContractAddress: " + transactionReceipt.ContractAddress);
+            writer.WriteLine("BlockNumber: " + transactionReceipt.BlockNumber);
+            writer.WriteLine("TransactionIndex: " + transactionReceipt.TransactionIndex);
+            fs.Flush();
+            writer.Flush();
+            writer.Close();
+            return;
+        }
+        static async Task GrantAccees(string fromSensor, string toSensor,bool accsses)
+        {
+            var grentAccessFunctionferHandler = web3.Eth.GetContractTransactionHandler<GrentAccessFunction>();
+            var grentAccessFunction = new GrentAccessFunction()
+            {
+                Sensor = fromSensor,
+                ToSensor = toSensor,
+                Access = true
+            };
+            var grentAccessReceipt = await grentAccessFunctionferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, grentAccessFunction);
+            //writer.WriteLine("grentAccessFunction: 0x2339dc10423B924125234A394f9eeADa68EF3F0A 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
+            //writer.WriteLine("BlockNumber: " + grentAccessReceipt.BlockNumber);
+            //writer.WriteLine("TransactionIndex: " + grentAccessReceipt.TransactionIndex);
+            var transferEventOutput = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
+            var transferEventOutput1 = grentAccessReceipt.DecodeAllEvents<GrentAccess1EventDTO>();
+            
+        }
+        static async Task<uint> GetCount()
+        {
+            var getSensorCountFunction = new GetSensorCountFunction()
+            {
+                
+            };
+            var getSensorCountFunctionHandler = web3.Eth.GetContractQueryHandler<GetSensorCountFunction>();
+            return await getSensorCountFunctionHandler.QueryAsync<uint>(contractAddress, getSensorCountFunction);
+        }
+
+        static async Task<bool> IsAccseesAllow(string from,string to)
+        {
+            var isAccessAllowFunctionHandler = web3.Eth.GetContractQueryHandler<IsAccessAllowFunction>();
+            var isAccessAllowFunction = new IsAccessAllowFunction()
+            {
+                From = from,
+                To = to,
+            };
+           return await isAccessAllowFunctionHandler.QueryAsync<bool>(contractAddress, isAccessAllowFunction);
+        }
+        
+        static async Task InitSensor(string sensorName,string sensorPublicKey)
+        {
+            var initSesorFunctionBase = new InitSensorFunction()
+            {
+                SensorName = sensorName,
+                Sensor = sensorPublicKey
+            };
+            var transferHandler = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();
+            var initSesorReceipt = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
+            var eventList = initSesorReceipt.DecodeAllEvents<InitSensorEventDTOBase>();
+            var GetSensorCountFunctionHandler = web3.Eth.GetContractTransactionHandler<GetSensorCountFunction>();
+        }
+        
+        
+            static async Task Demo()
         {
             try
             {
                 // Setup using the Nethereum public test chain
-                
-                var privateKey = "0xacd8aed0732dfafc2f6483c0ff1611fa4162b1d70e24ff993fa0f39111d922d6";
-                var account = new Account(privateKey);
-                var web3 = new Web3(account, "https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
-                string path = @"C:\Myproject\MyTest.txt";
-                if(File.Exists(path))
+
+                //await DeployContract();
+               var tsak =await GrantAccees("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x2339dc10423B924125234A394f9eeADa68EF3F0A");
+                IsAccseesAllow("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x2339dc10423B924125234A394f9eeADa68EF3F0A")
+                 var service = new CASmartContractService(web3, contractAddress); 
+                //var ans= await service.GetSensorCountRequestAsync(new GetSensorCountFunction());
+
+                ////init Sensor
+                var initSen = await service.InitSensorRequestAndWaitForReceiptAsync( "0x2339dc10423B924125234A394f9eeADa68EF3F0A", "Sensor1");
+                //var initSen = await service.InitSensorRequestAndWaitForReceiptAsync("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "Sensor2");
+                var eventList = initSen.DecodeAllEvents<InitSensorEventDTOBase>();
+                foreach(var even in eventList)
                 {
-                    File.Delete(path);
+                    Console.WriteLine(even);
                 }
-                FileStream fs = File.Create(path);
-                
-                StreamWriter writer = new StreamWriter(fs);
-                //var privateKeysensor = "0xf5ee10c67ecf5801ba9ed73ede16af5e91b33f526c13b8110a9cbaf5e6a385ad";
-                Console.WriteLine("Deploying...");
-                //var deployment = new CASmartContractDeployment() { };
-                //var deploymentHandler = web3.Eth.GetContractDeploymentHandler<CASmartContractDeployment>();
-                //var transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deployment);
-                var contractAddress = "0xf857c1d2a6fc091ee2fce9d2a0f38f55d6325090";
-                //writer.WriteLine("ContractAddress: " + transactionReceipt.ContractAddress);
-                //writer.WriteLine("BlockNumber: " + transactionReceipt.BlockNumber);
-                //writer.WriteLine("TransactionIndex: " + transactionReceipt.TransactionIndex);
-                //fs.Flush();
-                //writer.Flush();
-                //writer.Close();
-                //return;
-                //  var receipt = await CASmartContractService.DeployContractAndWaitForReceiptAsync(web3, deployment);
-                var transferHandler = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();
-                //var initSesorFunctionBase = new InitSensorFunction()
-                //{
-                //    SensorName = "Sensor1",
-                //    Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A"
-                //};
-//                var initSesorFunctionBase = new InitSensorFunction()
-                //{
-                //    SensorName = "Sensor2",
-                //    Sensor = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4"
-                //};
-                //var initSesorReceipt = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
-                //var eventList = initSesorReceipt.DecodeAllEvents<InitSensorEventDTOBase>();
-                //writer.WriteLine("InitSensorFunction: Sensor1 0x2339dc10423B924125234A394f9eeADa68EF3F0A");
-                //writer.WriteLine("BlockNumber: " + initSesorReceipt.BlockNumber);
-                //writer.WriteLine("TransactionIndex: " + initSesorReceipt.TransactionIndex);
-              
 
-            
-                //return;
-                //var transferHandler2 = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();
-                //var initSesorFunctionBase2 = new InitSensorFunction()
-                //{
-                //    SensorName = "Sensor2",
-                //    Sensor = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4"
-                //};
-                //var transactionReceipt2 = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
-                //writer.WriteLine("InitSensorFunction: Sensor2 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
-                //writer.WriteLine("BlockNumber: " + transactionReceipt2.BlockNumber);
-                //writer.WriteLine("TransactionIndex: " + transactionReceipt2.TransactionIndex);
+                //var ans = await service.GetSensorCountRequestAndWaitForReceiptAsync<Big>(new GetSensorCountFunction());
+                // var eventList2 = ans.DecodeAllEvents<CountEventDTO>();
 
-                //var grentAccessFunctionferHandler = web3.Eth.GetContractTransactionHandler<GrentAccessFunction>();
+                //  await InitSensor("Sensor1", "0x2339dc10423B924125234A394f9eeADa68EF3F0A");
+                //  await InitSensor("Sensor2", "0x2339dc10423B924125234A394f9eeADa68EF3F0A");
+
+
                 //var grentAccessFunction = new GrentAccessFunction()
                 //{
                 //    Sensor = "0x2339dc10423B924125234A394f9eeADa68EF3F0A",
@@ -98,13 +151,13 @@ namespace TestGeth
                 //writer.WriteLine("grentAccessFunction: 0x2339dc10423B924125234A394f9eeADa68EF3F0A 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
                 //writer.WriteLine("BlockNumber: " + grentAccessReceipt.BlockNumber);
                 //writer.WriteLine("TransactionIndex: " + grentAccessReceipt.TransactionIndex);
-               // var transferEventOutput = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
+                // var transferEventOutput = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
                 //var transferEventOutput1 = grentAccessReceipt.DecodeAllEvents<GrentAccess1EventDTO>();
                 //foreach(var message in transferEventOutput1)
                 //{
                 //    writer.WriteLine("message: " + message);
                 //}
-                var account2 = new Account("0xf5ee10c67ecf5801ba9ed73ede16af5e91b33f526c13b8110a9cbaf5e6a385ad");
+                //var account2 = new Account("0xf5ee10c67ecf5801ba9ed73ede16af5e91b33f526c13b8110a9cbaf5e6a385ad");
                 var web32 = new Web3(account, "https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
 
                 var isAccessAllowFunctionHandler = web3.Eth.GetContractQueryHandler<IsAccessAllowFunction>();
@@ -123,7 +176,7 @@ namespace TestGeth
                 };
                 var isAccessAllowFunctionAnswer1 = await isAccessAllowFunctionHandler1.QueryAsync<bool>(contractAddress, isAccessAllowFunction1);
 
-                //var service = new CASmartContractService(web3, dontractAddress);
+                
                 ////var service = new CASmartContractService(web3, "0xd9145CCE52D386f254917e481eB44e9943F39138");
                 // //Console.WriteLine($"Contract Deployment Tx Status: {receipt.Status.Value}");
                 //Console.WriteLine($"Contract Address: {service.ContractHandler.ContractAddress}");
@@ -141,10 +194,10 @@ namespace TestGeth
 
                 //Console.WriteLine($"hasAccess: { hasAccess}" );
 
-                writer.Flush();
-                fs.Flush();
-                fs.Close();
-                Console.WriteLine("");
+                //writer.Flush();
+                //fs.Flush();
+                //fs.Close();
+                //Console.WriteLine("");
             }
             catch (Exception ex)
             {

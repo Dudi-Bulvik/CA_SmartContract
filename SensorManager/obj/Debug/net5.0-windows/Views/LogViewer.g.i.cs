@@ -53,7 +53,7 @@ namespace SensorManager.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SensorManager;component/views/logviewer.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SensorManager;V1.0.0.0;component/views/logviewer.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\LogViewer.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
