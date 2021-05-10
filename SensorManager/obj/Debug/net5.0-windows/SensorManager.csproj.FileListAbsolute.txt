@@ -158,3 +158,5 @@ C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\IintSensorContro
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\Views\IintSensorControl.baml
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Myproject\CaNew\SensorManager\obj\Debug\net5.0-windows\MainWindow.baml
+C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\Nethereum.BlockchainProcessing.dll
+C:\Myproject\CaNew\SensorManager\bin\Debug\net5.0-windows\Nethereum.Model.dll

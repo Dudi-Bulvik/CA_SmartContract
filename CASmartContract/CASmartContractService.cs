@@ -42,24 +42,15 @@ namespace CASmartContract.Contracts.CASmartContract
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
-        public Task<string> GetSensorCountRequestAsync(GetSensorCountFunction getSensorCountFunction)
+        public Task<BigInteger> GetSensorCountQueryAsync(GetSensorCountFunction getSensorCountFunction, BlockParameter blockParameter = null)
         {
-             return ContractHandler.SendRequestAsync(getSensorCountFunction);
+            return ContractHandler.QueryAsync<GetSensorCountFunction, BigInteger>(getSensorCountFunction, blockParameter);
         }
 
-        public Task<string> GetSensorCountRequestAsync()
+        
+        public Task<BigInteger> GetSensorCountQueryAsync(BlockParameter blockParameter = null)
         {
-             return ContractHandler.SendRequestAsync<GetSensorCountFunction>();
-        }
-
-        public Task<TransactionReceipt> GetSensorCountRequestAndWaitForReceiptAsync(GetSensorCountFunction getSensorCountFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(getSensorCountFunction, cancellationToken);
-        }
-
-        public Task<TransactionReceipt> GetSensorCountRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync<GetSensorCountFunction>(null, cancellationToken);
+            return ContractHandler.QueryAsync<GetSensorCountFunction, BigInteger>(null, blockParameter);
         }
 
         public Task<GetSensornameOutputDTO> GetSensornameQueryAsync(GetSensornameFunction getSensornameFunction, BlockParameter blockParameter = null)

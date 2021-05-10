@@ -45,6 +45,7 @@ contract CASmartContract {
          if(sensorData[sensor].SennsorOwner != msg.sender)
          {
              emit grentAccess1("msg.sender is not owner");
+              return false;
          }
          
              sensorData[sensor].AccessList[toSensor] =access;

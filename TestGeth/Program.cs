@@ -11,7 +11,7 @@ namespace TestGeth
 {
     class Program
     {
-        private static string  contractAddress = "0x7134000ce227965bfb542302d23e7e8bffc81bad";
+        private static string  contractAddress = "0x18ef532851c26d53bca65b8787204602ebb2724f";
         static string privateKey = "0xacd8aed0732dfafc2f6483c0ff1611fa4162b1d70e24ff993fa0f39111d922d6";
         static Account account;
         static Web3 web3;
@@ -61,22 +61,24 @@ namespace TestGeth
             writer.Close();
             return;
         }
-        static async Task GrantAccees(string fromSensor, string toSensor,bool accsses)
+        static async Task<bool> GrantAccees(string fromSensor, string toSensor,bool accsses)
         {
-            var grentAccessFunctionferHandler = web3.Eth.GetContractTransactionHandler<GrentAccessFunction>();
+            var grentAccessFunctionferHandler = web3.Eth.GetContractQueryHandler<GrentAccessFunction>();
             var grentAccessFunction = new GrentAccessFunction()
             {
                 Sensor = fromSensor,
                 ToSensor = toSensor,
                 Access = true
             };
-            var grentAccessReceipt = await grentAccessFunctionferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, grentAccessFunction);
+            return await grentAccessFunctionferHandler.QueryAsync<bool>(contractAddress, grentAccessFunction);
             //writer.WriteLine("grentAccessFunction: 0x2339dc10423B924125234A394f9eeADa68EF3F0A 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
             //writer.WriteLine("BlockNumber: " + grentAccessReceipt.BlockNumber);
             //writer.WriteLine("TransactionIndex: " + grentAccessReceipt.TransactionIndex);
-            var transferEventOutput = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
-            var transferEventOutput1 = grentAccessReceipt.DecodeAllEvents<GrentAccess1EventDTO>();
-            
+            //var transferEventOutput = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
+            //var transferEventOutput1 = grentAccessReceipt.DecodeAllEvents<GrentAccess1EventDTO>();
+            //return grentAccessReceipt;
+
+
         }
         static async Task<uint> GetCount()
         {
@@ -99,17 +101,19 @@ namespace TestGeth
            return await isAccessAllowFunctionHandler.QueryAsync<bool>(contractAddress, isAccessAllowFunction);
         }
         
-        static async Task InitSensor(string sensorName,string sensorPublicKey)
+        static async Task<bool> InitSensor(string sensorName,string sensorPublicKey)
         {
             var initSesorFunctionBase = new InitSensorFunction()
             {
                 SensorName = sensorName,
                 Sensor = sensorPublicKey
             };
-            var transferHandler = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();
-            var initSesorReceipt = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
-            var eventList = initSesorReceipt.DecodeAllEvents<InitSensorEventDTOBase>();
-            var GetSensorCountFunctionHandler = web3.Eth.GetContractTransactionHandler<GetSensorCountFunction>();
+            var initSensorFunctionHandler = web3.Eth.GetContractQueryHandler<InitSensorFunction>();
+            return await initSensorFunctionHandler.QueryAsync<bool>(contractAddress, initSesorFunctionBase);
+            //var transferHandler = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();
+            //var initSesorReceipt = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
+            //var eventList = initSesorReceipt.DecodeAllEvents<InitSensorEventDTOBase>();
+            //var GetSensorCountFunctionHandler = web3.Eth.GetContractTransactionHandler<GetSensorCountFunction>();
         }
         
         
@@ -119,10 +123,18 @@ namespace TestGeth
             {
                 // Setup using the Nethereum public test chain
 
-                //await DeployContract();
-               var tsak =await GrantAccees("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x2339dc10423B924125234A394f9eeADa68EF3F0A");
-                IsAccseesAllow("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x2339dc10423B924125234A394f9eeADa68EF3F0A")
-                 var service = new CASmartContractService(web3, contractAddress); 
+              //   await DeployContract();
+                var anwet1  = await InitSensor("Dudi", "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
+                //var anwet2 = await InitSensor("Dudi2", "0x2339dc10423B924125234A394f9eeADa68EF3F0A");
+                 //var tsak1 =await GrantAccees("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x2339dc10423B924125234A394f9eeADa68EF3F0A",true);
+                 var tsak2 =await  IsAccseesAllow("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x2339dc10423B924125234A394f9eeADa68EF3F0A");
+                 var service = new CASmartContractService(web3, contractAddress);
+                var isAccessAllowFunction = new IsAccessAllowFunction()
+                {
+                    From = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+                    To = "0x2339dc10423B924125234A394f9eeADa68EF3F0A",
+                };
+                var answer = await service.IsAccessAllowQueryAsync(isAccessAllowFunction);
                 //var ans= await service.GetSensorCountRequestAsync(new GetSensorCountFunction());
 
                 ////init Sensor
@@ -161,20 +173,14 @@ namespace TestGeth
                 var web32 = new Web3(account, "https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0");
 
                 var isAccessAllowFunctionHandler = web3.Eth.GetContractQueryHandler<IsAccessAllowFunction>();
-                var isAccessAllowFunction = new IsAccessAllowFunction()
+                var isAccessAllowFunction1 = new IsAccessAllowFunction()
                 {
                     From = "0x2339dc10423B924125234A394f9eeADa68EF3F0A",
                     To = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
                 };
                 var isAccessAllowFunctionAnswer = await isAccessAllowFunctionHandler.QueryAsync<bool>(contractAddress, isAccessAllowFunction);
                 
-                var isAccessAllowFunctionHandler1 = web3.Eth.GetContractQueryHandler<IsAccessAllowFunction>();
-                var isAccessAllowFunction1 = new IsAccessAllowFunction()
-                {
-                    To = "0x2339dc10423B924125234A394f9eeADa68EF3F0A",
-                    From = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
-                };
-                var isAccessAllowFunctionAnswer1 = await isAccessAllowFunctionHandler1.QueryAsync<bool>(contractAddress, isAccessAllowFunction1);
+               
 
                 
                 ////var service = new CASmartContractService(web3, "0xd9145CCE52D386f254917e481eB44e9943F39138");
