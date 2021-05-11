@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Myproject\CaNew\SensorManager\App.xaml
-51578366407
+6-1166535042
 
-19954063347
+23475005747
 220726381068
-MainWindow.xaml;Views\CaMangerView.xaml;Views\IintSensorControl.xaml;Views\LogViewer.xaml;Views\SensorRightsView.xaml;
+MainWindow.xaml;Views\CaMangerView.xaml;Views\GrantAccessView.xaml;Views\IintSensorControl.xaml;Views\LogViewer.xaml;Views\SensorRightsView.xaml;
 
-False
+True
 

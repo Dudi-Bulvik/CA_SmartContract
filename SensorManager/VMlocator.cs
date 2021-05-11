@@ -15,17 +15,22 @@ namespace SensorManager
             test = true;
             Load();
         }
-        public  void Load()
+        public async void Load()
         {
             if (test)
             {
-                SimpleIoc.Default.Register<ICaService, CaServiceTest>();
+              //  SimpleIoc.Default.Register<ICaService, CaServiceTest>();
                 //SimpleIoc.Default.Register<ManagerVM>();
             }
             SimpleIoc.Default.Register<ILogger, LogViewerVm>();
-           // SimpleIoc.Default.Register< LogViewerVm>();
-            //SimpleIoc.Default.Register<ICaService>(()=> new CAService(@"C:\Myproject\configSensorsFile.txt"));
+            SimpleIoc.Default.Register<ISettings, Settings>();
+            // SimpleIoc.Default.Register<ICaService, CAService>();
+            // SimpleIoc.Default.Register< LogViewerVm>();
+            var caService = new CAService();
+            caService.InitializeAsync(ISettings, LogViewerVm);
+            SimpleIoc.Default.Register<ICaService>( ()=> caService);
             SimpleIoc.Default.Register<ManagerVM>();
+            SimpleIoc.Default.Register<GrantAccessVM>();
             SimpleIoc.Default.Register<InitSensorVM>();
             SimpleIoc.Default.Register<MainWindowVM>();
             
@@ -42,7 +47,14 @@ namespace SensorManager
                 return ServiceLocator.Current.GetInstance<ManagerVM>();
             }
         }
-        public InitSensorVM SesnorCreatorVM
+        public GrantAccessVM GrantAccessVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GrantAccessVM>();
+            }
+        }
+        public InitSensorVM InitSensorVM
         {
             get
             {
@@ -63,6 +75,13 @@ namespace SensorManager
                 return (LogViewerVm)ServiceLocator.Current.GetInstance<ILogger>();
             }
         }
-        
+        public ISettings ISettings
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ISettings>();
+            }
+        }
+
     }
 }

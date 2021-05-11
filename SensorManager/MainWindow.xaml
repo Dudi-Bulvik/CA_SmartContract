@@ -17,9 +17,9 @@
                 <uc:IintSensorControl></uc:IintSensorControl>
                 <!--<Label Background ="Yellow">Dudi Bulvik 1</Label>-->
             </TabItem>
-            <TabItem Header="SensorAccess" >
+            <TabItem Header="Grant Access" >
             <!--<Label Background ="Red">Dudi Bulvik 2 </Label>-->
-                 <uc:CaMangerView></uc:CaMangerView>
+                <uc:GrantAccessView></uc:GrantAccessView>
             </TabItem>
             <TabItem Header="Log Viewer">
                                   

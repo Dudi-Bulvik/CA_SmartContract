@@ -22,8 +22,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="SesnorManagerSettings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SesnorManagerSettings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SesnorManagerSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SesnorManagerSettings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

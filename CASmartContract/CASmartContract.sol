@@ -18,7 +18,7 @@ contract CASmartContract {
      event initSensor(address sensorOwner ,address sensor, string name );
     function InitSensor(address  sensor,  string memory sensorName) public returns (bool success) {
         if(!sensorData[sensor].HasOwner)
-        {        
+        {                    
             sensorData[sensor].HasOwner =true;
             sensorData[sensor].SennsorOwner = msg.sender;
             sensorData[sensor].SensorName  = sensorName;
@@ -59,11 +59,11 @@ contract CASmartContract {
               access =  sensorData[from].AccessList[to];
              return access;
         }
-    event Count(uint count );
-    function GetSensorCount () public  returns(uint numberOfSensors) {   
-            emit Count(sensorDataArray.length);     
-            numberOfSensors =sensorDataArray.length;                 
-             return numberOfSensors;
+
+    
+    function GetSensorCount () public  view returns(uint numberOfSensors) {   
+                                        
+             return sensorDataArray.length;
         }
         function GetSensorname (uint sensorNumber) public view returns( string memory name,address  key) 
         {                         

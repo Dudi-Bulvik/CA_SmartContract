@@ -17,6 +17,7 @@ namespace SensorManager
         private readonly ICaService caService;
         private readonly ILogger logger;
         private List<string> sensorNames;
+        private List<string> sensorOwners;
         private string sensorName;
         private string sensorOwner;
         private bool isOwner;
@@ -27,10 +28,19 @@ namespace SensorManager
             this.caService = caService;
             this.logger = logger;
             sensorNames = caService.SensorNames;
+            sensorOwners = caService.SensorOwners;
+            caService.AddNewSensor += AddNewSensor;
             InitSensorCommand = new RelayCommand(InitSensor, CanExecuteInitSensor);
             addressUtil = new AddressUtil();
             errorMessage = "";
         }
+
+        private void AddNewSensor(object sender, EventArgs e)
+        {
+            SensorNames = caService.SensorNames;     
+            SensorOwners = caService.SensorOwners;
+        }
+
         //public string GetPublicAddress()
         //{
         //    var initaddr = new Sha3Keccack().CalculateHash(GetPubKeyNoPrefix());
@@ -125,17 +135,22 @@ namespace SensorManager
                 RaisePropertyChanged("ShowToolTip");
             }
         }
-        private void InitSensor()
+        private async void InitSensor()
         {
             if(isOwner)
             {
-                caService.InitOwner(SensorOwner, SensorPublikKey, SensorPrivateKey);
+                await caService.InitOwner(sensorName, SensorPublikKey, SensorPrivateKey);
             }
             else
             {
-                caService.InitSensor(SensorOwner, sensorName, SensorPublikKey);
+                await caService.InitSensor(SensorOwner, sensorName, SensorPublikKey);
             }
             
+            SensorName = "";
+            SensorOwner = "";
+            SensorPublikKey = "";
+            SensorPrivateKey = "";
+            RaisePropertyChanged("");
         }
 
         public RelayCommand InitSensorCommand
@@ -145,10 +160,27 @@ namespace SensorManager
         
         }
 
-        public List<string> SensorNames { get { return sensorNames; } }
+        public List<string> SensorNames
+        {
+            get { return sensorNames; }
+            set { Set(() => SensorNames, ref sensorNames, value); }
+        }
 
-        public string SensorOwner { get => sensorOwner; set => sensorOwner = value; }
-        public string SensorName { get => sensorName; set => sensorName = value; }
+        public List<string> SensorOwners
+        {
+            get { return sensorOwners; }
+            set { Set(() => SensorOwners, ref sensorOwners, value); }
+        }
+
+        public string SensorOwner { 
+            get { return sensorOwner; }
+            set { Set(() => SensorOwner, ref sensorOwner, value); }
+        }
+        public string SensorName { 
+            get { return sensorName; }
+            set { Set(() => SensorName, ref sensorName, value); }
+        
+        }
         public string SensorPublikKey { get; set; }
         public bool IsOwner
         {
