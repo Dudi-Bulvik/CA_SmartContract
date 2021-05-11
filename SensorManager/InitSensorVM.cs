@@ -129,7 +129,7 @@ namespace SensorManager
         {
             if(isOwner)
             {
-                caService.InitOwner(SensorOwner, SensorPublikKey, SensorPrivateKey);
+                caService.InitOwner(sensorName, SensorPublikKey, SensorPrivateKey);
             }
             else
             {

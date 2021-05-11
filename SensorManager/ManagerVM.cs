@@ -34,9 +34,13 @@ namespace SensorManager
             this.caService = caService;
             this.logger = logger;
             this.SenesorNames = caService.SensorNames;
-            caService.GetSenssorData(SenesorNames[0]);            
-            caService.SensorDataArrived += SensorDataArrivedHandler;            
-            SelectedSensorName = this.SenesorNames[0];
+            caService.SensorDataArrived += SensorDataArrivedHandler;
+            if(SenesorNames.Count > 0)
+            {
+                caService.GetSenssorData(SenesorNames[0]);
+                SelectedSensorName = this.SenesorNames[0];
+            }
+            
         }
         private void SensorDataArrivedHandler(object sender, SensorModel sensorData)
         {

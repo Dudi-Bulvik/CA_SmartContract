@@ -19,11 +19,13 @@ namespace SensorManager
         {
             if (test)
             {
-                SimpleIoc.Default.Register<ICaService, CaServiceTest>();
+              //  SimpleIoc.Default.Register<ICaService, CaServiceTest>();
                 //SimpleIoc.Default.Register<ManagerVM>();
             }
             SimpleIoc.Default.Register<ILogger, LogViewerVm>();
-           // SimpleIoc.Default.Register< LogViewerVm>();
+            SimpleIoc.Default.Register<ISettings, Settings>();
+            SimpleIoc.Default.Register<ICaService, CAService>();
+            // SimpleIoc.Default.Register< LogViewerVm>();
             //SimpleIoc.Default.Register<ICaService>(()=> new CAService(@"C:\Myproject\configSensorsFile.txt"));
             SimpleIoc.Default.Register<ManagerVM>();
             SimpleIoc.Default.Register<InitSensorVM>();

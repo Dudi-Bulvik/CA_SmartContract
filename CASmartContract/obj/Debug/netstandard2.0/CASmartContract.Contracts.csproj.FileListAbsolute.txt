@@ -15,3 +15,4 @@ D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Cont
 D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.csproj.CoreCompileInputs.cache
 D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.dll
 D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.pdb
+C:\Myproject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.csprojAssemblyReference.cache

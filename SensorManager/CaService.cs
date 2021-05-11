@@ -25,12 +25,14 @@ namespace SensorManager
     public class CAService : ICaService
     {
         private string contractAddress;
-        private List<string> sensorNames;
+        private List<string> sensorNames= new List<string>();
         private string url = @"https://rinkeby.infura.io/v3/d07d714973ba46fcbcf79b770db878d0";
 
         private Dictionary<string, Account> accountDic = new Dictionary<string, Account>();
         public Dictionary<string, SensorModel> senVM = new Dictionary<string, SensorModel>();
         private object web3;
+        private readonly ILogger logger;
+
         public List<string> SensorNames {
             get {
                 var temp = new List<string>();
@@ -49,14 +51,15 @@ namespace SensorManager
 
 
         public event EventHandler<SensorModel> SensorDataArrived;
-        public CAService(string path)
+        public CAService(ISettings Settings,ILogger logger)
         {
+            this.logger = logger;
 
-            if (!File.Exists(path))
+            if (!File.Exists(Settings.ConfigurationFilePath))
             {
                 throw new Exception();
             }
-            using (var fs = File.Open(path, FileMode.Open))
+            using (var fs = File.Open(Settings.ConfigurationFilePath, FileMode.Open))
             using (TextReader sr = new StreamReader(fs))
             {
                 contractAddress = sr.ReadLine();
@@ -74,6 +77,7 @@ namespace SensorManager
                 }
             }
 
+            
         }
 
         private void RaizeEvent(string sensorName)
@@ -86,43 +90,67 @@ namespace SensorManager
             }
 
         }
-        public async Task InitSensorOwner(string sensorOwner, string sensorPrivateKey, string sensorPK)
+        public async void InitSensorOwner(string sensorOwner, string sensorPK, string  sensorPrivateKey)
         {
             if (accountDic.ContainsKey(sensorOwner))
             {
-                return;
+                return ;
             }
             accountDic[sensorOwner] = new Account(sensorPrivateKey);
-            InitSensor(sensorOwner, sensorOwner, sensorPK);
+            SendInitSensor(sensorOwner, sensorOwner, sensorPK);
             
 
         }
             
        
-            public async Task InitSensor(string sensorOwner,string sensorName,string sensorPK)
+            public async void SendInitSensor(string sensorOwner,string sensorName,string sensorPK)
         {
             if(!accountDic.ContainsKey(sensorOwner))
             {
-                return;
+                logger.AddLogEntey("No Private Key");
+               
             }
             var account = accountDic[sensorOwner];
             var web3 = new Web3(account, url);
             var transferHandler = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();      
            
+            //var initSesorFunctionBase = new InitSensorFunction()
+            //{
+            //    SensorName = sensorName,
+            //    Sensor = sensorPK
+            //};
+            //var transactionReceipt2 = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
+
+            /////////////////////////////////////////////////////////////////
+            ///
             var initSesorFunctionBase = new InitSensorFunction()
             {
                 SensorName = sensorName,
                 Sensor = sensorPK
             };
-            var transactionReceipt2 = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
-            if(!senVM.ContainsKey(sensorName))
+            //    var initSensorFunctionHandler = web3.Eth.GetContractQueryHandler<InitSensorFunction>();
+            //return await initSensorFunctionHandler.QueryAsync<bool>(contractAddress, initSesorFunctionBase);
+            //var transferHandler = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();
+
+            var initSesorReceipt = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, initSesorFunctionBase);
+            var eventList = initSesorReceipt.DecodeAllEvents<InitSensorEventDTOBase>();
+            foreach(var ev in eventList)
+            {
+                logger.AddLogEntey(ev.ToString());
+                
+            }
+            logger.AddLogEntey("BlockNumber: " + initSesorReceipt.BlockNumber);
+            logger.AddLogEntey("GasUsed: " + initSesorReceipt.GasUsed);
+            logger.AddLogEntey("GasUsed: " + initSesorReceipt.Status);
+            //////////////////////////////////////////////////////
+            if (!senVM.ContainsKey(sensorName))
             {
                 var svm = new SensorModel();
                 svm.SensorName = sensorName;
                 svm.SensorPublicKey = sensorPK;
                 senVM.Add(svm.SensorName, svm);
             }
-
+           
         }
         public async Task ChangeAccessRightFromConract(string sensorOwner,  string fromSensor, string toSensorName, bool accses)
         {
@@ -187,12 +215,12 @@ namespace SensorManager
 
         void ICaService.InitSensor(string sensorOwner, string sensorName, string sensorPublikKey)
         {
-            throw new NotImplementedException();
+            SendInitSensor(sensorOwner, sensorName, sensorPublikKey);
         }
 
         public void InitOwner(string sensorOwner, string sensorPublikKey, string SensorPrivateKey)
         {
-            throw new NotImplementedException();
+            InitSensorOwner(sensorOwner, sensorPublikKey, SensorPrivateKey);
         }
     }
 }
