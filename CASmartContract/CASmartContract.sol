@@ -15,7 +15,7 @@ contract CASmartContract {
         mapping(address => SensorData) private sensorData;
         address[] private sensorDataArray;
 
-     event initSensor(address sensorOwner ,address sensor, string name );
+     event initSensor(address sensorOwner ,address sensor,string status );
     function InitSensor(address  sensor,  string memory sensorName) public returns (bool success) {
         if(!sensorData[sensor].HasOwner)
         {                    
@@ -25,33 +25,32 @@ contract CASmartContract {
             sensorData[sensor].Key =sensor;
             
             sensorDataArray.push(sensor);
-            emit initSensor( msg.sender,sensor,sensorData[sensor].SensorName);                         
+            emit initSensor( msg.sender,sensor ,"success");                         
             return success =true;
         }
-       emit initSensor(sensorData[sensor].SennsorOwner,sensor,"HasOwner");
+       emit initSensor( msg.sender,sensor,"Failed");  
         return false;
     }
     
     
-      event grentAccess(address sensor ,address toSensor, string status, bool access );
-      event grentAccess1(string errorMessage );
+      
+    event grentAccess(string errorMessage );
     function GrentAccess(address sensor,address toSensor,bool access) public returns(bool success){
 
          if(!sensorData[sensor].HasOwner)
          {
-            emit grentAccess1("No owner");
+            emit grentAccess("No owner");
              return false;
          }
          if(sensorData[sensor].SennsorOwner != msg.sender)
          {
-             emit grentAccess1("msg.sender is not owner");
+             emit grentAccess("msg.sender is not owner");
               return false;
          }
-         
-             sensorData[sensor].AccessList[toSensor] =access;
-             emit grentAccess( sensor,toSensor,"success",sensorData[sensor].AccessList[toSensor]);
-              emit grentAccess1("success");
-             return true;
+    
+        sensorData[sensor].AccessList[toSensor] =access;      
+        emit grentAccess("Success");
+        return true;
         
          
     }

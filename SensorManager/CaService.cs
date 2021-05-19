@@ -16,6 +16,7 @@ namespace SensorManager
     {
         List<string> SensorNames { get; }
         List<string> SensorOwners { get; }
+       
         event EventHandler<SensorModel> SensorDataArrived;
         bool IsPublicKeyallreadyExist(string publicKey);
 
@@ -24,7 +25,7 @@ namespace SensorManager
         public void GetSenssorData(string sensorName);
         public Task<bool> InitSensor(string sensorOwner,string sensorName,string sensorPublikKey);
         public Task<bool> InitOwner(string sensorOwner, string sensorPublikKey, string SensorPrivateKey);
-
+        public Task<bool> IsAccessAllow(string fromSensor, string toSensorName);
     }
     public class CAService : ICaService
     {
@@ -150,18 +151,22 @@ namespace SensorManager
        
             public async Task<bool> InitSensor(string sensorOwner,string sensorName,string sensorPK)
         {
-            if(!accountDic.ContainsKey(sensorOwner))
+            var message = new StringBuilder();
+            message.AppendLine("/////////////////////InitSensor////////////////");
+            if (!accountDic.ContainsKey(sensorOwner))
             {
-                logger.AddLogEntey("No Private Key");
+                message.AppendLine("No Private Key");
+                logger.AddLogEntey(message.ToString());
                 return false;
             }
             if (publicKeys.Contains(sensorPK) || sensorNames.Contains(sensorName))
             {
-                logger.AddLogEntey("Sesnor allready Define sensorNames");
+                message.AppendLine("Sesnor allready Define sensorNames");
+                logger.AddLogEntey(message.ToString());               
                 return false; ;
             }
             
-            var account = accountDic[sensorOwner];
+           var account = accountDic[sensorOwner];
             var web3 = new Web3(account, url);
             var transferHandler = web3.Eth.GetContractTransactionHandler<InitSensorFunction>();      
            
@@ -187,13 +192,15 @@ namespace SensorManager
             var eventList = initSesorReceipt.DecodeAllEvents<InitSensorEventDTOBase>();
             foreach(var ev in eventList)
             {
-                logger.AddLogEntey("Sensor: "+ ev.Event.Sensor);
-                logger.AddLogEntey("SensorOwner: " + ev.Event.SensorOwner);
-                logger.AddLogEntey("Name: " + ev.Event.Name);
+                message.AppendLine("Sensor Owner: " + sensorOwner + " Public Key: " + ev.Event.SensorOwner);                
+                message.AppendLine("sensor Name:  " + sensorName + " Public Key: " + ev.Event.Sensor);
+                message.AppendLine("status: "  + ev.Event.Status);
             }
-            logger.AddLogEntey("BlockNumber: " + initSesorReceipt.BlockNumber);
-            logger.AddLogEntey("GasUsed: " + initSesorReceipt.GasUsed);
-            logger.AddLogEntey("Status: " + initSesorReceipt.Status);
+            message.AppendLine("BlockNumber: " + initSesorReceipt.BlockNumber);
+            message.AppendLine("TransactionIndex: " + initSesorReceipt.TransactionIndex);
+            message.AppendLine("GasUsed: " + initSesorReceipt.GasUsed);
+            message.AppendLine("CumulativeGasUsed: " + initSesorReceipt.CumulativeGasUsed);
+            logger.AddLogEntey(message.ToString());
             //////////////////////////////////////////////////////
             if (!senVM.ContainsKey(sensorName))
             {
@@ -215,52 +222,91 @@ namespace SensorManager
         }
         public async  Task<bool> ChangeAccessRight(string sensorOwner,  string fromSensor, string toSensorName, bool accses)
         {
+            var message = new StringBuilder();
+            message.AppendLine("/////////////////////ChangeAccessRight////////////////");
             if (!accountDic.ContainsKey(sensorOwner) )
             {
-                logger.AddLogEntey(sensorOwner + " doesn't have private key");
+                message.AppendLine(sensorOwner + " doesn't have private key");
+                logger.AddLogEntey(message.ToString());
                 return false; 
             }
             if (!senVM.ContainsKey(fromSensor))
             {
-                logger.AddLogEntey(fromSensor + " doesn't have public key");
+                message.AppendLine(fromSensor + " doesn't have public key");
+                logger.AddLogEntey(message.ToString());
                 return false;
             }
             if (!senVM.ContainsKey(toSensorName))
             {
-                logger.AddLogEntey(toSensorName + " doesn't have public key");
+                message.AppendLine(toSensorName + " doesn't have public key");
+                logger.AddLogEntey(message.ToString());
                 return false;
             }
-            var account = accountDic[sensorOwner];
-            var web3 = new Web3(account, url);
-            var grentAccessFunctionferHandler = web3.Eth.GetContractTransactionHandler<GrentAccessFunction>();
-            var fromSensorPk = senVM[fromSensor].SensorPublicKey;
-            var toSensorPk = senVM[toSensorName].SensorPublicKey;
-            var grentAccessFunction = new GrentAccessFunction()
+            try
             {
-                Sensor = fromSensorPk,
-                ToSensor = toSensorPk,
-                Access = accses
-            };
-            var grentAccessReceipt =  await grentAccessFunctionferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, grentAccessFunction);
-            var eventList = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
-            var eventList1 = grentAccessReceipt.DecodeAllEvents<GrentAccess1EventDTO>();
-            foreach (var ev in eventList1)
-            {
-                logger.AddLogEntey("Message " + ev.Event.ErrorMessage);               
+                var account = accountDic[sensorOwner];
+                var web3 = new Web3(account, url);
+                var grentAccessFunctionferHandler = web3.Eth.GetContractTransactionHandler<GrentAccessFunction>();
+                var fromSensorPk = senVM[fromSensor].SensorPublicKey;
+                var toSensorPk = senVM[toSensorName].SensorPublicKey;
+                var grentAccessFunction = new GrentAccessFunction()
+                {
+                    Sensor = fromSensorPk,
+                    ToSensor = toSensorPk,
+                    Access = accses
+                };
+                var grentAccessReceipt = await grentAccessFunctionferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, grentAccessFunction);
+                var eventList = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
+                
+                foreach (var ev in eventList)
+                {
+                    message.AppendLine("Message: " + ev.Event.ErrorMessage);
+                }                
+                message.AppendLine("BlockNumber: " + grentAccessReceipt.BlockNumber);
+                message.AppendLine("TransactionIndex: " + grentAccessReceipt.TransactionIndex);
+                message.AppendLine("GasUsed: " + grentAccessReceipt.GasUsed);
+                message.AppendLine("CumulativeGasUsed: " + grentAccessReceipt.CumulativeGasUsed);
+                logger.AddLogEntey(message.ToString());
+                return await IsAccessAllow(account, fromSensorPk, toSensorPk);
+            }catch (Exception e)            
+            {             
+                message.AppendLine(e.ToString());
+                logger.AddLogEntey(message.ToString());
+                return false;
             }
-            foreach (var ev in eventList)
-            {
-                logger.AddLogEntey("From Sensor: " + ev.Event.Sensor);
-                logger.AddLogEntey("ToSensor: " + ev.Event.ToSensor);
-                logger.AddLogEntey("Access: " + ev.Event.Access);
-                logger.AddLogEntey("Status: " + ev.Event.Status);
-            }
-            logger.AddLogEntey("BlockNumber: " + grentAccessReceipt.BlockNumber);
-            logger.AddLogEntey("GasUsed: " + grentAccessReceipt.GasUsed);
-            logger.AddLogEntey("Status: " + grentAccessReceipt.Status);
-            return  await IsAccessAllow(account ,fromSensorPk, toSensorPk);
         }
 
+        public async Task<bool> IsAccessAllow(string fromSensor, string toSensorName)
+        {
+            var message = new StringBuilder();
+            message.AppendLine("/////////////////////IsAccessAllow////////////////");
+
+            if (!senVM.ContainsKey(fromSensor))
+            {
+                message.AppendLine(fromSensor + " doesn't have public key");
+                logger.AddLogEntey(message.ToString());
+                return false;
+            }
+            if (!senVM.ContainsKey(toSensorName))
+            {
+                message.AppendLine(toSensorName + " doesn't have public key");
+                logger.AddLogEntey(message.ToString());
+                return false;
+            }
+            try
+            {
+                var fromSensorPk = senVM[fromSensor].SensorPublicKey;
+                var toSensorPk = senVM[toSensorName].SensorPublicKey;
+                Account account = accountDic.Values.FirstOrDefault();
+                return await IsAccessAllow(account, fromSensorPk, toSensorPk);
+            }
+            catch(Exception e)
+            {
+                message.AppendLine(e.ToString());
+                return false;
+
+            }
+         }
         private  Task<bool> IsAccessAllow(Account account, string fromPK,string toPK)
         {
             var web3 = new Web3(account, url);

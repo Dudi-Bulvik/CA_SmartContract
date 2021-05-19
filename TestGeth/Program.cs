@@ -76,8 +76,7 @@ namespace TestGeth
             //writer.WriteLine("TransactionIndex: " + grentAccessReceipt.TransactionIndex);
             var grentAccessFunctionferHandler = web3.Eth.GetContractTransactionHandler<GrentAccessFunction>();
             var grentAccessReceipt = await grentAccessFunctionferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, grentAccessFunction);
-            var transferEventOutput = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();
-            var transferEventOutput1 = grentAccessReceipt.DecodeAllEvents<GrentAccess1EventDTO>();
+            var transferEventOutput = grentAccessReceipt.DecodeAllEvents<GrentAccessEventDTO>();            
             return true;
 
 
@@ -138,7 +137,8 @@ namespace TestGeth
             {
                 // Setup using the Nethereum public test chain
 
-                //   await DeployContract();
+                 await DeployContract();
+                return;
                 var count = await GetCount();
                 //var anser2 = await GetSensorname(1);
                 //for (uint i =1;i<count+1; i++)

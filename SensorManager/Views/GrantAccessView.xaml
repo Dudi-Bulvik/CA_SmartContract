@@ -8,7 +8,8 @@
               DataContext="{Binding GrantAccessVM, Source={StaticResource Locator}}"  
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
+        <CheckBox Content="Check Access" IsChecked="{Binding CheckAccess}" Margin="8"/>
+        <StackPanel Orientation="Horizontal"  Visibility="{Binding Path=ChnageAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label   MinWidth="110" Content="Sensor Owner" Margin="8" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <!--<TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
             <ComboBox MinWidth="350" ItemsSource="{Binding SensorOwners}" SelectedItem="{Binding SensorOwner}"  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -22,27 +23,56 @@
 
             </ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label   MinWidth="110" Content="To Sensor" Margin="8" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <StackPanel Orientation="Horizontal"  >
+            <Label   MinWidth="110" Content="To Sensor" Margin="8" />
             <!--<TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
             <ComboBox MinWidth="350" ItemsSource="{Binding SensorNames}" SelectedItem="{Binding ToSensor}"   Text="{Binding Path=ToSensor}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}">
 
             </ComboBox>
         </StackPanel>
-        <Button  FontSize="22"   Command="{Binding GrantAccessCommand}" Width="400" Height="100" Content="Grant Access" ToolTipService.IsEnabled="{Binding Path=ShowToolTip}"  ToolTipService.ShowOnDisabled="True">
+
+        <ToggleButton  IsChecked="{Binding Access, Mode=TwoWay}" Width="300" Height="100"  Visibility="{Binding Path=ChnageAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ToggleButton.Style>
+                <Style TargetType="ToggleButton">
+                    <Setter Property="Content" Value="Grant Access"/>
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="Background" Value="GreenYellow"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Access , Converter={StaticResource dummyConverotr}}" Value="False">
+                            <Setter Property="Content" Value="Deny access"/>
+                            <Setter Property="Background" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+            </ToggleButton.Style>
+            <!--<ToggleButton.Content>
+                                <TextBlock MinWidth="140" FontSize="15"   Text="{Binding AccessePermition, Converter={StaticResource allowAndNotAllowConvertor}}" Background="{Binding AccessePermition,Converter={StaticResource boolToColorConertor}}" Margin="5"/>
+                                -->
+            <!--<textblock text="{binding accessepermition , converter={staticresource allowandnotallowconvertor}}" background="{binding  accessepermition , converter={ staticresource booltocolorconertor}}"/>-->
+            <!--
+                            </ToggleButton.Content>-->
+        </ToggleButton>
+
+        <Button  FontSize="22"  Margin="10" Content="Send Access Command" Command="{Binding GrantAccessCommand}" Width="300" Height="100"  ToolTipService.IsEnabled="{Binding Path=ShowToolTip}"  ToolTipService.ShowOnDisabled="True" Visibility="{Binding Path=ChnageAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Button.ToolTip    >
                 <ToolTip Background="Red" Content="{Binding Path=ErrorMessage}"  />
             </Button.ToolTip>
         </Button>
-        <CheckBox Content="Is Accsee Allow" IsChecked="{Binding Access}" Margin="8"/>
-        <ToggleButton >
+
+        <Button  FontSize="22"  Margin="10" Content="Check Access Rights" Command="{Binding CheckAccessCommand}" Width="300" Height="100"  ToolTipService.IsEnabled="{Binding Path=ShowToolTip}"  ToolTipService.ShowOnDisabled="True" Visibility="{Binding Path=CheckAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Button.ToolTip    >
+                <ToolTip Background="Red" Content="{Binding Path=ErrorMessage}"  />
+            </Button.ToolTip>
+        </Button>
+        <ToggleButton Width="200" Height="50" HorizontalContentAlignment="Center">
             <ToggleButton.Style>
                 <Style TargetType="ToggleButton">
                     <Setter Property="Content" Value="Accsee Allow"/>
                     <Setter Property="FontSize" Value="15"/>
                     <Setter Property="Background" Value="GreenYellow"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=IsAaccessAllow , Converter={StaticResource dummyConverotr}}" Value="False">
+                        <DataTrigger Binding="{Binding Path=IsAaccessAllow}" Value="False">
                             <Setter Property="Content" Value="Accsee Not Allow"/>
                             <Setter Property="Background" Value="Red"/>
                         </DataTrigger>

@@ -19,7 +19,9 @@ namespace SensorManager
         private string toSensor;
         private bool access;
         private bool isAaccessAllow;
-        private string errorMessage;        
+        private string errorMessage;
+        private bool checkAccess;
+        private bool showStatus;
         private readonly ILogger logger;
         public GrantAccessVM(ICaService caService, ILogger logger)
         {
@@ -29,6 +31,7 @@ namespace SensorManager
             sensorOwners = caService.SensorOwners;
             caService.AddNewSensor += AddNewSensor;
             GrantAccessCommand = new RelayCommand(GrantAccess, CanExecuteGrantAccess);
+            CheckAccessCommand= new RelayCommand(CheckAccessFun, CanExecuteCheckAccess);
         }
 
         public string ErrorMessage
@@ -39,6 +42,26 @@ namespace SensorManager
                 Set(() => ErrorMessage, ref errorMessage, value);
                 RaisePropertyChanged("ShowToolTip");
             }
+        }
+        private bool CanExecuteCheckAccess()
+        {
+            if (string.IsNullOrEmpty(fromSensor))
+            {
+                ErrorMessage = "fromSensor can't be empty";
+                return false;
+            }
+            if (string.IsNullOrEmpty(toSensor))
+            {
+                ErrorMessage = "toSensor can't be empty";
+                return false;
+            }
+            ErrorMessage = "";
+            return true;
+        }
+        private void CheckAccessFun()
+        {
+            IsAaccessAllow = false;
+            Task.Run(async () => IsAaccessAllow = await caService.IsAccessAllow(fromSensor, toSensor));
         }
         private bool CanExecuteGrantAccess()
         {
@@ -68,9 +91,16 @@ namespace SensorManager
         private void GrantAccess()
         {
             IsAaccessAllow = false;
-             Task.Run( async ()=> IsAaccessAllow = await caService.ChangeAccessRight(sensorOwner, fromSensor, toSensor, access));
+            ShowStatus = false;
+            Task.Run( async ()=> IsAaccessAllow = await caService.ChangeAccessRight(sensorOwner, fromSensor, toSensor, access));
         }
         public RelayCommand GrantAccessCommand
+        {
+            get;
+            private set;
+
+        }
+        public RelayCommand CheckAccessCommand
         {
             get;
             private set;
@@ -96,26 +126,60 @@ namespace SensorManager
         public string SensorOwner
         {
             get { return sensorOwner; }
-            set { Set(() => SensorOwner, ref sensorOwner, value); }
+            set {
+                ShowStatus = false;
+                Set(() => SensorOwner, ref sensorOwner, value); }
         }
         public string FromSensor
         {
             get { return fromSensor; }
-            set { Set(() => FromSensor, ref fromSensor, value); }
+            set {
+                ShowStatus = false;
+                Set(() => FromSensor, ref fromSensor, value); }
 
         }
         public string ToSensor
         {
             get { return toSensor; }
-            set { Set(() => ToSensor, ref toSensor, value); }
+            set {
+                ShowStatus = false; 
+                Set(() => ToSensor, ref toSensor, value); }
 
         }
         public bool Access
         {
             get { return access; }
-            set { Set(() => Access, ref access, value); }
+            set {
+                ShowStatus = false;
+                Set(() => Access, ref access, value); }
 
         }
+        public bool CheckAccess
+        {
+            get { return checkAccess; }
+            set { 
+                Set(() => CheckAccess, ref checkAccess, value);
+                RaisePropertyChanged("ChnageAccess");
+            }
+
+        }
+        public bool ShowStatus
+        {
+            get { return showStatus; }
+            set
+            {
+                Set(() => ShowStatus, ref showStatus, value);
+                RaisePropertyChanged("ChnageAccess");
+            }
+
+        }
+        public bool ChnageAccess
+        {
+            get { return !checkAccess; }
+            
+
+        }
+        
         public bool IsAaccessAllow
         {
             get { return isAaccessAllow; }
