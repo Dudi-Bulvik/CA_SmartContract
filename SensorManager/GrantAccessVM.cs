@@ -23,6 +23,9 @@ namespace SensorManager
         private bool checkAccess;
         private bool showStatus;
         private readonly ILogger logger;
+        private decimal balanceAfter = 0;
+        private decimal balanceBefore = 0;
+
         public GrantAccessVM(ICaService caService, ILogger logger)
         {
             this.caService = caService;
@@ -30,6 +33,7 @@ namespace SensorManager
             SensorNames = caService.SensorNames;
             sensorOwners = caService.SensorOwners;
             caService.AddNewSensor += AddNewSensor;
+            ShowStatus = false;
             GrantAccessCommand = new RelayCommand(GrantAccess, CanExecuteGrantAccess);
             CheckAccessCommand= new RelayCommand(CheckAccessFun, CanExecuteCheckAccess);
         }
@@ -61,7 +65,13 @@ namespace SensorManager
         private void CheckAccessFun()
         {
             IsAaccessAllow = false;
-            Task.Run(async () => IsAaccessAllow = await caService.IsAccessAllow(fromSensor, toSensor));
+            ShowStatus = false;
+            Task.Run(async () =>
+            {
+                BalanceBefore = await caService.GetAccountBalance(fromSensor);
+                IsAaccessAllow = await caService.IsAccessAllow(fromSensor, toSensor);
+                BalanceAfter = await caService.GetAccountBalance(fromSensor);
+            });
         }
         private bool CanExecuteGrantAccess()
         {
@@ -92,7 +102,13 @@ namespace SensorManager
         {
             IsAaccessAllow = false;
             ShowStatus = false;
-            Task.Run( async ()=> IsAaccessAllow = await caService.ChangeAccessRight(sensorOwner, fromSensor, toSensor, access));
+            Task.Run(async () =>
+            {
+                BalanceBefore = await caService.GetAccountBalance(sensorOwner);
+                IsAaccessAllow = await caService.ChangeAccessRight(sensorOwner, fromSensor, toSensor, access);
+                BalanceAfter =await caService.GetAccountBalance(sensorOwner);
+            });
+          
         }
         public RelayCommand GrantAccessCommand
         {
@@ -154,15 +170,45 @@ namespace SensorManager
                 Set(() => Access, ref access, value); }
 
         }
+
+
         public bool CheckAccess
         {
             get { return checkAccess; }
             set { 
                 Set(() => CheckAccess, ref checkAccess, value);
+                ShowStatus = false;
                 RaisePropertyChanged("ChnageAccess");
+                
             }
 
         }
+        public decimal GasUsed
+        {
+            get { return balanceBefore - balanceAfter; }
+        }
+
+        public decimal BalanceAfter
+        {
+            get { return balanceAfter; }
+            set
+            {
+                Set(() => BalanceAfter, ref balanceAfter, value);
+                RaisePropertyChanged("GasUsed");
+
+            }
+
+        }
+        public decimal BalanceBefore
+        {
+            get { return balanceBefore; }
+            set
+            {
+                Set(() => BalanceBefore, ref balanceBefore, value);
+             
+            }
+        }
+
         public bool ShowStatus
         {
             get { return showStatus; }
@@ -183,7 +229,9 @@ namespace SensorManager
         public bool IsAaccessAllow
         {
             get { return isAaccessAllow; }
-            set { Set(() => IsAaccessAllow, ref isAaccessAllow, value); }
+            set { Set(() => IsAaccessAllow, ref isAaccessAllow, value);
+                ShowStatus = true;
+            }
 
         }
     }

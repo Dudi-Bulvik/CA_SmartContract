@@ -23,6 +23,9 @@ namespace SensorManager
         private bool isOwner;
         private string errorMessage;
         private AddressUtil addressUtil;
+        private decimal balanceAfter = 0;
+        private decimal balanceBefore = 0;
+        private bool showStatus;
         public InitSensorVM(ICaService caService ,ILogger logger)
         {
             this.caService = caService;
@@ -33,6 +36,7 @@ namespace SensorManager
             InitSensorCommand = new RelayCommand(InitSensor, CanExecuteInitSensor);
             addressUtil = new AddressUtil();
             errorMessage = "";
+            ShowStatus = false;
         }
 
         private void AddNewSensor(object sender, EventArgs e)
@@ -135,22 +139,35 @@ namespace SensorManager
                 RaisePropertyChanged("ShowToolTip");
             }
         }
-        private async void InitSensor()
+        private  void InitSensor()
         {
-            if(isOwner)
+            Task.Run(async () =>
             {
-                await caService.InitOwner(sensorName, SensorPublikKey, SensorPrivateKey);
-            }
-            else
-            {
-                await caService.InitSensor(SensorOwner, sensorName, SensorPublikKey);
-            }
-            
-            SensorName = "";
-            SensorOwner = "";
-            SensorPublikKey = "";
-            SensorPrivateKey = "";
-            RaisePropertyChanged("");
+                ShowStatus = false;
+                if (isOwner)
+                {
+                    BalanceBefore = await caService.GetAccountBalance(sensorName, SensorPublikKey);
+                    await caService.InitOwner(sensorName, SensorPublikKey, SensorPrivateKey);
+                    BalanceAfter = await caService.GetAccountBalance(sensorName);
+                }
+                else
+                {
+                    BalanceBefore = await caService.GetAccountBalance(SensorOwner);
+                    await caService.InitSensor(SensorOwner, sensorName, SensorPublikKey);
+                    BalanceAfter = await caService.GetAccountBalance(SensorOwner);
+                }
+
+                SensorName = "";
+                SensorOwner = "";
+                SensorPublikKey = "";
+                SensorPrivateKey = "";
+                ShowStatus = true;
+                RaisePropertyChanged("");
+
+                
+            });
+
+           
         }
 
         public RelayCommand InitSensorCommand
@@ -163,7 +180,9 @@ namespace SensorManager
         public List<string> SensorNames
         {
             get { return sensorNames; }
-            set { Set(() => SensorNames, ref sensorNames, value); }
+            set { Set(() => SensorNames, ref sensorNames, value);
+                //ShowStatus = false;
+            }
         }
 
         public List<string> SensorOwners
@@ -174,7 +193,9 @@ namespace SensorManager
 
         public string SensorOwner { 
             get { return sensorOwner; }
-            set { Set(() => SensorOwner, ref sensorOwner, value); }
+            set { Set(() => SensorOwner, ref sensorOwner, value);
+               // ShowStatus = false;
+            }
         }
         public string SensorName { 
             get { return sensorName; }
@@ -188,13 +209,51 @@ namespace SensorManager
             set
             {
                 Set(() => IsOwner, ref isOwner, value);
+               // ShowStatus = false;
                 RaisePropertyChanged("IsNotOwner");
+                
             }
         }
         public bool IsNotOwner
         {
             get { return !isOwner; }            
         }
+        public bool ShowStatus
+        {
+            get { return showStatus; }
+            set
+            {
+                Set(() => ShowStatus, ref showStatus, value);
+               
+            }
+
+        }
+
+        public decimal GasUsed
+        {
+            get { return balanceBefore -balanceAfter; }
+        }
+        public decimal BalanceAfter
+        {
+            get { return balanceAfter; }
+            set
+            {
+                Set(() => BalanceAfter, ref balanceAfter, value);
+                RaisePropertyChanged("GasUsed");
+            }
+
+        }
+
+        public decimal BalanceBefore
+        {
+            get { return balanceBefore; }
+            set
+            {
+                Set(() => BalanceBefore, ref balanceBefore, value);
+
+            }
+        }
+
         public string SensorPrivateKey { get; set; }
     }
 }

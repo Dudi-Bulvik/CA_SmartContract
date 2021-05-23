@@ -52,6 +52,14 @@
                 <ToolTip Background="Red" Content="{Binding Path=ErrorMessage}"  />
             </Button.ToolTip>
           </Button>
+        <StackPanel Orientation="Horizontal" Visibility="{Binding Path=ShowStatus, Converter={StaticResource BooleanToVisibilityConverter}}" >
+            <TextBlock Text="BalanceBefore" Margin="5"/>
+            <TextBlock Text="{Binding BalanceBefore}" Margin="5"/>
+            <TextBlock Text="Balance After" Margin="5"/>
+            <TextBlock Text="{Binding BalanceAfter}" Margin="5"/>
+            <TextBlock Text="Ether used" Margin="5"/>
+            <TextBlock Text="{Binding GasUsed}" Margin="5"/>
+        </StackPanel>   
     </StackPanel>
         
 </UserControl>
