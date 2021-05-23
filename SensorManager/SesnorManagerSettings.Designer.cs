@@ -25,7 +25,7 @@ namespace SensorManager {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Myproject\\configSensorsFile.txt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\..\\..\\configSensorsFile.txt")]
         public string Configfile {
             get {
                 return ((string)(this["Configfile"]));

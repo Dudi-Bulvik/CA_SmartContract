@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Configfile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Myproject\configSensorsFile.txt</Value>
+      <Value Profile="(Default)">..\..\..\..\configSensorsFile.txt</Value>
     </Setting>
   </Settings>
 </SettingsFile>
