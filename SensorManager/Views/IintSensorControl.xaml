@@ -57,9 +57,17 @@
             <TextBlock Text="{Binding BalanceBefore}" Margin="5"/>
             <TextBlock Text="Balance After" Margin="5"/>
             <TextBlock Text="{Binding BalanceAfter}" Margin="5"/>
-            <TextBlock Text="Ether used" Margin="5"/>
+            <TextBlock Text="Gas Used" Margin="5"/>
             <TextBlock Text="{Binding GasUsed}" Margin="5"/>
-        </StackPanel>   
+        </StackPanel>
+        <StackPanel>
+            <CheckBox Content="Enable Deply Contract" IsChecked="{Binding EnableDeply}" Margin="8"/>
+            <Button  FontSize="22"   Command="{Binding DeplyContractCommand}" Width="400" Height="100" Content="Deploy Contract" 
+                     Visibility="{Binding Path=EnableDeply, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     >
+               
+            </Button>
+        </StackPanel>
     </StackPanel>
         
 </UserControl>

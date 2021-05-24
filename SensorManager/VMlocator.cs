@@ -26,9 +26,10 @@ namespace SensorManager
             SimpleIoc.Default.Register<ISettings, Settings>();
             // SimpleIoc.Default.Register<ICaService, CAService>();
             // SimpleIoc.Default.Register< LogViewerVm>();
-            var caService = new CAService();
-            caService.InitializeAsync(ISettings, LogViewerVm);
-            SimpleIoc.Default.Register<ICaService>( ()=> caService);
+            
+            
+            SimpleIoc.Default.Register<ICaService,CAService>();
+            await ((CAService)ServiceLocator.Current.GetInstance<ICaService>()).InitializeAsync();
             SimpleIoc.Default.Register<ManagerVM>();
             SimpleIoc.Default.Register<GrantAccessVM>();
             SimpleIoc.Default.Register<InitSensorVM>();

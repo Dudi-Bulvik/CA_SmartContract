@@ -25,13 +25,14 @@ namespace SensorManager
         private readonly ILogger logger;
         private decimal balanceAfter = 0;
         private decimal balanceBefore = 0;
+        private bool checkBalance;
 
         public GrantAccessVM(ICaService caService, ILogger logger)
         {
             this.caService = caService;
             this.logger = logger;
             SensorNames = caService.SensorNames;
-            sensorOwners = caService.SensorOwners;
+            SensorOwners = caService.SensorOwners;
             caService.AddNewSensor += AddNewSensor;
             ShowStatus = false;
             GrantAccessCommand = new RelayCommand(GrantAccess, CanExecuteGrantAccess);
@@ -68,9 +69,17 @@ namespace SensorManager
             ShowStatus = false;
             Task.Run(async () =>
             {
-                BalanceBefore = await caService.GetAccountBalance(fromSensor);
+                if(checkBalance)
+                {
+                    BalanceBefore = await caService.GetAccountBalance(fromSensor);
+                }
+                
                 IsAaccessAllow = await caService.IsAccessAllow(fromSensor, toSensor);
-                BalanceAfter = await caService.GetAccountBalance(fromSensor);
+                if (checkBalance)
+                {
+                    BalanceAfter = await caService.GetAccountBalance(fromSensor);
+                }
+                ShowStatus = true;
             });
         }
         private bool CanExecuteGrantAccess()
@@ -104,9 +113,17 @@ namespace SensorManager
             ShowStatus = false;
             Task.Run(async () =>
             {
-                BalanceBefore = await caService.GetAccountBalance(sensorOwner);
+                if(checkBalance)
+                {
+                    BalanceBefore = await caService.GetAccountBalance(sensorOwner);
+                }
+              
                 IsAaccessAllow = await caService.ChangeAccessRight(sensorOwner, fromSensor, toSensor, access);
-                BalanceAfter =await caService.GetAccountBalance(sensorOwner);
+                if (checkBalance)
+                {
+                    BalanceAfter = await caService.GetAccountBalance(sensorOwner);
+                }
+                ShowStatus = true;
             });
           
         }
@@ -176,10 +193,10 @@ namespace SensorManager
         {
             get { return checkAccess; }
             set { 
-                Set(() => CheckAccess, ref checkAccess, value);
-                ShowStatus = false;
+                Set(() => CheckAccess, ref checkAccess, value);                
                 RaisePropertyChanged("ChnageAccess");
-                
+                ShowStatus = false;
+
             }
 
         }
@@ -216,6 +233,7 @@ namespace SensorManager
             {
                 Set(() => ShowStatus, ref showStatus, value);
                 RaisePropertyChanged("ChnageAccess");
+                RaisePropertyChanged("ShowBalance");
             }
 
         }
@@ -230,7 +248,22 @@ namespace SensorManager
         {
             get { return isAaccessAllow; }
             set { Set(() => IsAaccessAllow, ref isAaccessAllow, value);
-                ShowStatus = true;
+               
+            }
+
+        }
+        public bool ShowBalance
+        {
+            get { return showStatus & checkBalance; }
+        }
+        public bool CheckBalance
+        {
+            get { return checkBalance; }
+            set
+            {
+                Set(() => CheckBalance, ref checkBalance, value);
+                ShowStatus = false;
+                RaisePropertyChanged("ShowBalance");
             }
 
         }

@@ -8,7 +8,11 @@
               DataContext="{Binding GrantAccessVM, Source={StaticResource Locator}}"  
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical">
-        <CheckBox Content="Check Access" IsChecked="{Binding CheckAccess}" Margin="8"/>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Content="Check Access" IsChecked="{Binding CheckAccess}" Margin="8"/>
+            <CheckBox Content="Check Balance" IsChecked="{Binding CheckBalance}" Margin="8"/>
+        </StackPanel>
+        
         <StackPanel Orientation="Horizontal"  Visibility="{Binding Path=ChnageAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label   MinWidth="110" Content="Sensor Owner" Margin="8" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <!--<TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
@@ -88,12 +92,12 @@
             <!--
                             </ToggleButton.Content>-->
         </ToggleButton>
-        <StackPanel Orientation="Horizontal" Visibility="{Binding Path=ShowStatus, Converter={StaticResource BooleanToVisibilityConverter}}" >
+        <StackPanel Orientation="Horizontal" Visibility="{Binding Path=ShowBalance, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <TextBlock Text="BalanceBefore" Margin="5"/>
             <TextBlock Text="{Binding BalanceBefore}" Margin="5"/>
             <TextBlock Text="Balance After" Margin="5"/>
             <TextBlock Text="{Binding BalanceAfter}" Margin="5"/>
-            <TextBlock Text="Ether used" Margin="5"/>
+            <TextBlock Text="Gas Used" Margin="5"/>
             <TextBlock Text="{Binding GasUsed}" Margin="5"/>
         </StackPanel>
     </StackPanel>

@@ -27,6 +27,7 @@ namespace SensorManager
         public Task<bool> InitOwner(string sensorOwner, string sensorPublikKey, string SensorPrivateKey);
         public Task<bool> IsAccessAllow(string fromSensor, string toSensorName);
         public Task<decimal> GetAccountBalance(string address ,string publicKey =null);
+        public Task DeployContract();
     }
     public class CAService : ICaService
     {
@@ -40,7 +41,8 @@ namespace SensorManager
         List<string> publicKeys = new List<string>();
         private object web3;
         private ILogger logger;
-
+        private ISettings settings;
+        private bool deployContract;
         public List<string> SensorNames {
             get {
                 var temp = new List<string>();
@@ -78,20 +80,28 @@ namespace SensorManager
         {
             return publicKey.Contains(publicKey);
         }
+        private void Clear()
+        {
+            sensorOwners.Clear();
+            sensorNames.Clear();
+            publicKeys.Clear();
+            accountDic.Clear();
+            senVM.Clear();
 
+        }
         public bool IsNamellreadyDefine(string name)
         {
             return sensorNames.Contains(name);
         }
 
-        public CAService()
-        {
-
-        }
-        public async Task InitializeAsync(ISettings settings, ILogger logger)
+        public CAService(ISettings settings, ILogger logger)
         {
             this.logger = logger;
-
+            this.settings = settings;
+        }
+        public async Task InitializeAsync()
+        {
+            Clear();
             if (!File.Exists(settings.ConfigurationFilePath))
             {
                 throw new Exception();
@@ -116,11 +126,35 @@ namespace SensorManager
                     //accountDic.Add(svm.SensorName, new Account(svm.SensorPrivateKey));
                     senVM.Add(svm.SensorName, svm);
                     //publicKeys.Add(svm.SensorPublicKey);
-
-                    await InitOwner(svm.SensorName, svm.SensorPublicKey, svm.SensorPrivateKey);
+                    if(deployContract)
+                    {
+                        await InitOwner(svm.SensorName, svm.SensorPublicKey, svm.SensorPrivateKey);
+                    }
+                    else
+                    {
+                        if (!accountDic.ContainsKey(svm.SensorName))
+                        {
+                            accountDic[svm.SensorName] = new Account(svm.SensorPrivateKey);
+                        }
+                            
+                        if(!sensorOwners.Contains(svm.SensorName))
+                        {
+                            sensorOwners.Add(svm.SensorName);
+                        }
+                        if (!sensorNames.Contains(svm.SensorName))
+                        {
+                            sensorNames.Add(svm.SensorName);
+                        }
+                        if (!sensorNames.Contains(svm.SensorPublicKey))
+                        {
+                            publicKeys.Add(svm.SensorPublicKey);
+                        }                       
+                    }
+                    
 
                 }
             }
+            deployContract =false;
 
 
         }
@@ -200,7 +234,7 @@ namespace SensorManager
             message.AppendLine("BlockNumber: " + initSesorReceipt.BlockNumber);
             message.AppendLine("TransactionIndex: " + initSesorReceipt.TransactionIndex);
             message.AppendLine("GasUsed: " + initSesorReceipt.GasUsed);
-            message.AppendLine("CumulativeGasUsed: " + initSesorReceipt.CumulativeGasUsed);
+           // message.AppendLine("CumulativeGasUsed: " + initSesorReceipt.CumulativeGasUsed);
             logger.AddLogEntey(message.ToString());
             //////////////////////////////////////////////////////
             if (!senVM.ContainsKey(sensorName))
@@ -266,7 +300,7 @@ namespace SensorManager
                 message.AppendLine("BlockNumber: " + grentAccessReceipt.BlockNumber);
                 message.AppendLine("TransactionIndex: " + grentAccessReceipt.TransactionIndex);
                 message.AppendLine("GasUsed: " + grentAccessReceipt.GasUsed);
-                message.AppendLine("CumulativeGasUsed: " + grentAccessReceipt.CumulativeGasUsed);
+               // message.AppendLine("CumulativeGasUsed: " + grentAccessReceipt.CumulativeGasUsed);
                 logger.AddLogEntey(message.ToString());
                 return await IsAccessAllow(account, fromSensorPk, toSensorPk);
             } catch (Exception e)
@@ -276,7 +310,56 @@ namespace SensorManager
                 return false;
             }
         }
+         public async Task DeployContract()
+        {
 
+            var message = new StringBuilder();
+            message.AppendLine("/////////////////////DeployContract////////////////");
+            try
+            {
+                string path = settings.ConfigurationFilePath;
+                if (!File.Exists(settings.ConfigurationFilePath))
+                {
+                    message.AppendLine("File Not Found: " + settings.ConfigurationFilePath);
+                    logger.AddLogEntey(message.ToString());
+                    return;
+                }
+                Account account = accountDic.Values.FirstOrDefault();
+                if(account == null)
+                {
+                    message.AppendLine("No Private Key Found");
+                    logger.AddLogEntey(message.ToString());
+                }
+                string[] arrLine = File.ReadAllLines(path);
+
+
+
+                var web3 = new Web3(account,url);
+                //Deploy contruct
+                //var privateKeysensor = "0xf5ee10c67ecf5801ba9ed73ede16af5e91b33f526c13b8110a9cbaf5e6a385ad";
+                //Console.WriteLine("Deploying...");
+                var deployment = new CASmartContractDeployment() { };
+
+                var deploymentHandler = web3.Eth.GetContractDeploymentHandler<CASmartContractDeployment>();
+                var transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deployment);
+                contractAddress = transactionReceipt.ContractAddress;
+                arrLine[0] = contractAddress;
+                File.WriteAllLines(path, arrLine);
+                message.AppendLine("ContractAddress: " + transactionReceipt.ContractAddress);
+                message.AppendLine("BlockNumber: " + transactionReceipt.BlockNumber);
+                message.AppendLine("TransactionIndex: " + transactionReceipt.TransactionIndex);
+                message.AppendLine("Gas Used: " + transactionReceipt.GasUsed);
+               // message.AppendLine(message.ToString());
+            }
+            catch(Exception e)
+            {
+                message.AppendLine(e.ToString());                
+            }
+            logger.AddLogEntey(message.ToString());
+            deployContract = true;
+            await InitializeAsync();
+            return;
+        }
         public async Task<bool> IsAccessAllow(string fromSensor, string toSensorName)
         {
             var message = new StringBuilder();
@@ -308,16 +391,17 @@ namespace SensorManager
 
             }
         }
-        private Task<bool> IsAccessAllow(Account account, string fromPK, string toPK)
+        private async Task<bool> IsAccessAllow(Account account, string fromPK, string toPK)
         {
             var web3 = new Web3(account, url);
+            //var web3 = new Web3( url);
             var isAccessAllowFunctionHandler = web3.Eth.GetContractQueryHandler<IsAccessAllowFunction>();
             var isAccessAllowFunction = new IsAccessAllowFunction()
             {
                 From = fromPK,
                 To = toPK,
             };
-            return isAccessAllowFunctionHandler.QueryAsync<bool>(contractAddress, isAccessAllowFunction);
+            return await isAccessAllowFunctionHandler.QueryAsync<bool>(contractAddress, isAccessAllowFunction);
 
         }
         public async Task GetSenssorDataFromConract(string sensorName)
@@ -371,7 +455,7 @@ namespace SensorManager
                
                 var web3 = new Web3(url);
                 var balance = await web3.Eth.GetBalance.SendRequestAsync(adress);
-                balance = await web3.Eth.GetBalance.SendRequestAsync("0x2339dc10423B924125234A394f9eeADa68EF3F0A");
+//                balance = await web3.Eth.GetBalance.SendRequestAsync("0x2339dc10423B924125234A394f9eeADa68EF3F0A");
                 //Console.WriteLine($"Balance in Wei: {balance.Value}");                
                 var etherAmount = Web3.Convert.FromWei(balance.Value);
                 

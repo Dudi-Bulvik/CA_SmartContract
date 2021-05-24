@@ -26,22 +26,36 @@ namespace SensorManager
         private decimal balanceAfter = 0;
         private decimal balanceBefore = 0;
         private bool showStatus;
-        public InitSensorVM(ICaService caService ,ILogger logger)
+        private bool enableDeply;
+
+        public InitSensorVM(ICaService caService, ILogger logger)
         {
             this.caService = caService;
             this.logger = logger;
-            sensorNames = caService.SensorNames;
-            sensorOwners = caService.SensorOwners;
+            SensorNames = caService.SensorNames;
+            SensorOwners = caService.SensorOwners;
             caService.AddNewSensor += AddNewSensor;
             InitSensorCommand = new RelayCommand(InitSensor, CanExecuteInitSensor);
+            DeplyContractCommand = new RelayCommand(DeplyContract);
             addressUtil = new AddressUtil();
             errorMessage = "";
             ShowStatus = false;
         }
 
+        private  void DeplyContract()
+        {
+            Task.Run
+                (async ()=>
+                {
+                    await caService.DeployContract();
+                    EnableDeply = false;                    
+                 }
+                );
+        }
+
         private void AddNewSensor(object sender, EventArgs e)
         {
-            SensorNames = caService.SensorNames;     
+            SensorNames = caService.SensorNames;
             SensorOwners = caService.SensorOwners;
         }
 
@@ -55,11 +69,16 @@ namespace SensorManager
         public bool ShowToolTip { get { return !string.IsNullOrEmpty(errorMessage); } }
         private bool CanExecuteInitSensor()
         {
-             if(IsNotOwner && string.IsNullOrEmpty(SensorOwner) )
-             {
+            if(enableDeply)
+            {
+                ErrorMessage = "Disable Deploy Contrct";
+                return false;
+            }
+            if (IsNotOwner && string.IsNullOrEmpty(SensorOwner))
+            {
                 ErrorMessage = "SensorOwner can't be empty";
                 return false;
-             }
+            }
             if (string.IsNullOrEmpty(SensorName))
             {
                 ErrorMessage = "SensorName can't be empty";
@@ -67,9 +86,9 @@ namespace SensorManager
             }
             else
             {
-                if(sensorNames.Contains(SensorName))
+                if (sensorNames.Contains(SensorName))
                 {
-                    ErrorMessage = "Sensor Name: "+ SensorName+" is allready existing";
+                    ErrorMessage = "Sensor Name: " + SensorName + " is allready existing";
                     return false;
                 }
             }
@@ -92,17 +111,17 @@ namespace SensorManager
                 ErrorMessage = "SensorPublikKey can't be empty";
                 return false;
             }
-            if(IsOwner)
+            if (IsOwner)
             {
                 return CheckPrivatePublicKeyPair();
-            }          
-            
-            
-            
+            }
+
+
+
             ErrorMessage = "";
             return true;
         }
-        
+
         private bool CheckPrivatePublicKeyPair()
         {
             try
@@ -122,7 +141,7 @@ namespace SensorManager
                 }
                 ErrorMessage = "";
                 return true; ;
-            }catch(Exception e )
+            } catch (Exception e)
             {
                 ErrorMessage = e.ToString();
                 logger.AddLogEntey("Keys are not valid" + e);
@@ -139,7 +158,7 @@ namespace SensorManager
                 RaisePropertyChanged("ShowToolTip");
             }
         }
-        private  void InitSensor()
+        private void InitSensor()
         {
             Task.Run(async () =>
             {
@@ -164,12 +183,16 @@ namespace SensorManager
                 ShowStatus = true;
                 RaisePropertyChanged("");
 
-                
+
             });
 
-           
-        }
 
+        }
+        public RelayCommand DeplyContractCommand
+        {
+            get;
+            private set;
+        }
         public RelayCommand InitSensorCommand
         {
             get;
@@ -254,6 +277,14 @@ namespace SensorManager
             }
         }
 
+        public bool EnableDeply {
+            get { return enableDeply; }
+            set
+            {
+                Set(() => EnableDeply, ref enableDeply, value);
+
+            }
+        }
         public string SensorPrivateKey { get; set; }
     }
 }
