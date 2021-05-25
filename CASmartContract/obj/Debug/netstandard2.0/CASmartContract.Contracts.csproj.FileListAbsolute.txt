@@ -7,12 +7,3 @@ C:\Myproject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Cont
 C:\Myproject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.dll
 C:\Myproject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.pdb
 C:\Myproject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.csprojAssemblyReference.cache
-D:\MyProject\CaNew\CASmartContract\bin\Debug\netstandard2.0\CASmartContract.Contracts.deps.json
-D:\MyProject\CaNew\CASmartContract\bin\Debug\netstandard2.0\CASmartContract.Contracts.dll
-D:\MyProject\CaNew\CASmartContract\bin\Debug\netstandard2.0\CASmartContract.Contracts.pdb
-D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.csprojAssemblyReference.cache
-D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.AssemblyInfoInputs.cache
-D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.AssemblyInfo.cs
-D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.csproj.CoreCompileInputs.cache
-D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.dll
-D:\MyProject\CaNew\CASmartContract\obj\Debug\netstandard2.0\CASmartContract.Contracts.pdb
