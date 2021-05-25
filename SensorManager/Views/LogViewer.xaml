@@ -85,8 +85,6 @@
     </UserControl.Resources>
 
     <DockPanel>
-        <TextBlock Text="{Binding Count, StringFormat='{}{0} Items'}"
-               DockPanel.Dock="Top"/>
 
         <ItemsControl ItemsSource="{Binding Path=Contents}" Style="{StaticResource LogViewerStyle}">
             <ItemsControl.Template>

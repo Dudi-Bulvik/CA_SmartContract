@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Myproject\\CaNew\\SensorManager\\SensorManager.csproj": {}
+    "D:\\MyProject\\CaNew\\SensorManager\\SensorManager.csproj": {}
   },
   "projects": {
-    "C:\\Myproject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj": {
+    "D:\\MyProject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Myproject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj",
+        "projectUniqueName": "D:\\MyProject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj",
         "projectName": "CASmartContract.Contracts",
-        "projectPath": "C:\\Myproject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj",
-        "packagesPath": "C:\\Users\\IMOE001\\.nuget\\packages\\",
-        "outputPath": "C:\\Myproject\\CaNew\\CASmartContract\\obj\\",
+        "projectPath": "D:\\MyProject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj",
+        "packagesPath": "C:\\Users\\dudib\\.nuget\\packages\\",
+        "outputPath": "D:\\MyProject\\CaNew\\CASmartContract\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\IMOE001\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dudib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,21 +64,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Myproject\\CaNew\\SensorManager\\SensorManager.csproj": {
+    "D:\\MyProject\\CaNew\\SensorManager\\SensorManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Myproject\\CaNew\\SensorManager\\SensorManager.csproj",
+        "projectUniqueName": "D:\\MyProject\\CaNew\\SensorManager\\SensorManager.csproj",
         "projectName": "SensorManager",
-        "projectPath": "C:\\Myproject\\CaNew\\SensorManager\\SensorManager.csproj",
-        "packagesPath": "C:\\Users\\IMOE001\\.nuget\\packages\\",
-        "outputPath": "C:\\Myproject\\CaNew\\SensorManager\\obj\\",
+        "projectPath": "D:\\MyProject\\CaNew\\SensorManager\\SensorManager.csproj",
+        "packagesPath": "C:\\Users\\dudib\\.nuget\\packages\\",
+        "outputPath": "D:\\MyProject\\CaNew\\SensorManager\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\IMOE001\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dudib\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,8 +95,8 @@
           "net5.0-windows7.0": {
             "targetAlias": "net5.0-windows",
             "projectReferences": {
-              "C:\\Myproject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj": {
-                "projectPath": "C:\\Myproject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj"
+              "D:\\MyProject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj": {
+                "projectPath": "D:\\MyProject\\CaNew\\CASmartContract\\CASmartContract.Contracts.csproj"
               }
             }
           }
@@ -144,7 +150,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -14,23 +14,20 @@
         </StackPanel>
         
         <StackPanel Orientation="Horizontal"  Visibility="{Binding Path=ChnageAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Label   MinWidth="110" Content="Sensor Owner" Margin="8" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <!--<TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
-            <ComboBox MinWidth="350" ItemsSource="{Binding SensorOwners}" SelectedItem="{Binding SensorOwner}"  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Label   MinWidth="110" Content="Sensor Owner" Margin="8" />
+            <ComboBox MinWidth="350" ItemsSource="{Binding SensorOwners}" SelectedItem="{Binding SensorOwner}"  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10">
 
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Label   MinWidth="110" Content="From Sensor" Margin="8" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <!--<TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
-            <ComboBox MinWidth="350" ItemsSource="{Binding SensorNames}" SelectedItem="{Binding FromSensor}"  Text="{Binding Path=FromSensor}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Label   MinWidth="110" Content="From Sensor" Margin="8" />
+            <ComboBox MinWidth="350" ItemsSource="{Binding SensorNames}" SelectedItem="{Binding FromSensor}"  Text="{Binding Path=FromSensor}" Margin="10" >
 
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal"  >
             <Label   MinWidth="110" Content="To Sensor" Margin="8" />
-            <!--<TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Path=SensorOwner}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
-            <ComboBox MinWidth="350" ItemsSource="{Binding SensorNames}" SelectedItem="{Binding ToSensor}"   Text="{Binding Path=ToSensor}" Margin="10" Visibility="{Binding Path=IsNotOwner, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ComboBox MinWidth="350" ItemsSource="{Binding SensorNames}" SelectedItem="{Binding ToSensor}"   Text="{Binding Path=ToSensor}" Margin="10" >
 
             </ComboBox>
         </StackPanel>
@@ -93,11 +90,11 @@
                             </ToggleButton.Content>-->
         </ToggleButton>
         <StackPanel Orientation="Horizontal" Visibility="{Binding Path=ShowBalance, Converter={StaticResource BooleanToVisibilityConverter}}" >
-            <TextBlock Text="BalanceBefore" Margin="5"/>
+            <Label Content="BalanceBefore" Margin="5"/>
             <TextBlock Text="{Binding BalanceBefore}" Margin="5"/>
-            <TextBlock Text="Balance After" Margin="5"/>
+            <Label Content="Balance After" Margin="5"/>
             <TextBlock Text="{Binding BalanceAfter}" Margin="5"/>
-            <TextBlock Text="Gas Used" Margin="5"/>
+            <Label Content="Gas Used" Margin="5"/>
             <TextBlock Text="{Binding GasUsed}" Margin="5"/>
         </StackPanel>
     </StackPanel>
