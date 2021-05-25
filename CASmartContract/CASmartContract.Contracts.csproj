@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,6 +7,12 @@
 
     <ItemGroup>
         <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="nethereum-gen.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+      </None>
     </ItemGroup>
     
 </Project>
